@@ -43,6 +43,8 @@ data class ProviderData(
 
     val isApproved get() = approved == 1
 
+    val isSuspendedAccount get() = approved == 2
+
     val isPremium get() = premium == 1
 
     val accountType get() = AccountType.values().first { it.apiValue == typeOfAccount }

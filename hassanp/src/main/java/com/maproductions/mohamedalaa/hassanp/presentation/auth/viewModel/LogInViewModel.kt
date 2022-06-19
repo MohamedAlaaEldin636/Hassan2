@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.maproductions.mohamedalaa.hassanp.R
+import com.maproductions.mohamedalaa.shared.R as SR
 import com.maproductions.mohamedalaa.hassanp.presentation.auth.LogInFragment
 import com.maproductions.mohamedalaa.hassanp.presentation.auth.LogInFragmentDirections
 import com.maproductions.mohamedalaa.shared.NavSharedArgs
@@ -55,6 +56,12 @@ class LogInViewModel @Inject constructor(
                     return@executeOnGlobalLoadingAndAutoHandleRetryCancellable2
                 }
 
+                if (provider.isApproved.not()) {
+                    view.context.showErrorToast(fragment.getString(SR.string.waiting_for_admin_approval))
+
+                    return@executeOnGlobalLoadingAndAutoHandleRetryCancellable2
+                }
+
                 viewModelScope.launch {
                     prefsAccount.setApiBearerToken(provider.apiToken)
                 }
@@ -74,7 +81,13 @@ class LogInViewModel @Inject constructor(
                     viewModelScope.launch {
                         prefsAccount.setProviderData(provider)
 
-                        prefsSplash.setInitialLaunch(SplashInitialLaunch.MAIN)
+                        prefsSplash.setInitialLaunch(
+                            if (provider.isSuspendedAccount) {
+                                SplashInitialLaunch.PROVIDER_ACCOUNT_SUSPENDED
+                            }else {
+                                SplashInitialLaunch.MAIN
+                            }
+                        )
 
                         PusherUtils.loginBeams(
                             false,
@@ -84,10 +97,11 @@ class LogInViewModel @Inject constructor(
 
                         fragment.findNavControllerOfProject().navigateDeepLinkWithOptions(
                             "fragment-dest",
-                            "com.grand.hassan.shared.provider.bottom.nav",
+                            "com.grand.hassan.shared.provider.bottom.nav.suspend.account",
                             defaultAnimationsNavOptionsBuilder()
                                 .setPopUpTo(R.id.dest_log_in, true)
                                 .build(),
+                            provider.isSuspendedAccount.toString()
                         )
                     }
                 }

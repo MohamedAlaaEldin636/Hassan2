@@ -48,15 +48,21 @@ class LogInFragment : MABaseFragment<FragmentLogInBinding>() {
             val locationData = it.fromJson<LocationData>(gson)
 
             lifecycleScope.launch {
-                prefsAccount.setProviderData(
-                    prefsAccount.getProviderData().first()!!.copy(
-                        latitude = locationData.latitude,
-                        longitude = locationData.longitude,
-                        address = locationData.address,
-                    )
+                val provider = prefsAccount.getProviderData().first()!!.copy(
+                    latitude = locationData.latitude,
+                    longitude = locationData.longitude,
+                    address = locationData.address,
                 )
 
-                prefsSplash.setInitialLaunch(SplashInitialLaunch.MAIN)
+                prefsAccount.setProviderData(provider)
+
+                prefsSplash.setInitialLaunch(
+                    if (provider.isSuspendedAccount) {
+                        SplashInitialLaunch.PROVIDER_ACCOUNT_SUSPENDED
+                    }else {
+                        SplashInitialLaunch.MAIN
+                    }
+                )
 
                 PusherUtils.loginBeams(
                     false,
@@ -66,10 +72,11 @@ class LogInFragment : MABaseFragment<FragmentLogInBinding>() {
 
                 findNavController().navigateDeepLinkWithOptions(
                     "fragment-dest",
-                    "com.grand.hassan.shared.provider.bottom.nav",
+                    "com.grand.hassan.shared.provider.bottom.nav.suspend.account",
                     defaultAnimationsNavOptionsBuilder()
                         .setPopUpTo(R.id.dest_log_in, true)
-                        .build()
+                        .build(),
+                    provider.isSuspendedAccount.toString()
                 )
             }
         }

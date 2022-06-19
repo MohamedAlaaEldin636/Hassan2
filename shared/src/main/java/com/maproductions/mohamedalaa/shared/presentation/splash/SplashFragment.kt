@@ -79,6 +79,16 @@ class SplashFragment : MABaseFragment<FragmentSplashBinding>() {
                                 .build()
                         )
                     }
+                    SplashInitialLaunch.PROVIDER_ACCOUNT_SUSPENDED -> {
+                        findNavController().navigateDeepLinkWithOptions(
+                            "fragment-dest",
+                            "com.grand.hassan.shared.provider.bottom.nav.suspend.account",
+                            defaultAnimationsNavOptionsBuilder()
+                                .setPopUpTo(R.id.dest_splash, true)
+                                .build(),
+                            true.toString()
+                        )
+                    }
                     else /* SplashInitialLaunch.ON_BOARD, null */ -> {
                         findNavController().navigate(SplashFragmentDirections.actionDestSplashToDestOnBoard())
                     }

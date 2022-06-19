@@ -28,7 +28,11 @@
         android:id="@+id/dest_my_account"
         android:name="com.maproductions.mohamedalaa.hassanp.presentation.myAccount.MyAccountFragment"
         android:label="@string/my_account"
-        tools:layout="@layout/fragment_my_account" />
+        tools:layout="@layout/fragment_my_account" >
+        <argument
+            android:name="suspendAccount"
+            app:argType="boolean"/>
+    </fragment>
     <action
         android:id="@+id/action_global_dest_conversations"
         app:destination="@id/dest_conversations" />

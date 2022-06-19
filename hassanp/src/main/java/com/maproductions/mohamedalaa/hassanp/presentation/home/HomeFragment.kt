@@ -58,6 +58,8 @@ class HomeFragment : MABaseFragment<FragmentHomeBinding>() {
         binding?.viewModel = viewModel
     }
 
+    // todo will be changed to have 2 more flags orders_flag and approved == 2 meaning u have to
+    //  ffreeze account so see login view model kda isa,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         channelEvent.subscribe()
 

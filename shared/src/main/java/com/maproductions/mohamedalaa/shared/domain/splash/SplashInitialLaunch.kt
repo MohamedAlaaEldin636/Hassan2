@@ -6,5 +6,6 @@ enum class SplashInitialLaunch {
     LOGIN_LOCATION,
     LOGIN,
     /** Represents User or Provider according to the module using them isa. */
-    MAIN
+    MAIN,
+    PROVIDER_ACCOUNT_SUSPENDED
 }

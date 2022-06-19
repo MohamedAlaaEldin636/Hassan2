@@ -74,7 +74,11 @@ class ProviderBottomNavFragment : BottomNavFragment() {
 
     override val navigationResOfGraph: Int = R.navigation.nav_bottom_nav
 
-    override val startDestinationId: Int get() = args.startDestinationId
+    override val startDestinationId: Int get() = if (args.suspendAccount) {
+        R.id.dest_my_account
+    }else {
+        args.startDestinationId
+    }
 
     override fun getSelectedItemIdFromCurrentDestinationId(destinationId: Int?): Int? {
         return when (destinationId) {
@@ -88,11 +92,17 @@ class ProviderBottomNavFragment : BottomNavFragment() {
     }
 
     override fun onItemSelectedListener(navController: NavController, menuItem: MenuItem): Boolean {
+        if (args.suspendAccount && menuItem.itemId != R.id.action_my_account) {
+            context?.showErrorToast(getString(com.maproductions.mohamedalaa.shared.R.string.you_must_fill_your_data))
+
+            return false
+        }
+
         val directions = when (menuItem.itemId) {
             R.id.action_home -> NavBottomNavDirections.actionGlobalDestHome()
             R.id.action_conversations -> NavBottomNavDirections.actionGlobalDestConversations()
             R.id.action_orders -> NavBottomNavDirections.actionGlobalDestOrders()
-            R.id.action_my_account -> NavBottomNavDirections.actionGlobalDestMyAccount()
+            R.id.action_my_account -> NavBottomNavDirections.actionGlobalDestMyAccount(args.suspendAccount)
             R.id.action_more -> NavBottomNavDirections.actionGlobalDestMore()
             else -> return false
         }

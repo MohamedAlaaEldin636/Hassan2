@@ -21,6 +21,15 @@
             android:name="startDestinationId"
             app:argType="integer"
             android:defaultValue="-1" />
+        <argument
+            android:name="suspendAccount"
+            app:argType="boolean"
+            android:defaultValue="false" />
+
+        <deepLink
+            android:id="@+id/deep_link_dest_provider_bottom_nav_suspend_account"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.provider.bottom.nav.suspend.account/{suspendAccount}"/>
 
     </fragment>
     <dialog

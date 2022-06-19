@@ -3,6 +3,7 @@ package com.maproductions.mohamedalaa.hassanp.core.di.module
 import androidx.lifecycle.SavedStateHandle
 import com.maproductions.mohamedalaa.hassanp.presentation.auth.NewPasswordFragmentArgs
 import com.maproductions.mohamedalaa.hassanp.presentation.home.NewOrderDialogFragmentArgs
+import com.maproductions.mohamedalaa.hassanp.presentation.myAccount.MyAccountFragmentArgs
 import com.maproductions.mohamedalaa.hassanp.presentation.order.CancellationReasonDialogFragmentArgs
 import com.maproductions.mohamedalaa.hassanp.presentation.order.ConfirmFinishingWorkDialogFragmentArgs
 import com.maproductions.mohamedalaa.hassanp.presentation.order.MoneyReceivedDialogFragmentArgs
@@ -17,6 +18,11 @@ import dagger.hilt.android.components.ViewModelComponent
 @Module
 @InstallIn(ViewModelComponent::class)
 object ViewModelArgsModule {
+
+    @Provides
+    fun provideMyAccountFragmentArgs(state: SavedStateHandle): MyAccountFragmentArgs {
+        return MyAccountFragmentArgs.fromBundle(state.asBundle())
+    }
 
     @Provides
     fun provideOrderDetailsFragmentArgs(state: SavedStateHandle): OrderDetailsFragmentArgs {
