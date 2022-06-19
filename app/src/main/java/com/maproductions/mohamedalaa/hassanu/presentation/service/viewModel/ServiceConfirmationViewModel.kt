@@ -115,7 +115,7 @@ class ServiceConfirmationViewModel @Inject constructor(
             afterHidingLoading = {
                 fragment.findNavControllerOfProject().navigate(
                     ServiceConfirmationFragmentDirections
-                        .actionDestServiceConfirmationToDestPendingProviderServiceRequestDialog()
+                        .actionDestServiceConfirmationToDestPendingProviderServiceRequestDialog(it.orZero())
                 )
             }
         )

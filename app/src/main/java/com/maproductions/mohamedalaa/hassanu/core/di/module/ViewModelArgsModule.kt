@@ -26,6 +26,11 @@ import dagger.hilt.android.components.ViewModelComponent
 object ViewModelArgsModule {
 
     @Provides
+    fun providePendingProviderServiceRequestDialogFragmentArgs(state: SavedStateHandle): PendingProviderServiceRequestDialogFragmentArgs {
+        return PendingProviderServiceRequestDialogFragmentArgs.fromBundle(state.asBundle())
+    }
+
+    @Provides
     fun provideServicesSelectionFragmentArgs(state: SavedStateHandle): ServicesSelectionFragmentArgs {
         return ServicesSelectionFragmentArgs.fromBundle(state.asBundle())
     }

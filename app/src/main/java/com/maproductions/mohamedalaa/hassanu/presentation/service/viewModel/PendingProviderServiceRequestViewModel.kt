@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.maproductions.mohamedalaa.hassanu.R
+import com.maproductions.mohamedalaa.hassanu.presentation.service.PendingProviderServiceRequestDialogFragmentArgs
 import com.maproductions.mohamedalaa.shared.core.extensions.defaultAnimationsNavOptionsBuilder
 import com.maproductions.mohamedalaa.shared.core.extensions.findNavControllerOfProject
 import com.maproductions.mohamedalaa.shared.core.extensions.navigateDeepLinkWithOptions
@@ -14,7 +15,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class PendingProviderServiceRequestViewModel @Inject constructor() : ViewModel() {
+class PendingProviderServiceRequestViewModel @Inject constructor(
+    val args: PendingProviderServiceRequestDialogFragmentArgs
+) : ViewModel() {
 
     fun backToMainPage(view: View) {
         view.findNavControllerOfProject().navigateDeepLinkWithOptions(

@@ -57,6 +57,6 @@ interface ApiHomeServices {
         @PartMap map: Map<String, @JvmSuppressWildcards RequestBody>,
 
         @HeaderMap headerMap: Map<String, String>,
-    ): MABaseResponse<Any> /* was returning Int which was order id but now reorder is from backend */
+    ): MABaseResponse<Int> /* was returning Int which was order id but now reorder is from backend */
 
 }

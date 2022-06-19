@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AcceptedProviderServiceRequestViewModel @Inject constructor(
     application: Application,
-    private val args: AcceptedProviderServiceRequestDialogFragmentArgs,
+    val args: AcceptedProviderServiceRequestDialogFragmentArgs,
 ) : AndroidViewModel(application) {
 
     val text by lazy {

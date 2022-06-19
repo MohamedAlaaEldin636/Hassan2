@@ -162,5 +162,8 @@
             android:id="@+id/deep_link_dest_pending_provider_service_request_dialog"
             android:autoVerify="true"
             app:uri="dialog-dest://com.grand.hassan.shared.dest.pending.provider.service.request.dialog" />
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
     </dialog>
 </navigation>

@@ -2,6 +2,7 @@ package com.maproductions.mohamedalaa.shared.data.home.dataSource.remote
 
 import com.maproductions.mohamedalaa.shared.core.customTypes.BasePaging
 import com.maproductions.mohamedalaa.shared.core.customTypes.MABaseResponse
+import com.maproductions.mohamedalaa.shared.core.customTypes.MAResult
 import com.maproductions.mohamedalaa.shared.core.di.module.GsonModule
 import com.maproductions.mohamedalaa.shared.data.api.ApiConst
 import com.maproductions.mohamedalaa.shared.data.remote.BaseRemoteDataSource
@@ -51,7 +52,7 @@ class DataSourceHome @Inject constructor(
         extraNotes: String,
 
         total: Float,
-    ) = safeApiCall {
+    ): MAResult.Immediate<MABaseResponse<Int>> = safeApiCall {
         val map = mutableMapOf<String, RequestBody>()
         for ((index, item) in services.withIndex()) {
             map["${ApiConst.Query.SERVICES}[$index][${ApiConst.Query.SERVICE_ID}]"] = item.serviceInCategory.id.toString().toRequestBody()
