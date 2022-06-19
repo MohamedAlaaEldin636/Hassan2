@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanp.presentation.myAccount.WalletFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanp.presentation.myAccount.viewModel.WalletViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F9F9F9"
+
+        android:orientation="vertical"
+
+        android:clipToPadding="false"
+        android:paddingBottom="8dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:cardElevation="4dp"
+            app:cardMaxElevation="4dp"
+
+            app:cardCornerRadius="8dp"
+
+            android:layout_margin="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+
+                android:background="@color/white"
+
+                android:padding="16dp"
+                android:clipToPadding="false">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    style="@style/TextTajawalBold14"
+                    android:textSize="24sp"
+
+                    android:text="@string/your_wallet_account"
+
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="16dp"
+
+                    style="@style/TextTajawalBold14"
+                    android:textSize="24sp"
+                    android:textColor="#FFBC23"
+
+                    tools:text="-200 جنيه"
+                    android:text="@{viewModel.totalValueOfWallet}"
+
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            style="@style/TextTajawalMedium14"
+
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+
+            tools:text="@string/wallet_hint_4"
+            android:text="@{viewModel.info}"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:padding="8dp"
+            android:clipToPadding="false"
+
+            android:scrollbars="vertical"
+            tools:itemCount="14"
+            tools:orientation="vertical"
+            tools:listitem="@layout/item_wallet"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    </LinearLayout>
+
+</layout>

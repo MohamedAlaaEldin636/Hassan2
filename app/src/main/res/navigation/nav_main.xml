@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/nav_shared">
+
+    <include app:graph="@navigation/nav_shared"/>
+    <include app:graph="@navigation/nav_auth" />
+    <fragment
+        android:id="@+id/dest_user_bottom_nav"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.bottomNav.UserBottomNavFragment"
+        tools:layout="@layout/fragment_bottom_nav">
+
+        <deepLink
+            android:id="@+id/deep_link_dest_user_bottom_nav"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.user.bottom.nav"/>
+        <deepLink
+            android:id="@+id/deep_link_dest_user_bottom_nav_is_guest"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.user.bottom.nav.is.guest/{isGuest}"/>
+        <action
+            android:id="@+id/action_dest_user_bottom_nav_to_dest_move_to_provider_app_dialog"
+            app:destination="@id/dest_move_to_provider_app_dialog" />
+        <argument
+            android:name="isGuest"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <action
+            android:id="@+id/action_dest_user_bottom_nav_to_dest_rate_provider_dialog"
+            app:destination="@id/dest_rate_provider_dialog" />
+        <argument
+            android:name="startDestinationId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+
+    </fragment>
+    <include app:graph="@navigation/nav_services" />
+    <dialog
+        android:id="@+id/dest_move_to_provider_app_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.global.MoveToProviderAppDialogFragment"
+        tools:layout="@layout/dialog_fragment_move_to_provider_app" />
+    <dialog
+        android:id="@+id/dest_guest_please_login_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.global.GuestPleaseLoginDialogFragment"
+        tools:layout="@layout/dialog_fragment_guest_please_login" >
+        <deepLink
+            android:id="@+id/deep_link_dest_guest_please_login_dialog"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.guest.please.login.dialog"/>
+    </dialog>
+    <include app:graph="@navigation/nav_more" />
+    <fragment
+        android:id="@+id/dest_add_new_address"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.address.AddNewAddressFragment"
+        android:label="@string/address_details"
+        tools:layout="@layout/fragment_adding_new_address">
+        <argument
+            android:name="jsonOfLocationData"
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/deep_link_dest_add_new_address"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.add.new.address/{jsonOfLocationData}"/>
+    </fragment>
+    <dialog
+        android:id="@+id/done_adding_address_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.address.DoneAddingAddressDialogFragment"
+        tools:layout="@layout/dialog_fragment_done_adding_address" >
+        <deepLink
+            android:id="@+id/deep_link_done_adding_address_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.adding.address.dialog/{isAdditionNotDeletion}"/>
+        <argument
+            android:name="isAdditionNotDeletion"
+            app:argType="boolean" />
+    </dialog>
+    <include app:graph="@navigation/nav_orders" />
+    <fragment
+        android:id="@+id/dest_order_additions"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.order.OrderAdditionsFragment"
+        tools:layout="@layout/fragment_order_additions" >
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <deepLink
+            android:id="@+id/deep_link_dest_order_additions"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.order.additions/{orderId}"/>
+        <action
+            android:id="@+id/action_dest_order_additions_to_dest_finished_order_payment_dialog"
+            app:destination="@id/dest_finished_order_payment_dialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/dest_finished_order_payment_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.order.FinishedOrderPaymentDialogFragment"
+        tools:layout="@layout/dialog_fragment_finished_order_payment" >
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+    </dialog>
+    <dialog
+        android:id="@+id/dest_rate_provider_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.global.RateProviderDialogFragment"
+        tools:layout="@layout/dialog_fragment_rate_provider" >
+        <argument
+            android:name="providerId"
+            app:argType="integer" />
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/deep_link_dest_rate_provider_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.rate.provider.dialog/{providerId}/{categoryName}"/>
+    </dialog>
+    <dialog
+        android:id="@+id/dest_accepted_provider_service_request_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.service.AcceptedProviderServiceRequestDialogFragment"
+        tools:layout="@layout/dialog_fragment_accepted_provider_service_request" >
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <argument
+            android:name="providerName"
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/deep_link_dest_accepted_provider_service_request_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.accepted.provider.service.request.dialog/{orderId}/{providerName}"/>
+    </dialog>
+
+</navigation>

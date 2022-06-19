@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanu.presentation.order.OrdersFragment">
+
+    <data>
+        <import type="com.maproductions.mohamedalaa.shared.core.customTypes.OrdersCategory"/>
+
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanu.presentation.order.viewModel.OrdersViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="#F9F9F9"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pendingButton"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintWidth_default="wrap"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+
+            android:background="@{viewModel.currentCategory == OrdersCategory.PENDING ? @drawable/dr_project_round : @drawable/dr_rounded_white_small}"
+            tools:background="@drawable/dr_rounded_white_small"
+            style="@style/Widget.MaterialComponents.Button"
+            materialButton_backgroundTintBA="@{viewModel.currentCategory == OrdersCategory.PENDING ? @color/colorPrimaryDark : @color/white}"
+
+            android:text="@string/pending"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextTajawalMedium16"
+            android:textColor="@color/black"
+
+            android:maxLines="1"
+            android:ellipsize="end"
+
+            android:onClick="@{() -> viewModel.toggleCategory(OrdersCategory.PENDING)}"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/currentButton"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/currentButton"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintWidth_default="wrap"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+
+            android:background="@{viewModel.currentCategory == OrdersCategory.CURRENT ? @drawable/dr_project_round : @drawable/dr_rounded_white_small}"
+            tools:background="@drawable/dr_project_round"
+            style="@style/Widget.MaterialComponents.Button"
+            materialButton_backgroundTintBA="@{viewModel.currentCategory == OrdersCategory.CURRENT ? @color/colorPrimaryDark : @color/white}"
+            tools:backgroundTint="@color/colorPrimaryDark"
+
+            android:text="@string/current"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextTajawalMedium16"
+            android:textColor="@color/black"
+
+            android:maxLines="1"
+            android:ellipsize="end"
+
+            android:onClick="@{() -> viewModel.toggleCategory(OrdersCategory.CURRENT)}"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/pendingButton"
+            app:layout_constraintEnd_toStartOf="@id/finishedButton"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/finishedButton"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintWidth_default="wrap"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+
+            android:background="@{viewModel.currentCategory == OrdersCategory.FINISHED ? @drawable/dr_project_round : @drawable/dr_rounded_white_small}"
+            tools:background="@drawable/dr_project_round"
+            style="@style/Widget.MaterialComponents.Button"
+            materialButton_backgroundTintBA="@{viewModel.currentCategory == OrdersCategory.FINISHED ? @color/colorPrimaryDark : @color/white}"
+
+            android:text="@string/previous"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextTajawalMedium16"
+            android:textColor="@color/black"
+
+            android:maxLines="1"
+            android:ellipsize="end"
+
+            android:onClick="@{() -> viewModel.toggleCategory(OrdersCategory.FINISHED)}"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/currentButton"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/filterMaterialCardView"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintDimensionRatio="1:1"
+
+            android:layout_marginEnd="16dp"
+
+            app:cardElevation="4dp"
+            app:cardMaxElevation="4dp"
+
+            app:cardCornerRadius="8dp"
+
+            app:cardBackgroundColor="@color/black"
+
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{v -> viewModel.filter(v)}"
+
+            app:layout_constraintTop_toTopOf="@id/searchMaterialCardView"
+            app:layout_constraintBottom_toBottomOf="@id/searchMaterialCardView"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+
+                android:src="@drawable/ic_filter"
+                tools:ignore="ContentDescription" />
+
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/searchMaterialCardView"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
+
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.RightOnly"
+
+            app:cardElevation="4dp"
+            app:cardMaxElevation="4dp"
+
+            app:layout_constraintTop_toBottomOf="@id/pendingButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/filterMaterialCardView">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+
+                android:background="@color/white"
+
+                android:hint="@string/search_by_order_number_provider_service"
+                app:hintTextColor="#848484"
+                android:textColorHint="#848484"
+
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+
+                android:onClick="@{v -> viewModel.toSearchQueries(v)}"
+
+                textInputLayout_onEndIconClicksBA="@{viewModel.clearSearchFilter()}"
+                textInputLayout_setEndIconAsCloseOrEmptyBA="@{viewModel.filters.search != null &amp;&amp; viewModel.filters.search.length() > 0}"
+
+                app:startIconDrawable="@drawable/ic_search_2"
+                app:startIconTint="@android:color/transparent"
+                app:startIconTintMode="src_over">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    style="@style/TextTajawalRegular12"
+                    android:textColor="#848484"
+
+                    android:text="@{viewModel.filters.search}"
+
+                    android:background="@color/white"
+
+                    android:onClick="@{v -> viewModel.toSearchQueries(v)}"
+
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="none"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{v -> viewModel.toSearchQueries(v)}"
+
+            app:layout_constraintTop_toTopOf="@id/searchMaterialCardView"
+            app:layout_constraintBottom_toBottomOf="@id/searchMaterialCardView"
+            app:layout_constraintStart_toStartOf="@id/searchMaterialCardView"
+            app:layout_constraintEnd_toEndOf="@id/searchMaterialCardView"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pendingRecyclerView"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            tools:visibility="gone"
+            android:visibility="@{viewModel.currentCategory == OrdersCategory.PENDING}"
+
+            android:layout_marginTop="8dp"
+
+            android:padding="8dp"
+            android:clipToPadding="false"
+
+            android:scrollbars="vertical"
+            tools:itemCount="12"
+            tools:orientation="vertical"
+            tools:listitem="@layout/item_order_pending"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+            app:layout_constraintTop_toBottomOf="@id/searchMaterialCardView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/currentRecyclerView"
+
+            tools:visibility="gone"
+            android:visibility="@{viewModel.currentCategory == OrdersCategory.CURRENT}"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:layout_marginTop="8dp"
+
+            android:padding="8dp"
+            android:clipToPadding="false"
+
+            android:scrollbars="vertical"
+            tools:itemCount="12"
+            tools:orientation="vertical"
+            tools:listitem="@layout/item_order_current"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+            app:layout_constraintTop_toBottomOf="@id/searchMaterialCardView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/finishedRecyclerView"
+
+            tools:visibility="visible"
+            android:visibility="@{viewModel.currentCategory == OrdersCategory.FINISHED}"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:layout_marginTop="8dp"
+
+            android:padding="8dp"
+            android:clipToPadding="false"
+
+            android:scrollbars="vertical"
+            tools:itemCount="12"
+            tools:orientation="vertical"
+            tools:listitem="@layout/item_order_finished"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+            app:layout_constraintTop_toBottomOf="@id/searchMaterialCardView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

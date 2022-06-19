@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/materialCardView"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    app:cardMaxElevation="2dp"
+    app:cardElevation="2dp"
+
+    app:cardCornerRadius="8dp"
+
+    android:layout_margin="8dp"
+
+    android:layout_gravity="center"
+
+    tools:ignore="ContentDescription">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:padding="12dp"
+        android:clipToPadding="false">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/imageMaterialCardView"
+
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+
+            app:cardMaxElevation="2dp"
+            app:cardElevation="2dp"
+
+            app:cardCornerRadius="54dp"
+
+            app:strokeWidth="2dp"
+            app:strokeColor="@color/white"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/imageImageView"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:background="#F9F9F9"
+
+                android:src="@drawable/ic_logo_app_placeholder"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            android:layout_marginStart="12dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageMaterialCardView"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/nameTextView"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                style="@style/TextTajawalRegular14"
+
+                tools:text="عاصم خليفة"
+
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                style="@style/TextTajawalRegular12"
+                android:textColor="#8E8E8E"
+
+                tools:text="لوريم ايبسوم دولار سيت أميت لوريم ايبسوم دولار سيت أميت كونسيكتيتور لوريم ايبسوم دولار سيت أميت لوريم ايبسوم دولار سيت أميت لوريم ايبسوم دولار سيت أميت لوريم ايبسوم دولار سيت أميت لوريم ايبسوم دولار سيت كونسيكتيتور لوريم ايبسوم دولار سيت أميت"
+
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/ratingBar"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="4dp"
+
+                android:numStars="5"
+                tools:progress="80"
+
+                style="@style/Widget.AppCompat.RatingBar.Small"
+
+                android:progressTint="#FFA200"
+                android:progressBackgroundTint="#737373"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

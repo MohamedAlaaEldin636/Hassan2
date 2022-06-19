@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.shared.presentation.chat.ConversationsFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.shared.presentation.chat.viewModel.ConversationsViewModel" />
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:background="#F9F9F9"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:padding="8dp"
+        android:clipToPadding="false"
+
+        android:scrollbars="vertical"
+        tools:itemCount="9"
+        tools:orientation="vertical"
+        tools:listitem="@layout/item_conversation"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</layout>

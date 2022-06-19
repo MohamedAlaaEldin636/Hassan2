@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/materialCardView"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    app:cardMaxElevation="2dp"
+    app:cardElevation="2dp"
+
+    app:cardCornerRadius="8dp"
+
+    android:layout_margin="8dp"
+
+    android:layout_gravity="center">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:padding="12dp"
+        android:clipToPadding="false">
+
+        <ImageView
+            android:id="@+id/imageView"
+
+            android:layout_width="53dp"
+            android:layout_height="60dp"
+
+            android:src="@drawable/ic_logo_app_placeholder"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/dateAndTimeTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            style="@style/TextTajawalMedium10"
+
+            tools:text="01 May 2018 , 6 Am"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/descriptionTextView"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            style="@style/TextTajawalMedium14"
+
+            tools:text="عرض أضافات ' أحمد محمود ' لمعرفة اعرض أضافات ' أحمد محمود ' لمعرفة اعرض أضافات ' أحمد محمود ' لمعرفة اعرض أضافات ' أحمد محمود ' لمعرفة اعرض أضافات ' أحمد محمود ' لمعرفة اعرض أضافات ' أحمد محمود ' لمعرفة اعرض أضافات ' أحمد محمود ' لمعرفة اعرض أضافات ' أحمد محمود ' لمعرفة اعرض أضافات ' أحمد محمود ' لمعرفة التكلفة الاضافية"
+
+            android:layout_marginStart="12dp"
+
+            app:layout_constraintTop_toBottomOf="@id/dateAndTimeTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

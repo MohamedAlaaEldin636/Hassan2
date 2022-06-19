@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/nav_shared">
+
+    <include app:graph="@navigation/nav_shared"/>
+    <include app:graph="@navigation/nav_auth" />
+    <fragment
+        android:id="@+id/dest_provider_bottom_nav"
+        android:name="com.maproductions.mohamedalaa.hassanp.presentation.bottomNav.ProviderBottomNavFragment"
+        tools:layout="@layout/fragment_bottom_nav">
+
+        <deepLink
+            android:id="@+id/deep_link_dest_provider_bottom_nav"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.provider.bottom.nav"/>
+
+        <argument
+            android:name="startDestinationId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+
+    </fragment>
+    <dialog
+        android:id="@+id/dest_accepted_order_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanp.presentation.home.AcceptedOrderDialogFragment"
+        tools:layout="@layout/dialog_fragment_accepted_order" >
+        <deepLink
+            android:id="@+id/deep_link_dest_accepted_order_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.accepted.order.dialog"/>
+    </dialog>
+    <include app:graph="@navigation/nav_orders" />
+    <include app:graph="@navigation/nav_my_account" />
+    <dialog
+        android:id="@+id/dest_stop_recieving_orders_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanp.presentation.home.StopRecievingOrdersDialogFragment"
+        tools:layout="@layout/dialog_fragment_stop_recieving_orders" >
+        <deepLink
+            android:id="@+id/deep_link_dest_stop_recieving_orders_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.stop.recieving.orders.dialog"/>
+    </dialog>
+
+</navigation>

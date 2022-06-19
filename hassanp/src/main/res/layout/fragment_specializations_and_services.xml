@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanp.presentation.myAccount.SpecializationsAndServicesFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanp.presentation.myAccount.viewModel.SpecializationsAndServicesViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="#F9F9F9"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:fillViewport="true"
+
+            tools:ignore="ContentDescription"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottomMaterialCardView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:padding="16dp"
+                android:clipToPadding="false">
+
+                <LinearLayout
+                    android:id="@+id/specializationLinearLayout"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal"
+
+                    android:background="@drawable/dr_rounded_white_small"
+
+                    android:gravity="center"
+
+                    android:padding="16dp"
+                    android:clipToPadding="false"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+
+                        style="@style/TextTajawalBold16"
+                        android:textColor="#D6292D32"
+
+                        android:text="@string/specialization_you_picked"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        style="@style/TextTajawalBold16"
+                        android:textColor="#292D32"
+
+                        tools:text="سباك"
+                        android:text="@{viewModel.specialization}"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/servicesLinearLayout"
+
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+
+                    app:layout_constraintVertical_bias="0"
+
+                    app:layout_constraintHeight_default="wrap"
+
+                    android:orientation="vertical"
+
+                    android:layout_marginTop="16dp"
+
+                    android:background="@drawable/dr_rounded_white_small"
+
+                    android:padding="16dp"
+                    android:clipToPadding="false"
+
+                    app:layout_constraintTop_toBottomOf="@id/specializationLinearLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        style="@style/TextTajawalMedium16"
+                        android:textColor="#292D32"
+
+                        tools:text="الخدمات التي اقدمها"
+                        android:text="@string/services_i_provide"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:clipToPadding="false"
+
+                        android:scrollbars="vertical"
+                        tools:itemCount="5"
+                        tools:orientation="vertical"
+                        tools:listitem="@layout/item_small_text"
+                        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+                        app:layout_constraintTop_toBottomOf="@id/imagesValueTextView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/bottomMaterialCardView"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:cardMaxElevation="16dp"
+            app:cardElevation="16dp"
+
+            app:cardCornerRadius="0dp"
+
+            app:cardBackgroundColor="@color/white"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/confirmButton"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/dr_project_round"
+                style="@style/Widget.MaterialComponents.Button"
+
+                android:text="@string/send_edit_to_2"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextTajawalMedium16"
+                android:textColor="@color/black"
+
+                android:onClick="@{v -> viewModel.send(v)}"
+
+                android:layout_margin="16dp"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

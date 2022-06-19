@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_orders"
+    app:startDestination="@id/dest_order_details">
+
+    <fragment
+        android:id="@+id/dest_order_details"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.order.OrderDetailsFragment"
+        android:label="@string/order_details"
+        tools:layout="@layout/fragment_order_details" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <deepLink
+            android:id="@+id/deep_link_dest_order_details"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.order.details/{id}"/>
+        <action
+            android:id="@+id/action_dest_order_details_to_dest_rate_provider_2_dialog"
+            app:destination="@id/dest_rate_provider_2_dialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/dest_provider_details"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.provider.ProviderDetailsFragment"
+        android:label="@string/order_details"
+        tools:layout="@layout/fragment_provider_details" >
+        <argument
+            android:name="jsonOfProviderInOrder"
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/deep_link_dest_provider_details"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.provider.details/{jsonOfProviderInOrder}"/>
+    </fragment>
+    <fragment
+        android:id="@+id/dest_filter_orders"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.order.FilterOrdersFragment"
+        android:label="@string/filter_orders"
+        tools:layout="@layout/fragment_filter_orders" >
+        <deepLink
+            android:id="@+id/deep_link_dest_filter_orders"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.filter.orders"/>
+    </fragment>
+    <dialog
+        android:id="@+id/dest_rate_provider_2_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.order.RateProvider2DialogFragment"
+        tools:layout="@layout/dialog_fragment_rate_provider_2" >
+        <argument
+            android:name="providerId"
+            app:argType="integer" />
+    </dialog>
+</navigation>

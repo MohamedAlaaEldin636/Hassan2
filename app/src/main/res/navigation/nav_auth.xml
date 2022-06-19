@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_auth"
+    app:startDestination="@id/dest_log_in">
+
+    <fragment
+        android:id="@+id/dest_log_in"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.auth.LogInFragment"
+        tools:layout="@layout/fragment_log_in">
+
+        <deepLink
+            android:id="@+id/deep_link_dest_log_in"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.log.in"/>
+        <action
+            android:id="@+id/action_dest_log_in_to_dest_register_personal_data"
+            app:destination="@id/dest_register_personal_data"
+
+            app:enterAnim="@anim/anim_slide_in_right"
+            app:exitAnim="@anim/anim_slide_out_left"
+            app:popEnterAnim="@anim/anim_slide_in_left"
+            app:popExitAnim="@anim/anim_slide_out_right"/>
+        <action
+            android:id="@+id/action_dest_log_in_to_dest_register_phone"
+            app:destination="@id/dest_register_phone"
+
+            app:enterAnim="@anim/anim_slide_in_right"
+            app:exitAnim="@anim/anim_slide_out_left"
+            app:popEnterAnim="@anim/anim_slide_in_left"
+            app:popExitAnim="@anim/anim_slide_out_right" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/dest_register_personal_data"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.auth.RegisterPersonalDataFragment"
+        android:label="@string/your_personal_data"
+        tools:layout="@layout/fragment_register_personal_data" >
+
+        <deepLink
+            android:id="@+id/deep_link_dest_register_personal_data"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.registration.almost.complete.redirect.to.location"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/dest_register_phone"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.auth.RegisterPhoneFragment"
+        android:label="@string/enter_phone_number"
+        tools:layout="@layout/fragment_register_phone" >
+        <argument
+            android:name="socialId"
+            app:argType="string" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="email"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
+</navigation>

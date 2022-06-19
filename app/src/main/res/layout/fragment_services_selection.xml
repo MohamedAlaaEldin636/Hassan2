@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanu.presentation.service.ServicesSelectionFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanu.presentation.service.viewModel.ServicesSelectionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="#F9F9F9"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="16dp"
+
+            style="@style/TextTajawalBold14"
+
+            android:text="@string/pick_services_that_you_want_to_book"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:padding="8dp"
+            android:clipToPadding="false"
+
+            android:scrollbars="vertical"
+            tools:itemCount="12"
+            tools:orientation="vertical"
+            tools:listitem="@layout/item_service_in_selection"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:cardElevation="8dp"
+            app:cardMaxElevation="8dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:padding="16dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/logInButton"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:background="@drawable/dr_project_round"
+                    style="@style/Widget.MaterialComponents.Button"
+
+                    android:text="@string/next"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextTajawalMedium16"
+                    android:textColor="@color/black"
+
+                    android:onClick="@{v -> viewModel.next(v)}"/>
+
+            </FrameLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

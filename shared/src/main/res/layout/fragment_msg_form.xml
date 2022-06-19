@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.shared.presentation.settings.MSGFormFragment"
+
+    tools:ignore="ContentDescription">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.shared.presentation.settings.viewModel.MSGFormViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F9F9F9"
+
+        android:orientation="vertical"
+
+        android:padding="16dp"
+        android:clipToPadding="false">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameTextInputLayout"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+
+            android:background="@color/white"
+
+            android:hint="@string/name"
+            app:hintTextColor="#292D32"
+            android:textColorHint="#292D32">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                style="@style/TextTajawalRegular15"
+
+                android:text="@={viewModel.name}"
+
+                android:background="@color/white"
+
+                android:inputType="text"
+                android:imeOptions="actionDone|flagNoFullscreen"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailTextInputLayout"
+
+            android:layout_marginTop="16dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+
+            android:background="@color/white"
+
+            android:hint="@string/email"
+            app:hintTextColor="#292D32"
+            android:textColorHint="#292D32">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                style="@style/TextTajawalRegular15"
+
+                android:text="@={viewModel.email}"
+
+                android:background="@color/white"
+
+                android:inputType="text"
+                android:imeOptions="actionDone|flagNoFullscreen"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneTextInputLayout"
+
+            android:layout_marginTop="16dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+
+            android:background="@color/white"
+
+            android:hint="@string/phone_number_2"
+            app:hintTextColor="#292D32"
+            android:textColorHint="#292D32">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                style="@style/TextTajawalRegular15"
+
+                android:text="@={viewModel.phone}"
+
+                android:background="@color/white"
+
+                android:inputType="number"
+                android:imeOptions="actionDone|flagNoFullscreen"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/msgTextInputLayout"
+
+            android:layout_marginTop="16dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+
+            android:background="@color/white"
+
+            android:hint="@string/the_message"
+            app:hintTextColor="#292D32"
+            android:textColorHint="#292D32">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                style="@style/TextTajawalRegular15"
+
+                android:text="@={viewModel.message}"
+                tools:text="A\nA\nA\nA\nA\nA\nA\nA\nA\nA\nA\nA\nA\nA\nA\nA\nA\nA\nA\nA\nA\nA\nB\nB\nB\nB\nB\nB\nB\nB\nB"
+
+                android:background="@color/white"
+
+                android:inputType="textMultiLine"
+                android:imeOptions="actionDone|flagNoFullscreen"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButton"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            style="@style/Widget.MaterialComponents.Button"
+            android:textAppearance="@style/TextTajawalMedium16"
+
+            android:text="@string/send"
+            android:textColor="@android:color/black"
+
+            android:background="@drawable/dr_project_round"
+            app:backgroundTint="@null"
+
+            android:layout_marginTop="16dp"
+
+            android:onClick="@{v -> viewModel.send(v)}"/>
+
+    </LinearLayout>
+
+</layout>

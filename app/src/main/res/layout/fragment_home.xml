@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanu.presentation.home.HomeFragment">
+
+    <data>
+        <import type="com.maproductions.mohamedalaa.shared.core.customTypes.MenuItemVisibility"/>
+        <variable
+            name="activityViewModel"
+            type="com.maproductions.mohamedalaa.shared.presentation.main.viewModels.MainViewModel" />
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanu.presentation.home.viewModel.HomeViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F9F9F9"
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:paddingBottom="16dp"
+            android:clipToPadding="false">
+
+            <!-- 56dp End + 8 margin == 64dp -->
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/placeholderMaterialToolbar"
+
+                style="@style/ToolbarColoredBackArrow"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:visibility="invisible"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageView
+                android:id="@+id/notificationsImageView"
+
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> activityViewModel.onNotificationsClick(v)}"
+
+                android:padding="4dp"
+
+                tools:src="@drawable/ic_notification"
+                android:src="@{activityViewModel.menuItemNotificationsVisibility == MenuItemVisibility.SHOW ? @drawable/ic_notification : @drawable/ic_notification_new_data}"
+
+                android:layout_marginEnd="16dp"
+
+                tools:visibility="visible"
+                android:visibility="@{activityViewModel.menuItemNotificationsVisibility == MenuItemVisibility.SHOW || activityViewModel.menuItemNotificationsVisibility == MenuItemVisibility.SHOW_HAVING_NEW_DATA,default=gone}"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/placeholderMaterialToolbar"
+                app:layout_constraintBottom_toBottomOf="@id/placeholderMaterialToolbar"
+                tools:ignore="ContentDescription" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/logoImageView"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:src="@drawable/ic_home_user_app_logo"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/placeholderMaterialToolbar"/>
+
+            <!--هاشم الأشقر -النزهةهاشم الأشقر -النزهة-->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintWidth_default="wrap"
+
+                style="@style/TextTajawalMedium14"
+
+                android:ellipsize="end"
+                android:maxLines="1"
+
+                tools:text="هاشم الأشقر -النزهة"
+                android:text="@{viewModel.address}"
+
+                app:drawableEndCompat="@drawable/ic_arrow_down"
+                android:drawablePadding="4dp"
+
+                android:gravity="center"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.editLocation(v)}"
+
+                app:layout_constraintStart_toEndOf="@id/logoImageView"
+                app:layout_constraintEnd_toStartOf="@id/notificationsImageView"
+                app:layout_constraintTop_toTopOf="@id/placeholderMaterialToolbar"
+                app:layout_constraintBottom_toBottomOf="@id/placeholderMaterialToolbar"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/searchMaterialCardView"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="16dp"
+
+                app:cardElevation="2dp"
+                app:cardMaxElevation="2dp"
+
+                app:cardCornerRadius="8dp"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toSearchQueries(v)}"
+
+                app:layout_constraintTop_toBottomOf="@id/placeholderMaterialToolbar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+
+                    android:background="@color/white"
+
+                    android:hint="@string/search"
+                    app:hintTextColor="#848484"
+                    android:textColorHint="#848484"
+
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+
+                    android:onClick="@{v -> viewModel.toSearchQueries(v)}"
+
+                    app:startIconDrawable="@drawable/ic_search_2"
+                    app:startIconTint="@android:color/transparent"
+                    app:startIconTintMode="src_over">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/location_search"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        style="@style/TextTajawalRegular12"
+                        android:textColor="#848484"
+
+                        android:background="@color/white"
+
+                        android:onClick="@{v -> viewModel.toSearchQueries(v)}"
+
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:inputType="none"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/sliderMaterialCardView"
+
+                android:layout_width="0dp"
+                android:layout_height="155dp"
+
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+
+                app:cardBackgroundColor="@android:color/transparent"
+                tools:cardBackgroundColor="@android:color/black"
+
+                app:cardElevation="0dp"
+                app:cardMaxElevation="0dp"
+
+                app:cardCornerRadius="16dp"
+
+                app:layout_constraintTop_toBottomOf="@id/searchMaterialCardView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/sliderView"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    app:sliderAnimationDuration="600"
+                    app:sliderAutoCycleDirection="back_and_forth"
+                    app:sliderAutoCycleEnabled="false"
+                    app:sliderIndicatorAnimationDuration="600"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="3dp"
+                    app:sliderIndicatorRadius="2dp"
+                    app:sliderIndicatorSelectedColor="#FFBC23"
+                    app:sliderIndicatorUnselectedColor="#AFAFAF"
+                    app:sliderScrollTimeInSec="3"
+                    app:sliderStartAutoCycle="false" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/servicesTextView"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="16dp"
+
+                style="@style/TextTajawalBold18"
+
+                android:text="@string/the_services"
+
+                app:layout_constraintTop_toBottomOf="@id/sliderMaterialCardView"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:maxHeight="405dp"
+                app:layout_constraintHeight_max="405dp"
+
+                android:padding="8dp"
+                android:clipToPadding="false"
+
+                android:scrollbars="vertical"
+                tools:itemCount="2"
+                app:spanCount="3"
+                tools:orientation="vertical"
+                tools:listitem="@layout/item_service_in_home"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+
+                app:layout_constraintTop_toBottomOf="@id/servicesTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageView
+                android:id="@+id/providerImageView"
+
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/ic_become_provider"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.becomeProvider(v)}"
+
+                app:layout_constraintTop_toBottomOf="@id/recyclerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintWidth_percent="0.45"
+
+                style="@style/TextTajawalBold18"
+
+                android:text="@string/become_provider"
+                tools:text="الاشتراك كمقدم خدمة الاشتراك كمقدم خدمةالاشتراك كمقدم خدمة"
+
+                android:gravity="center"
+                android:maxLines="2"
+                android:ellipsize="end"
+
+                app:layout_constraintTop_toTopOf="@id/providerImageView"
+                app:layout_constraintBottom_toBottomOf="@id/providerImageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:src="@drawable/ic_arrow_end"
+
+                android:layout_marginEnd="32dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/providerImageView"
+                app:layout_constraintBottom_toBottomOf="@id/providerImageView"
+                tools:ignore="ContentDescription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

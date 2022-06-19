@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    tools:context="com.maproductions.mohamedalaa.hassanu.presentation.order.FinishedOrderPaymentDialogFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanu.presentation.order.viewModel.FinishedOrderPaymentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/dr_top_round_white"
+        tools:backgroundTint="@color/gray"
+
+        tools:layout_gravity="bottom"
+
+        android:padding="24dp"
+        android:clipToPadding="false"
+
+        tools:ignore="ContentDescription">
+
+        <ImageView
+            android:id="@+id/circleImageView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/ic_circle_with_money_gradient"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+
+            style="@style/TextTajawalBold14"
+
+            android:text="@string/please_enter_the_amount_you_paid"
+
+            android:gravity="center"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/circleImageView"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+
+            android:background="@color/white"
+
+            android:hint="@string/the_amount_you_paid"
+            app:hintTextColor="#BFBFBF"
+            android:textColorHint="#BFBFBF"
+
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                style="@style/TextTajawalRegular15"
+
+                android:text="@={viewModel.moneyYouPaid}"
+
+                android:background="@color/white"
+
+                android:inputType="numberDecimal"
+                android:imeOptions="actionDone|flagNoFullscreen"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButton"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            style="@style/Widget.MaterialComponents.Button"
+            android:textAppearance="@style/TextTajawalMedium16"
+
+            android:text="@string/send"
+            android:textColor="@android:color/black"
+
+            android:background="@drawable/dr_project_round"
+            app:backgroundTint="@null"
+
+            android:layout_marginTop="16dp"
+
+            android:onClick="@{v -> viewModel.send(v)}"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

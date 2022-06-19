@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanu.presentation.auth.RegisterPersonalDataFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanu.presentation.auth.viewModel.RegisterPersonalDataViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F9F9F9"
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/logoImageView"
+
+                android:layout_width="183dp"
+                android:layout_height="85dp"
+
+                android:src="@drawable/ic_verify_code_app_logo"
+
+                android:layout_marginTop="32dp"
+
+                app:layout_constraintVertical_chainStyle="packed"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/nameTextInputLayout"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameTextInputLayout"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+
+                android:hint="@string/user_name"
+
+                app:startIconDrawable="@drawable/ic_name_of_user"
+                app:startIconTintMode="src_atop"
+                app:startIconTint="@android:color/transparent"
+
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+
+                app:hintTextColor="#717171"
+                android:textColorHint="#717171"
+                android:background="@drawable/dr_input_round_white"
+
+                app:layout_constraintTop_toBottomOf="@id/logoImageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/emailTextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="12sp"
+
+                    android:background="@drawable/dr_input_round_white"
+
+                    android:text="@={viewModel.name}"
+                    style="@style/TextTajawalMedium12"
+
+                    android:inputType="text"
+                    android:imeOptions="actionNone|flagNoFullscreen"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailTextInputLayout"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+
+                android:hint="@string/email"
+                app:expandedHintEnabled="false"
+
+                app:suffixText="@string/optional_between_brackets"
+                app:suffixTextColor="#717171"
+                app:suffixTextAppearance="@style/TextTajawalMedium12"
+
+                app:startIconDrawable="@drawable/ic_name_of_user"
+                app:startIconTintMode="src_atop"
+                app:startIconTint="@android:color/transparent"
+
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+
+                app:hintTextColor="#717171"
+                android:textColorHint="#717171"
+                android:background="@drawable/dr_input_round_white"
+
+                app:layout_constraintTop_toBottomOf="@id/nameTextInputLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/confirmMaterialButton">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:background="@drawable/dr_input_round_white"
+
+                    android:text="@={viewModel.email}"
+                    style="@style/TextTajawalMedium12"
+
+                    android:inputType="text"
+                    android:imeOptions="actionNone|flagNoFullscreen"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/confirmMaterialButton"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="32dp"
+
+                android:background="@drawable/dr_project_round"
+                style="@style/Widget.MaterialComponents.Button"
+
+                android:text="@string/confirm"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextTajawalMedium16"
+                android:textColor="@color/black"
+
+                android:onClick="@{v -> viewModel.onConfirmClick(v)}"
+
+                app:layout_constraintTop_toBottomOf="@id/emailTextInputLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

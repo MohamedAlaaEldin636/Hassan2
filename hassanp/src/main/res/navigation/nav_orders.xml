@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_orders"
+    app:startDestination="@id/dest_order_details">
+
+    <fragment
+        android:id="@+id/dest_order_details"
+        android:name="com.maproductions.mohamedalaa.hassanp.presentation.order.OrderDetailsFragment"
+        android:label="@string/order_details"
+        tools:layout="@layout/fragment_order_details" >
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <deepLink
+            android:id="@+id/deep_link_dest_provider_bottom_nav"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.order.details/{orderId}"/>
+    </fragment>
+    <dialog
+        android:id="@+id/dest_confirm_finishing_work_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanp.presentation.order.ConfirmFinishingWorkDialogFragment"
+        tools:layout="@layout/dialog_fragment_confirm_finishing_work" >
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <argument
+            android:name="categoryId"
+            app:argType="integer" />
+        <deepLink
+            android:id="@+id/deep_link_dest_confirm_finishing_work_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.confirm.finishing.work.dialog/{orderId}/{categoryId}/{amountToPay}/{orderMinPriceForExtra}"/>
+        <argument
+            android:name="amountToPay"
+            app:argType="float" />
+        <argument
+            android:name="orderMinPriceForExtra"
+            app:argType="float" />
+    </dialog>
+    <dialog
+        android:id="@+id/dest_money_received_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanp.presentation.order.MoneyReceivedDialogFragment"
+        tools:layout="@layout/dialog_fragment_money_received" >
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <argument
+            android:name="amountToPay"
+            app:argType="float" />
+        <deepLink
+            android:id="@+id/deep_link_dest_money_received_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.money.received.dialog/{orderId}/{amountToPay}"/>
+        <argument
+            android:name="jsonListOfRequestServiceWithCount"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <deepLink
+            android:id="@+id/deep_link_dest_money_received_dialog_with_list_of_services"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.money.received.dialog.with.list.of.services/{orderId}/{amountToPay}/{jsonListOfRequestServiceWithCount}"/>
+    </dialog>
+    <fragment
+        android:id="@+id/dest_adding_services"
+        android:name="com.maproductions.mohamedalaa.hassanp.presentation.service.AddingServicesFragment"
+        android:label="@string/addition_of_services"
+        tools:layout="@layout/fragment_adding_services" >
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <argument
+            android:name="categoryId"
+            app:argType="integer" />
+        <argument
+            android:name="amountToPay"
+            app:argType="float" />
+        <argument
+            android:name="orderMinPriceForExtra"
+            app:argType="float" />
+        <deepLink
+            android:id="@+id/deep_link_dest_adding_services"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.adding.services/{orderId}/{categoryId}/{amountToPay}/{orderMinPriceForExtra}"/>
+    </fragment>
+    <dialog
+        android:id="@+id/dest_cancellation_reason_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanp.presentation.order.CancellationReasonDialogFragment"
+        tools:layout="@layout/dialog_fragment_cancellation_reason" >
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <argument
+            android:name="cancellationFees"
+            app:argType="float" />
+        <deepLink
+            android:id="@+id/deep_link_dest_cancellation_reason_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.cancellation.reason.dialog/{orderId}/{cancellationFees}"/>
+    </dialog>
+    <dialog
+        android:id="@+id/dest_new_order_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanp.presentation.home.NewOrderDialogFragment"
+        tools:layout="@layout/dialog_fragment_new_order" >
+        <argument
+            android:name="jsonResponsePusherOrder"
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/deep_link_dest_new_order_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.new.order.dialog/{jsonResponsePusherOrder}"/>
+    </dialog>
+</navigation>

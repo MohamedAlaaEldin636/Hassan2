@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanu.presentation.auth.LogInFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanu.presentation.auth.viewModel.LogInViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F9F9F9"
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/topView"
+
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintHeight_percent="0.4"
+
+                android:background="@drawable/ic_login_bg_top"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintHeight_percent="0.3"
+
+                android:background="@drawable/ic_login_bg_bottom"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/skipButton"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+
+                android:text="@string/skip"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextTajawalBold14"
+                android:textColor="@color/black"
+
+                android:layout_margin="16dp"
+
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/black"
+
+                app:iconTint="@color/black"
+                app:icon="@drawable/ic_double_arrows"
+                app:iconPadding="8dp"
+                app:iconGravity="textStart"
+
+                android:onClick="@{v -> viewModel.skip(v)}"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/log_in"
+
+                app:layout_constraintTop_toTopOf="@id/skipButton"
+                app:layout_constraintBottom_toBottomOf="@id/skipButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                style="@style/TextTajawalMedium14"
+
+                android:text="@string/please_enter_phone_number"
+
+                android:layout_marginBottom="56dp"
+
+                app:layout_constraintBottom_toBottomOf="@id/topView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phoneTextInputLayout"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="16dp"
+
+                android:hint="@string/phone_number"
+
+                app:startIconDrawable="@drawable/ic_phone"
+                app:startIconTintMode="src_atop"
+                app:startIconTint="@android:color/transparent"
+
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+
+                app:hintTextColor="#717171"
+                android:textColorHint="#717171"
+                android:background="@drawable/dr_input_round_white"
+
+                app:layout_constraintTop_toBottomOf="@id/topView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="12sp"
+
+                    android:background="@drawable/dr_input_round_white"
+
+                    android:text="@={viewModel.phone}"
+                    style="@style/TextTajawalMedium12"
+
+                    android:inputType="number"
+                    android:imeOptions="actionNone|flagNoFullscreen"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logInButton"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="16dp"
+
+                android:background="@drawable/dr_project_round"
+                style="@style/Widget.MaterialComponents.Button"
+
+                android:text="@string/log_in"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextTajawalMedium16"
+                android:textColor="@color/black"
+
+                android:onClick="@{v -> viewModel.logIn(v)}"
+
+                app:layout_constraintTop_toBottomOf="@id/phoneTextInputLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/checkBoxImageView"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="16dp"
+
+                tools:src="@drawable/ic_not_checked_5"
+                android:src="@{viewModel.agreeOnTermsAndConditions ? @drawable/ic_checked : @drawable/ic_not_checked_5, default=@drawable/ic_not_checked_5}"
+
+                app:layout_constraintTop_toBottomOf="@id/logInButton"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/agreeOnTextView"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                style="@style/TextTajawalMedium12"
+
+                android:text="@string/agree_on"
+                android:textColor="#717171"
+
+                android:layout_marginStart="8dp"
+
+                app:layout_constraintTop_toTopOf="@id/checkBoxImageView"
+                app:layout_constraintBottom_toBottomOf="@id/checkBoxImageView"
+                app:layout_constraintStart_toEndOf="@id/checkBoxImageView"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> viewModel.toggleAgreeOnTermsAndConditions()}"
+
+                app:layout_constraintTop_toTopOf="@id/agreeOnTextView"
+                app:layout_constraintBottom_toBottomOf="@id/agreeOnTextView"
+                app:layout_constraintStart_toStartOf="@id/checkBoxImageView"
+                app:layout_constraintEnd_toEndOf="@id/agreeOnTextView"/>
+
+            <TextView
+                android:id="@+id/termsAndConditionsTextView"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="8dp"
+
+                style="@style/TextTajawalBold12"
+
+                android:text="@string/terms_and_conditions"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.goToTermsAndConditions(v)}"
+
+                app:layout_constraintTop_toTopOf="@id/checkBoxImageView"
+                app:layout_constraintBottom_toBottomOf="@id/checkBoxImageView"
+                app:layout_constraintStart_toEndOf="@id/agreeOnTextView"/>
+
+            <TextView
+                android:id="@+id/socialLoginTextView"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="24dp"
+
+                android:text="@string/another_login_methods"
+
+                style="@style/TextTajawalMedium12"
+
+                app:layout_constraintVertical_chainStyle="packed"
+
+                app:layout_constraintBottom_toTopOf="@id/twitterMaterialCardView"
+                app:layout_constraintTop_toBottomOf="@id/termsAndConditionsTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+
+                android:background="#000000"
+
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="32dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/socialLoginTextView"
+                app:layout_constraintTop_toTopOf="@id/socialLoginTextView"
+                app:layout_constraintBottom_toBottomOf="@id/socialLoginTextView" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+
+                android:background="#000000"
+
+                android:layout_marginEnd="32dp"
+                android:layout_marginStart="16dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/socialLoginTextView"
+                app:layout_constraintTop_toTopOf="@id/socialLoginTextView"
+                app:layout_constraintBottom_toBottomOf="@id/socialLoginTextView" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/twitterMaterialCardView"
+
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="24dp"
+
+                app:layout_constraintHorizontal_chainStyle="packed"
+
+                app:cardElevation="4dp"
+                app:cardMaxElevation="4dp"
+                app:cardCornerRadius="4dp"
+
+                app:cardBackgroundColor="@android:color/white"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.onFacebookClick(v)}"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/socialLoginTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/facebookMaterialCardView">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:src="@drawable/ic_facebook" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/facebookMaterialCardView"
+
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:layout_marginStart="16dp"
+
+                app:cardElevation="4dp"
+                app:cardMaxElevation="4dp"
+                app:cardCornerRadius="4dp"
+
+                app:cardBackgroundColor="@android:color/white"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.onGoogleClick(v)}"
+
+                app:layout_constraintBottom_toBottomOf="@id/twitterMaterialCardView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/twitterMaterialCardView">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:padding="2dp"
+
+                    android:src="@drawable/ic_google" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

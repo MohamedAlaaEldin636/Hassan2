@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="facebook_app_id" translatable="false">339432601597474</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb339432601597474</string>
+    <string name="facebook_client_token" translatable="false">5a06b9bb2e007204d463ed9ed00a6427</string>
+    <string name="app_name">حسن (مستخدم)</string>
+    <string name="pick_services_that_you_want_to_book">اختر الخدمات التي تريد حجزها</string>
+    <string name="select_address">حدد العنوان</string>
+    <string name="upload_images_optional_2">رفع صور توضيحية ( اختياري )</string>
+    <string name="dialog_pending_provice_service_request_desc">تم ارسال الطلب الي مقدمين الخدمه القريبين لك , بانتظار قبول مقدم خدمة طلبك</string>
+    <string name="arrival_is_done">تم الوصول</string>
+    <string name="save">حفظ</string>
+    <string name="filter_by_city">تصفية بالمدينة</string>
+</resources>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanu.presentation.service.ServiceImageAndDescriptionSelectionFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanu.presentation.service.viewModel.ServiceImageAndDescriptionSelectionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="#F9F9F9"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:fillViewport="true"
+
+            tools:ignore="ContentDescription"
+
+            android:layout_marginBottom="16dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/nextButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/imageTextView"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/upload_images_optional_2"
+
+                    style="@style/TextTajawalMedium16"
+
+                    android:layout_margin="16dp"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <View
+                    android:id="@+id/imageView"
+
+                    android:layout_width="0dp"
+                    android:layout_height="126dp"
+
+                    android:background="@drawable/dr_rounded_white_small"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{v -> viewModel.uploadImages(v)}"
+
+                    android:layout_margin="16dp"
+
+                    app:layout_constraintTop_toBottomOf="@id/imageTextView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/uploadImageView"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:src="@drawable/ic_upload_with_alpha"
+
+                    app:layout_constraintTop_toTopOf="@id/imageView"
+                    app:layout_constraintStart_toStartOf="@id/imageView"
+                    app:layout_constraintEnd_toEndOf="@id/imageView"
+                    app:layout_constraintBottom_toTopOf="@id/uploadTextView"/>
+                <TextView
+                    android:id="@+id/uploadTextView"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    style="@style/TextTajawalMedium14"
+                    android:textColor="#292D32"
+
+                    android:text="@string/click_here_to_upload_images_with_12_max"
+
+                    app:layout_constraintTop_toBottomOf="@id/uploadImageView"
+                    app:layout_constraintBottom_toBottomOf="@id/imageView"
+                    app:layout_constraintStart_toStartOf="@id/imageView"
+                    app:layout_constraintEnd_toEndOf="@id/imageView"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:clipToPadding="false"
+
+                    android:scrollbars="horizontal"
+                    tools:itemCount="12"
+                    tools:orientation="horizontal"
+                    tools:listitem="@layout/item_image_rect"
+                    tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+                    app:layout_constraintTop_toBottomOf="@id/imageView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/descriptionTitleTextView"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/added_description_and_notes"
+
+                    style="@style/TextTajawalMedium16"
+
+                    android:layout_margin="16dp"
+
+                    app:layout_constraintTop_toBottomOf="@id/recyclerView"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/optional_between_brackets"
+
+                    style="@style/TextTajawalMedium16"
+
+                    android:layout_margin="16dp"
+
+                    app:layout_constraintTop_toBottomOf="@id/recyclerView"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/descriptionTextInputLayout"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:minHeight="99dp"
+
+                    android:layout_margin="16dp"
+
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+
+                    android:background="#F5F5F5"
+
+                    app:hintTextColor="#BFBFBF"
+                    android:textColorHint="#BFBFBF"
+
+                    app:layout_constraintTop_toBottomOf="@id/descriptionTitleTextView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        style="@style/TextTajawalRegular12"
+
+                        android:background="#F5F5F5"
+
+                        tools:text="تبخييتهب"
+                        android:text="@={viewModel.description}"
+
+                        android:inputType="textMultiLine"
+                        android:imeOptions="actionNone|flagNoFullscreen"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nextButton"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+
+            android:background="@drawable/dr_project_round"
+            style="@style/Widget.MaterialComponents.Button"
+
+            android:text="@string/next"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextTajawalMedium16"
+            android:textColor="@color/black"
+
+            android:onClick="@{v -> viewModel.next(v)}"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_more"
+    app:startDestination="@id/dest_wallet">
+
+    <fragment
+        android:id="@+id/dest_wallet"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.settings.WalletFragment"
+        android:label="@string/wallet"
+        tools:layout="@layout/fragment_wallet" >
+        <deepLink
+            android:id="@+id/deep_link_dest_wallet"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.user.wallet"/>
+    </fragment>
+    <fragment
+        android:id="@+id/dest_personal_data"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.settings.PersonalDataFragment"
+        android:label="@string/my_personal_data"
+        tools:layout="@layout/fragment_personal_data" >
+        <deepLink
+            android:id="@+id/deep_link_dest_personal_data"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.user.personal.data"/>
+    </fragment>
+    <fragment
+        android:id="@+id/dest_get_discounts"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.settings.GetDiscountsFragment"
+        tools:layout="@layout/fragment_get_discounts" >
+        <deepLink
+            android:id="@+id/deep_link_dest_get_discounts"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.user.get.discounts"/>
+        <action
+            android:id="@+id/action_dest_get_discounts_to_dest_get_discount_code_dialog"
+            app:destination="@id/dest_get_discount_code_dialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/dest_my_addresses"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.address.MyAddressesFragment"
+        android:label="@string/my_addresses"
+        tools:layout="@layout/fragment_my_addresses" >
+        <deepLink
+            android:id="@+id/deep_link_dest_my_addresses"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.user.my.addresses"/>
+        <action
+            android:id="@+id/action_dest_my_addresses_to_dest_del_address_check_dialog"
+            app:destination="@id/dest_del_address_check_dialog"
+
+            app:enterAnim="@anim/anim_slide_in_right"
+            app:exitAnim="@anim/anim_slide_out_left"
+            app:popEnterAnim="@anim/anim_slide_in_left"
+            app:popExitAnim="@anim/anim_slide_out_right"/>
+    </fragment>
+    <dialog
+        android:id="@+id/dest_del_address_check_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.address.DelAddressCheckDialogFragment"
+        tools:layout="@layout/dialog_fragment_del_address_check" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <deepLink
+            android:id="@+id/deep_link_dest_del_address_check_dialog"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.user.del.address.check.dialog/{id}"/>
+    </dialog>
+    <fragment
+        android:id="@+id/dest_codes_of_discounts"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.discount.CodesOfDiscountsFragment"
+        android:label="@string/discount_codes"
+        tools:layout="@layout/fragment_codes_of_discounts" >
+        <deepLink
+            android:id="@+id/deep_link_dest_codes_of_discounts"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.user.codes.of.discounts"/>
+    </fragment>
+    <dialog
+        android:id="@+id/dest_get_discount_code_dialog"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.settings.GetDiscountCodeDialogFragment"
+        tools:layout="@layout/dialog_fragment_get_discount_oode" >
+        <argument
+            android:name="code"
+            app:argType="string" />
+        <argument
+            android:name="points"
+            app:argType="integer" />
+    </dialog>
+</navigation>

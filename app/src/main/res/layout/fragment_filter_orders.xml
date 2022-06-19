@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanu.presentation.order.FilterOrdersFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanu.presentation.order.viewModel.FilterOrdersViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="#F9F9F9"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:fillViewport="true"
+
+            tools:ignore="ContentDescription"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottomMaterialCardView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+
+                android:padding="16dp"
+                android:clipToPadding="false">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    app:cardElevation="8dp"
+                    app:cardMaxElevation="8dp"
+
+                    app:cardCornerRadius="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            app:cardElevation="8dp"
+                            app:cardMaxElevation="8dp"
+
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="@{() -> viewModel.toggleServicesTypes()}"
+
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.TopOnly">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:padding="16dp"
+
+                                style="@style/TextTajawalMedium14"
+
+                                android:ellipsize="end"
+                                android:maxLines="1"
+
+                                android:text="@string/filter_for_type_of_services"
+
+                                app:drawableEndCompat="@drawable/ic_arrow_down"
+                                app:drawableTint="@color/black"
+                                android:drawablePadding="4dp" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/servicesTypesRecyclerView"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:visibility="@{viewModel.showServicesTypes}"
+
+                            android:padding="8dp"
+                            android:clipToPadding="false"
+
+                            android:scrollbars="vertical"
+                            tools:itemCount="5"
+                            tools:orientation="vertical"
+                            tools:listitem="@layout/item_text_with_radio"
+                            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="16dp"
+
+                    app:cardElevation="8dp"
+                    app:cardMaxElevation="8dp"
+
+                    app:cardCornerRadius="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            app:cardElevation="8dp"
+                            app:cardMaxElevation="8dp"
+
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="@{() -> viewModel.toggleServicesCities()}"
+
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.TopOnly">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:padding="16dp"
+
+                                style="@style/TextTajawalMedium14"
+
+                                android:ellipsize="end"
+                                android:maxLines="1"
+
+                                android:text="@string/filter_by_city"
+
+                                app:drawableEndCompat="@drawable/ic_arrow_down"
+                                app:drawableTint="@color/black"
+                                android:drawablePadding="4dp" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/servicesCitiesRecyclerView"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:visibility="@{viewModel.showServicesCities}"
+
+                            android:padding="8dp"
+                            android:clipToPadding="false"
+
+                            android:scrollbars="vertical"
+                            tools:itemCount="5"
+                            tools:orientation="vertical"
+                            tools:listitem="@layout/item_text_with_radio"
+                            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/bottomMaterialCardView"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:cardMaxElevation="8dp"
+            app:cardElevation="8dp"
+
+            app:cardCornerRadius="0dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/confirmButton"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/dr_project_round"
+                style="@style/Widget.MaterialComponents.Button"
+
+                android:text="@string/search"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextTajawalMedium16"
+                android:textColor="@color/black"
+
+                android:onClick="@{v -> viewModel.search(v)}"
+
+                android:layout_margin="16dp"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

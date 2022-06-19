@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    tools:context="com.maproductions.mohamedalaa.shared.presentation.order.CancelOrderDialogFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.shared.presentation.order.viewModel.CancelOrderViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/dr_top_round_white"
+        tools:backgroundTint="@color/gray"
+
+        tools:layout_gravity="bottom"
+
+        android:padding="24dp"
+        android:clipToPadding="false"
+
+        tools:ignore="ContentDescription">
+
+        <ImageView
+            android:id="@+id/circleImageView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/ic_circle_with_info_gradient"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+
+            style="@style/TextTajawalMedium16"
+
+            tools:text="هل انت متأكد من الغاء الطلب لقد تحرك مقدم الخدمة بالفعل في الطريق سيتم فرض غرامه 20 % اذا قمت بإلغاء الطلب"
+            android:text="@{viewModel.text}"
+
+            android:gravity="center"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/circleImageView"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelOrderMaterialButton"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            style="@style/Widget.MaterialComponents.Button"
+            android:textAppearance="@style/TextTajawalMedium16"
+
+            android:text="@string/yes_cancel_order"
+            android:textColor="@android:color/black"
+
+            android:background="@drawable/dr_project_round"
+            app:backgroundTint="@null"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+
+            android:onClick="@{v -> viewModel.cancelOrder(v)}"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/goBackMaterialButton"
+            app:layout_constraintTop_toBottomOf="@id/textView" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/goBackMaterialButton"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            style="@style/Widget.MaterialComponents.Button"
+            android:textAppearance="@style/TextTajawalMedium16"
+
+            android:text="@string/no_back"
+            android:textColor="@android:color/white"
+
+            android:background="@drawable/dr_black_round"
+            app:backgroundTint="@null"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+
+            android:onClick="@{v -> viewModel.goBack(v)}"
+
+            app:layout_constraintStart_toEndOf="@id/cancelOrderMaterialButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanp.presentation.more.MoreFragment"
+
+    tools:ignore="ContentDescription">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanp.presentation.more.viewModel.MoreViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F9F9F9"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            android:padding="16dp"
+            android:clipToPadding="false">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/about_app"
+
+                android:background="@color/white"
+
+                android:padding="8dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle_black"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toAboutApp(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/technical_support"
+
+                android:background="@color/white"
+
+                android:padding="8dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle_black"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toTechnicalSupport(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/send_complains_or_suggestions"
+
+                android:background="@color/white"
+
+                android:padding="8dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle_black"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toComplainsOrSuggestions(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/share_app"
+
+                android:background="@color/white"
+
+                android:padding="8dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle_black"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.shareApp(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/review_app"
+
+                android:background="@color/white"
+
+                android:padding="8dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle_black"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.rateApp(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/terms_and_conditions"
+
+                android:padding="16dp"
+
+                android:gravity="center"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toTermsAndConditions(v)}"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    tools:context="com.maproductions.mohamedalaa.hassanp.presentation.order.ConfirmFinishingWorkDialogFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanp.presentation.order.viewModel.ConfirmFinishingWorkViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/dr_top_round_white"
+        tools:backgroundTint="@color/gray"
+
+        tools:layout_gravity="bottom"
+
+        android:padding="24dp"
+        android:clipToPadding="false"
+
+        tools:ignore="ContentDescription">
+
+        <!--todo bakrey-->
+        <ImageView
+            android:id="@+id/circleImageView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/ic_circle_with_info_gradient"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+
+            style="@style/TextTajawalMedium16"
+
+            tools:text="لتأكيد انتهاء العمل اضغط \'تم\' اذا قمت بتنفيذ بعض الخدمات الاضافيه غير المذكوره في الطلب برجاء اضافتها"
+            android:text="@string/confirm_finishing_dialog"
+
+            android:gravity="center"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/circleImageView"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelOrderMaterialButton"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            style="@style/Widget.MaterialComponents.Button"
+            android:textAppearance="@style/TextTajawalMedium16"
+
+            app:layout_constraintHorizontal_weight="1"
+
+            android:text="@string/done"
+            android:textColor="@android:color/black"
+
+            android:background="@drawable/dr_project_round"
+            app:backgroundTint="@null"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+
+            android:onClick="@{v -> viewModel.done(v)}"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/goBackMaterialButton"
+            app:layout_constraintTop_toBottomOf="@id/textView" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/goBackMaterialButton"
+
+            app:layout_constraintHorizontal_weight="1.7"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            style="@style/Widget.MaterialComponents.Button"
+            android:textAppearance="@style/TextTajawalMedium16"
+
+            tools:text="اضافة خدمات تم تنفيذها"
+            android:text="@string/add_services_that_has_been_executed"
+            android:textColor="@android:color/white"
+
+            android:background="@drawable/dr_black_round"
+            app:backgroundTint="@null"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+
+            android:onClick="@{v -> viewModel.addMore(v)}"
+
+            app:layout_constraintStart_toEndOf="@id/cancelOrderMaterialButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

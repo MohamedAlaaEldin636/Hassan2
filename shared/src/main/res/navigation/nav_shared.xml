@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_shared"
+    app:startDestination="@id/dest_splash">
+
+    <argument android:name="isUserNotProvider"
+        app:argType="boolean"/>
+
+    <fragment
+        android:id="@+id/dest_splash"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.splash.SplashFragment"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_dest_splash_to_dest_on_board"
+            app:destination="@id/dest_on_board"
+            app:enterAnim="@anim/anim_slide_in_right"
+            app:exitAnim="@anim/anim_slide_out_left"
+            app:popEnterAnim="@anim/anim_slide_in_left"
+            app:popExitAnim="@anim/anim_slide_out_right"
+            app:popUpTo="@id/dest_splash"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/dest_lottie_loader_dialog"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.base.LottieLoaderDialogFragment"
+        android:label=""
+        tools:layout="@layout/dialog_fragment_lottie_loader">
+
+        <deepLink
+            android:id="@+id/deep_link_dest_lottie_loader_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.lottie.loader.dialog"/>
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/dest_global_error_dialog"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.base.GlobalErrorDialogFragment"
+        android:label=""
+        tools:layout="@layout/dialog_fragment_base_ok_cancel">
+
+        <argument
+            android:name="message"
+            app:argType="string" />
+
+        <argument
+            android:name="cancellable"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+
+        <deepLink
+            android:id="@+id/deep_link_dest_global_error_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.global.error.dialog/{message}" />
+        <deepLink
+            android:id="@+id/deep_link_dest_global_error_dialog_cancellable"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.global.error.dialog.cancellable/{message}/{cancellable}" />
+
+    </dialog>
+
+    <fragment
+        android:id="@+id/dest_on_board"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.onBoard.OnBoardFragment"
+        tools:layout="@layout/fragment_on_board" />
+    <fragment
+        android:id="@+id/dest_verify_phone"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.auth.VerifyPhoneFragment"
+        android:label="@string/confirm_your_account"
+        tools:layout="@layout/fragment_verify_phone">
+        <argument
+            android:name="isUser"
+            app:argType="boolean" />
+        <argument
+            android:name="phone"
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/deep_link_dest_verify_phone"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.verify.phone/{isUser}/{phone}"/>
+        <deepLink
+            android:id="@+id/deep_link_dest_verify_phone_is_forget_password"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.verify.phone.is.forget.password/{isUser}/{phone}/{isForgetPassword}"/>
+        <argument
+            android:name="isForgetPassword"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/dest_location_selection"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.location.LocationSelectionFragment"
+        tools:layout="@layout/fragment_location_selection" >
+        <argument
+            android:name="latitude"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="longitude"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="showBackButton"
+            app:argType="boolean"
+            android:defaultValue="true" />
+        <deepLink
+            android:id="@+id/deep_link_dest_location_selection"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.location.selection/{latitude}/{longitude}" />
+        <deepLink
+            android:id="@+id/deep_link_dest_location_selection_no_args"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.location.selection.no.args" />
+        <deepLink
+            android:id="@+id/deep_link_dest_location_selection_back_button"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.location.selection.back.button/{showBackButton}" />
+        <argument
+            android:name="locationSelectionApiAction"
+            app:argType="com.maproductions.mohamedalaa.shared.domain.location.LocationSelectionApiAction"
+            android:defaultValue="NONE" />
+        <deepLink
+            android:id="@+id/deep_link_dest_location_selection_all_params"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.location.selection.all.params/{latitude}/{longitude}/{showBackButton}/{locationSelectionApiAction}" />
+        <deepLink
+            android:id="@+id/deep_link_dest_location_selection_back_button_and_api_action"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.location.selection.back.button.and.api.action/{showBackButton}/{locationSelectionApiAction}" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/dest_video_player_dialog"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.base.VideoPlayerDialogFragment"
+        android:label=""
+        tools:layout="@layout/dialog_fragment_video_player">
+
+        <argument
+            android:name="url"
+            app:argType="string" />
+
+        <deepLink
+            android:id="@+id/deep_link_dest_video_player_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.video.player.dialog/{url}" />
+
+        <argument
+            android:name="isUri"
+            app:argType="boolean"
+            android:defaultValue="false" />
+
+        <deepLink
+            android:id="@+id/deep_link_dest_video_player_dialog_is_uri"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.video.player.dialog.is.uri/{url}/{isUri}" />
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/dest_showing_image_dialog"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.base.ShowingImageDialogFragment"
+        android:label=""
+        tools:layout="@layout/item_image">
+
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+
+        <deepLink
+            android:id="@+id/deep_link_dest_showing_image_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.showing.image.dialog/{imageUrl}" />
+
+        <deepLink
+            android:id="@+id/deep_link_dest_showing_image_dialog_is_uri"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.showing.image.dialog.isUri/{imageUrl}/{isUri}" />
+        <argument
+            android:name="isUri"
+            app:argType="boolean"
+            android:defaultValue="false" />
+
+    </dialog>
+    <fragment
+        android:id="@+id/dest_search_queries"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.search.SearchQueriesFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_search_queries" >
+
+        <argument
+            android:name="searchType"
+            app:argType="com.maproductions.mohamedalaa.shared.domain.search.SearchType" />
+        <argument
+            android:name="isGuest"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <deepLink
+            android:id="@+id/deep_link_dest_search_queries"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.search.queries/{searchType}" />
+        <deepLink
+            android:id="@+id/deep_link_dest_search_queries_is_guest"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.search.queries.is.guest/{searchType}/{isGuest}" />
+        <argument
+            android:name="ordersCategory"
+            app:argType="com.maproductions.mohamedalaa.shared.core.customTypes.OrdersCategory"
+            android:defaultValue="PENDING" />
+        <deepLink
+            android:id="@+id/deep_link_dest_search_queries_with_orders_category"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.search.queries.with.orders.category/{searchType}/{ordersCategory}" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/dest_image_with_text_and_title"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.settings.ImageWithTextAndTitleFragment"
+        tools:layout="@layout/fragment_image_with_text_and_title" >
+
+        <argument
+            android:name="flag"
+            app:argType="com.maproductions.mohamedalaa.shared.domain.settings.ImageWithTextAndTitleFlag" />
+
+        <deepLink
+            android:id="@+id/deep_link_dest_image_with_text_and_title"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.image.with.text.and.title/{flag}" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/dest_msg_form"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.settings.MSGFormFragment"
+        tools:layout="@layout/fragment_msg_form">
+        <deepLink
+            android:id="@+id/deep_link_dest_msg_form"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.msg.form/{title}" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="orderId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <deepLink
+            android:id="@+id/deep_link_dest_msg_form_with_order_id"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.msg.form.with.order.id/{title}/{orderId}" />
+    </fragment>
+    <fragment
+        android:id="@+id/dest_notifications_list"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.notification.NotificationsListFragment"
+        android:label="@string/the_notifications"
+        tools:layout="@layout/fragment_notifications_list" >
+        <deepLink
+            android:id="@+id/deep_link_dest_notifications_list"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.notifications.list" />
+    </fragment>
+    <fragment
+        android:id="@+id/dest_chat_details"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.chat.ChatDetailsFragment"
+        tools:layout="@layout/fragment_chat_details" >
+        <argument
+            android:name="receiverId"
+            app:argType="integer" />
+        <deepLink
+            android:id="@+id/deep_link_dest_chat_details"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.chat.details/{receiverId}/{orderId}"/>
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <!--<argument
+            android:name="imageUrl"
+            app:argType="string" />
+        <argument
+            android:name="otherName"
+            app:argType="string" />-->
+        <!--<argument
+            android:name="isFinished"
+            app:argType="boolean"
+            android:defaultValue="false" />-->
+        <!--<deepLink
+            android:id="@+id/deep_link_dest_chat_details_is_finished"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.chat.details.is.finished/{receiverId}/{orderId}/{isFinished}"/>-->
+    </fragment>
+
+
+    <dialog
+        android:id="@+id/dest_cancel_order_dialog"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.order.CancelOrderDialogFragment"
+        tools:layout="@layout/dialog_fragment_cancel_order" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="text"
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/deep_link_dest_cancel_order_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.cancel.order.dialog/{id}/{text}"/>
+    </dialog>
+    <fragment
+        android:id="@+id/dest_location_viewer"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.location.LocationViewerFragment"
+        tools:layout="@layout/fragment_location_viewer" >
+
+        <argument
+            android:name="latitude"
+            app:argType="string"/>
+        <argument
+            android:name="longitude"
+            app:argType="string"/>
+        <deepLink
+            android:id="@+id/deep_link_dest_location_viewer"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.location_viewer/{latitude}/{longitude}"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/dest_location_tracking"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.location.LocationTrackingFragment"
+        tools:layout="@layout/fragment_location_tracking">
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <argument
+            android:name="latitude"
+            app:argType="string" />
+        <argument
+            android:name="longitude"
+            app:argType="string" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+        <argument
+            android:name="averageRate"
+            app:argType="float" />
+        <deepLink
+            android:id="@+id/deep_link_dest_location_tracking"
+            android:autoVerify="true"
+            app:uri="fragment-dest://com.grand.hassan.shared.location.tracking/{orderId}/{latitude}/{longitude}/{name}/{imageUrl}/{averageRate}" />
+    </fragment>
+
+</navigation>

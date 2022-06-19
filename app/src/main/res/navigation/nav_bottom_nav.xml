@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_bottom_nav"
+    app:startDestination="@id/dest_home">
+
+    <fragment
+        android:id="@+id/dest_home"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.home.HomeFragment"
+        tools:layout="@layout/fragment_home" >
+        <argument
+            android:name="isGuest"
+            app:argType="boolean"/>
+    </fragment>
+    <fragment
+        android:id="@+id/dest_conversations"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.chat.ConversationsFragment"
+        android:label="@string/chatting"
+        tools:layout="@layout/fragment_conversations" />
+    <fragment
+        android:id="@+id/dest_orders"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.order.OrdersFragment"
+        android:label="@string/the_orders"
+        tools:layout="@layout/fragment_orders" />
+    <fragment
+        android:id="@+id/dest_settings"
+        android:name="com.maproductions.mohamedalaa.hassanu.presentation.settings.SettingsFragment"
+        android:label="@string/the_options"
+        tools:layout="@layout/fragment_settings" >
+        <argument
+            android:name="isGuest"
+            app:argType="boolean"/>
+    </fragment>
+    <action
+        android:id="@+id/action_global_dest_home"
+        app:destination="@id/dest_home" />
+    <action
+        android:id="@+id/action_global_dest_orders"
+        app:destination="@id/dest_orders" />
+    <action
+        android:id="@+id/action_global_dest_conversations"
+        app:destination="@id/dest_conversations" />
+    <action
+        android:id="@+id/action_global_dest_settings"
+        app:destination="@id/dest_settings" />
+</navigation>

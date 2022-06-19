@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanu.presentation.settings.SettingsFragment"
+
+    tools:ignore="ContentDescription">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanu.presentation.settings.viewModel.SettingsViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F9F9F9"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            android:padding="16dp"
+            android:clipToPadding="false">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/my_personal_data"
+
+                android:background="@color/white"
+
+                android:padding="16dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toPersonalData(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/get_discounts"
+
+                android:background="@color/white"
+
+                android:padding="16dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toGetDiscounts(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/register_as_provider"
+
+                android:background="@color/white"
+
+                android:padding="16dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toRegisterAsProvider(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/wallet"
+
+                android:background="@color/white"
+
+                android:padding="16dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toWallet(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/my_addresses"
+
+                android:background="@color/white"
+
+                android:padding="16dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toMyAddresses(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/discount_codes_i_have"
+
+                android:background="@color/white"
+
+                android:padding="16dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toDiscountCodes(v)}"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/about_app"
+
+                android:background="@color/white"
+
+                android:padding="16dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toAboutApp(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/technical_support"
+
+                android:background="@color/white"
+
+                android:padding="16dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toTechnicalSupport(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/send_complains_or_suggestions"
+
+                android:background="@color/white"
+
+                android:padding="16dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toComplainsAndSuggestions(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/share_app"
+
+                android:background="@color/white"
+
+                android:padding="16dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.shareApp(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/review_app"
+
+                android:background="@color/white"
+
+                android:padding="16dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.reviewApp(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/log_out"
+
+                android:background="@color/white"
+
+                android:padding="16dp"
+
+                app:drawableEndCompat="@drawable/ic_arrow_left_with_circle"
+                android:drawablePadding="4dp"
+
+                android:gravity="center_vertical"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.logOut(v)}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+
+                style="@style/TextTajawalMedium16"
+
+                android:text="@string/terms_and_conditions"
+
+                android:padding="16dp"
+
+                android:gravity="center"
+
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{v -> viewModel.toTermsAndConditions(v)}"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

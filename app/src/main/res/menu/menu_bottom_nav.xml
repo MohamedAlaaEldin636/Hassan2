@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_home"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/action_orders"
+        android:title="@string/the_orders"
+        android:icon="@drawable/ic_orders"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/action_conversations"
+        android:title="@string/the_messages"
+        android:icon="@drawable/ic_conversations"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/action_options"
+        android:title="@string/the_options"
+        android:icon="@drawable/ic_options"
+        android:enabled="true"/>
+
+</menu>

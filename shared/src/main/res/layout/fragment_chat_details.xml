@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.shared.presentation.chat.ChatDetailsFragment"
+
+    tools:ignore="ContentDescription">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.shared.presentation.chat.viewModel.ChatDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="#F9F9F9"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/placeholderMaterialToolbar"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:visibility="invisible"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/imageMaterialCardView"
+
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            app:cardElevation="4dp"
+            app:cardMaxElevation="4dp"
+
+            app:cardCornerRadius="4dp"
+
+            android:layout_marginEnd="16dp"
+
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/placeholderMaterialToolbar"
+            app:layout_constraintBottom_toBottomOf="@id/placeholderMaterialToolbar">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:background="#F9F9F9"
+
+                android:src="@drawable/ic_logo_app_placeholder"
+                imageView_setUrlViaGlideOrIgnore="@{viewModel.imageUrl}"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <ImageView
+            android:id="@+id/backImageView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/ic_back"
+
+            android:layout_marginStart="16dp"
+
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{v -> viewModel.goBack(v)}"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/placeholderMaterialToolbar"
+            app:layout_constraintBottom_toBottomOf="@id/placeholderMaterialToolbar"/>
+
+        <TextView
+            android:id="@+id/titleTextView"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+
+            android:ellipsize="end"
+            android:maxLines="1"
+
+            android:gravity="center_vertical|end"
+
+            style="@style/TextTajawalBold16"
+
+            tools:text="أحمد محمد مصطفي"
+            android:text="@{viewModel.name}"
+
+            app:layout_constraintStart_toEndOf="@id/backImageView"
+            app:layout_constraintEnd_toStartOf="@id/imageMaterialCardView"
+            app:layout_constraintTop_toTopOf="@id/placeholderMaterialToolbar"
+            app:layout_constraintBottom_toBottomOf="@id/placeholderMaterialToolbar"/>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+
+            android:visibility="@{viewModel.canSendMessage}"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:padding="16dp"
+            android:clipToPadding="false"
+
+            android:gravity="center_vertical"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+
+                app:cardCornerRadius="100dp"
+
+                app:cardBackgroundColor="@color/white"
+
+                app:cardElevation="1dp"
+                app:cardMaxElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:clipToPadding="false"
+
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="@{v -> viewModel.sendMsg(v)}"
+
+                        android:alpha="@{viewModel.canSend ? 1.0f : 0.5f}"
+
+                        android:src="@drawable/ic_send_with_circle"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+
+                        android:background="@drawable/dr_input_round_white"
+
+                        android:hint="@string/type_your_msg_here"
+                        app:hintTextColor="#AFAFAF"
+                        android:textColorHint="#AFAFAF"
+
+                        android:gravity="center_vertical"
+
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+
+                        android:text="@={viewModel.message}"
+                        style="@style/TextTajawalRegular12"
+
+                        android:inputType="textMultiLine"
+                        android:imeOptions="actionDone|flagNoFullscreen"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cameraMaterialCardView"
+
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+
+                app:cardCornerRadius="36dp"
+
+                app:cardElevation="0dp"
+                app:cardMaxElevation="0dp"
+
+                android:layout_marginStart="16dp"
+
+                android:onClick="@{v -> viewModel.pickImage(v)}"
+
+                app:cardBackgroundColor="#F2F2F2">
+                <!--#FFFFBC23-->
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_gravity="center"
+
+                    android:src="@drawable/ic_camera"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:padding="8dp"
+            android:clipToPadding="false"
+
+            android:scrollbars="vertical"
+            tools:itemCount="9"
+            tools:orientation="vertical"
+            tools:listitem="@layout/item_chat_other"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+            app:layout_constraintTop_toBottomOf="@id/titleTextView"
+            app:layout_constraintBottom_toTopOf="@id/linearLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

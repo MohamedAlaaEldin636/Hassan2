@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/materialCardView"
+
+    app:cardElevation="1dp"
+    app:cardMaxElevation="1dp"
+
+    app:cardCornerRadius="8dp"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_gravity="center"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        android:gravity="center"
+
+        android:paddingTop="28dp"
+        android:paddingBottom="28dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:clipToPadding="false">
+
+        <TextView
+            android:id="@+id/nameTextView"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+
+            style="@style/TextTajawalMedium16"
+
+            tools:text="تركيب أسلاك"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/priceTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            style="@style/TextTajawalMedium14"
+
+            tools:text="100egp"
+
+            android:gravity="center"
+
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/minusImageView"
+
+            android:clickable="true"
+            android:focusable="true"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/ic_minus_in_circle"
+
+            android:layout_marginStart="32dp"/>
+
+        <TextView
+            android:id="@+id/numberTextView"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            style="@style/TextTajawalMedium14"
+
+            tools:text="1"
+
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/plusImageView"
+
+            android:clickable="true"
+            android:focusable="true"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/ic_plus_in_circle"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

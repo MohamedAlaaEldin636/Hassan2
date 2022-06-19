@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanp.presentation.order.OrdersFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanp.presentation.order.viewModel.OrdersViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="#F9F9F9"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/currentButton"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+
+            android:background="@{viewModel.currentCategoryIsCurrentNotFinished ? @drawable/dr_project_round : @drawable/dr_rounded_white_small}"
+            tools:background="@drawable/dr_project_round"
+            style="@style/Widget.MaterialComponents.Button"
+            materialButton_backgroundTintBA="@{viewModel.currentCategoryIsCurrentNotFinished ? @color/colorPrimaryDark : @color/white}"
+
+            android:text="@string/current_orders"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextTajawalMedium16"
+            android:textColor="@color/black"
+
+            android:maxLines="1"
+            android:ellipsize="end"
+
+            android:onClick="@{() -> viewModel.toggleCategory(true)}"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/finishedButton"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/finishedButton"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+
+            android:background="@{viewModel.currentCategoryIsCurrentNotFinished ? @drawable/dr_rounded_white_small : @drawable/dr_project_round}"
+            tools:background="@drawable/dr_project_round"
+            style="@style/Widget.MaterialComponents.Button"
+            materialButton_backgroundTintBA="@{!viewModel.currentCategoryIsCurrentNotFinished ? @color/colorPrimaryDark : @color/white}"
+
+            android:text="@string/finished_orders"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextTajawalMedium16"
+            android:textColor="@color/black"
+
+            android:maxLines="1"
+            android:ellipsize="end"
+
+            android:onClick="@{() -> viewModel.toggleCategory(false)}"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/currentButton"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/currentRecyclerView"
+
+            tools:visibility="visible"
+            android:visibility="@{viewModel.currentCategoryIsCurrentNotFinished}"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:layout_marginTop="8dp"
+
+            android:padding="8dp"
+            android:clipToPadding="false"
+
+            android:scrollbars="vertical"
+            tools:itemCount="12"
+            tools:orientation="vertical"
+            tools:listitem="@layout/item_order_current"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+            app:layout_constraintTop_toBottomOf="@id/currentButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/finishedRecyclerView"
+
+            tools:visibility="gone"
+            android:visibility="@{!viewModel.currentCategoryIsCurrentNotFinished}"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:layout_marginTop="8dp"
+
+            android:padding="8dp"
+            android:clipToPadding="false"
+
+            android:scrollbars="vertical"
+            tools:itemCount="12"
+            tools:orientation="vertical"
+            tools:listitem="@layout/item_order_finished"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+            app:layout_constraintTop_toBottomOf="@id/currentButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

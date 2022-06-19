@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.shared.presentation.main.SharedMainActivity">
+
+    <data>
+        <import type="com.maproductions.mohamedalaa.shared.core.customTypes.MenuItemVisibility"/>
+
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.shared.presentation.main.viewModels.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:background="#F9F9F9"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar"
+
+            style="@style/ToolbarColoredBackArrow"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:titleCentered="true"
+            tools:title="Title"
+            android:title="@{viewModel.titleToolbar}"
+            app:titleTextColor="#292D32"
+
+            android:background="#F9F9F9"
+
+            android:visibility="@{viewModel.showToolbar,default=gone}"
+            tools:visibility="gone"
+            app:navigationIconTint="#292D32"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/mainNavHostFragment"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:name="androidx.navigation.fragment.NavHostFragment"
+
+            app:defaultNavHost="true"
+
+            app:layout_constraintTop_toBottomOf="@id/materialToolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/placeholderMaterialToolbar"
+
+            style="@style/ToolbarColoredBackArrow"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:visibility="invisible"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/notificationsImageView"
+
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{v -> viewModel.onNotificationsClick(v)}"
+
+            android:padding="4dp"
+
+            tools:src="@drawable/ic_notification"
+            android:src="@{viewModel.menuItemNotificationsVisibility == MenuItemVisibility.SHOW ? @drawable/ic_notification : @drawable/ic_notification_new_data}"
+
+            android:layout_marginEnd="16dp"
+
+            tools:visibility="visible"
+            android:visibility="@{viewModel.showToolbar &amp;&amp; (viewModel.menuItemNotificationsVisibility == MenuItemVisibility.SHOW || viewModel.menuItemNotificationsVisibility == MenuItemVisibility.SHOW_HAVING_NEW_DATA),default=gone}"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/placeholderMaterialToolbar"
+            app:layout_constraintBottom_toBottomOf="@id/placeholderMaterialToolbar"
+            tools:ignore="ContentDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

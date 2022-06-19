@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanu.presentation.order.OrderAdditionsFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanu.presentation.order.viewModel.OrderAdditionsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="#F9F9F9"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:fillViewport="true"
+
+            tools:ignore="ContentDescription"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottomMaterialCardView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+
+                android:padding="16dp"
+                android:clipToPadding="false">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/servicesRecyclerView"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:padding="8dp"
+                    android:clipToPadding="false"
+
+                    android:background="@color/white"
+
+                    android:scrollbars="vertical"
+                    tools:itemCount="4"
+                    tools:orientation="vertical"
+                    tools:listitem="@layout/item_service_name_and_price"
+                    tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+                    app:layout_constraintTop_toBottomOf="@id/servicesTitleTextView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/costRecyclerView"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:padding="8dp"
+                    android:clipToPadding="false"
+
+                    android:background="@color/white"
+
+                    android:scrollbars="vertical"
+                    tools:itemCount="4"
+                    tools:orientation="vertical"
+                    tools:listitem="@layout/item_service_name_and_price"
+                    tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+                    app:layout_constraintTop_toBottomOf="@id/servicesRecyclerView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    app:cardMaxElevation="2dp"
+                    app:cardElevation="2dp"
+
+                    app:cardCornerRadius="4dp"
+
+                    android:layout_marginTop="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+
+                        android:padding="16dp"
+                        android:clipToPadding="false"
+
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            style="@style/TextTajawalBold16"
+
+                            android:gravity="center"
+
+                            android:text="@string/amount_required_to_be_paid"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginTop="24dp"
+
+                            style="@style/TextTajawalBold16"
+                            android:textSize="24sp"
+                            android:textColor="#FFBC23"
+
+                            android:gravity="center"
+
+                            tools:text="EGP 590"
+                            android:text="@{viewModel.amountToBePaid}"/>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/bottomMaterialCardView"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:cardMaxElevation="8dp"
+            app:cardElevation="8dp"
+
+            app:cardCornerRadius="0dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal"
+
+                android:gravity="center"
+
+                android:padding="16dp"
+                android:clipToPadding="false">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/confirmButton"
+
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+
+                    android:background="@drawable/dr_project_round"
+                    style="@style/Widget.MaterialComponents.Button"
+
+                    android:text="@string/confirm"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextTajawalMedium16"
+                    android:textColor="@color/black"
+
+                    android:onClick="@{v -> viewModel.confirm(v)}"
+
+                    android:layout_marginEnd="8dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/doNotAddButton"
+
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+
+                    android:background="@drawable/dr_black_round"
+                    app:backgroundTint="@color/black"
+                    style="@style/Widget.MaterialComponents.Button"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+
+                    android:text="@string/no"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextTajawalMedium16"
+                    android:textColor="@color/white"
+
+                    android:onClick="@{v -> viewModel.doNotAdd(v)}"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/complaintButton"
+
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="2dp"
+
+                    android:insetTop="0dp"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+
+                    android:layout_marginStart="8dp"
+
+                    android:text="@string/make_complaint"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextTajawalMedium16"
+                    android:textColor="@color/black"
+
+                    android:onClick="@{v -> viewModel.makeComplaint(v)}"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

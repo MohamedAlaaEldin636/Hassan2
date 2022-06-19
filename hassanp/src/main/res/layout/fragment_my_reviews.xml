@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanp.presentation.myAccount.MyReviewsFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanp.presentation.myAccount.viewModel.MyReviewsViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F9F9F9"
+
+        android:orientation="vertical"
+
+        android:clipToPadding="false"
+        android:paddingBottom="8dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:cardElevation="4dp"
+            app:cardMaxElevation="4dp"
+
+            app:cardCornerRadius="8dp"
+
+            app:cardBackgroundColor="#FFBC23"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+
+                android:gravity="center"
+
+                android:padding="16dp"
+                android:clipToPadding="false">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    style="@style/TextTajawalBold16"
+
+                    android:text="@string/final_review"
+
+                    android:gravity="center"/>
+
+                <!-- style="@style/Widget.AppCompat.RatingBar.Indicator" -->
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/ratingBar"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:numStars="5"
+                    android:progress="0"
+                    tools:progress="60"
+                    appCompatRatingBar_setProgress="@{viewModel.ratingAsPercent}"
+
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+
+                    android:progressTint="#292D32"
+                    android:progressBackgroundTint="#FFFFFF"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    style="@style/TextTajawalRegular16"
+                    android:textSize="18sp"
+
+                    tools:text="(3.1)"
+                    android:text="@{viewModel.ratingBetweenBrackets}"
+
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:padding="8dp"
+            android:clipToPadding="false"
+
+            android:scrollbars="vertical"
+            tools:itemCount="14"
+            tools:orientation="vertical"
+            tools:listitem="@layout/item_review"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    </LinearLayout>
+
+</layout>

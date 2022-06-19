@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="com.maproductions.mohamedalaa.hassanu.presentation.service.ServiceDateAndTimeSelectionFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.maproductions.mohamedalaa.hassanu.presentation.service.viewModel.ServiceDateAndTimeSelectionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="#F9F9F9"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:fillViewport="true"
+
+            tools:ignore="ContentDescription"
+
+            android:layout_marginBottom="16dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/nextButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/selectTimeAndDateMaterialCardView"
+
+                    android:layout_width="0dp"
+                    android:layout_height="121dp"
+
+                    app:strokeWidth="2dp"
+                    materialCardView_setStrokeWidthBA="@{viewModel.strokeDateAndTime}"
+                    app:strokeColor="#FFBC23"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="8dp"
+
+                    app:cardElevation="16dp"
+                    materialCardView_setCardElevationBA="@{viewModel.elevationDateAndTime}"
+                    app:cardMaxElevation="16dp"
+
+                    app:cardCornerRadius="8dp"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{() -> viewModel.selectDateAndTime()}"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/orderNowMaterialCardView">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/dateAndTimeCornerImageView"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:src="@drawable/ic_corner_top_left"
+
+                            android:visibility="@{viewModel.currentSelectionIsDateAndTimeNotOrderNow}"
+
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+
+                        <ImageView
+                            android:id="@+id/dateAndTimeDoneImageView"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:src="@drawable/ic_done_small"
+
+                            android:visibility="@{viewModel.currentSelectionIsDateAndTimeNotOrderNow}"
+
+                            android:layout_gravity="end"
+
+                            android:layout_marginStart="4dp"
+
+                            app:layout_constraintTop_toTopOf="@id/dateAndTimeCornerImageView"
+                            app:layout_constraintBottom_toBottomOf="@id/dateAndTimeCornerImageView"
+                            app:layout_constraintStart_toStartOf="@id/dateAndTimeCornerImageView"
+                            app:layout_constraintEnd_toEndOf="@id/dateAndTimeCornerImageView"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+
+                            android:gravity="center"
+
+                            style="@style/TextTajawalMedium20"
+
+                            android:text="@string/select_date_and_time"
+
+                            android:padding="8dp"
+
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/orderNowMaterialCardView"
+
+                    android:layout_width="0dp"
+                    android:layout_height="121dp"
+
+                    android:layout_marginTop="8dp"
+
+                    app:strokeWidth="0dp"
+                    materialCardView_setStrokeWidthBA="@{viewModel.strokeOrderNow}"
+                    app:strokeColor="#FFBC23"
+
+                    app:cardElevation="0dp"
+                    materialCardView_setCardElevationBA="@{viewModel.elevationOrderNow}"
+                    app:cardMaxElevation="16dp"
+
+                    app:cardCornerRadius="8dp"
+
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="16dp"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{() -> viewModel.orderNow()}"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/selectTimeAndDateMaterialCardView">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/orderNowCornerImageView"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:src="@drawable/ic_corner_top_left"
+
+                            android:visibility="@{!viewModel.currentSelectionIsDateAndTimeNotOrderNow}"
+
+                            tools:visibility="gone"
+
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+
+                            android:src="@drawable/ic_urgent_service"
+
+                            android:visibility="@{viewModel.currentSelectionIsDateAndTimeNotOrderNow}"
+
+                            app:layout_constraintWidth_percent="0.3"
+                            app:layout_constraintDimensionRatio="1:1"
+
+                            app:layout_constraintHorizontal_bias="1"
+
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"/>
+
+                        <ImageView
+                            android:id="@+id/orderNowDoneImageView"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:visibility="@{!viewModel.currentSelectionIsDateAndTimeNotOrderNow}"
+
+                            tools:visibility="gone"
+
+                            android:src="@drawable/ic_done_small"
+
+                            android:layout_gravity="end"
+
+                            android:layout_marginStart="4dp"
+
+                            app:layout_constraintTop_toTopOf="@id/orderNowCornerImageView"
+                            app:layout_constraintBottom_toBottomOf="@id/orderNowCornerImageView"
+                            app:layout_constraintStart_toStartOf="@id/orderNowCornerImageView"
+                            app:layout_constraintEnd_toEndOf="@id/orderNowCornerImageView"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+
+                            android:gravity="center"
+
+                            style="@style/TextTajawalMedium20"
+
+                            android:text="@string/order_now"
+
+                            android:padding="8dp"
+
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/dateTextView"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    style="@style/TextTajawalMedium16"
+
+                    android:visibility="@{viewModel.currentSelectionIsDateAndTimeNotOrderNow}"
+                    tools:visibility="gone"
+
+                    android:text="@string/pick_the_day_that_suits_you"
+
+                    android:layout_margin="16dp"
+
+                    app:layout_constraintTop_toBottomOf="@id/selectTimeAndDateMaterialCardView"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/dateTextInputLayout"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+
+                    android:visibility="@{viewModel.currentSelectionIsDateAndTimeNotOrderNow}"
+                    tools:visibility="gone"
+
+                    android:hint="@string/pick_day"
+                    app:hintTextColor="#000000"
+                    android:textColorHint="#000000"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{v -> viewModel.pickDate(v)}"
+
+                    android:background="@color/white"
+
+                    android:layout_margin="16dp"
+
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_arrow_down"
+                    app:endIconTint="#fa0"
+
+                    app:layout_constraintTop_toBottomOf="@id/dateTextView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        style="@style/TextTajawalRegular16"
+                        android:textColor="@color/black"
+                        android:text="@={viewModel.date}"
+                        android:inputType="none"
+
+                        android:background="@color/white"
+
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="@{v -> viewModel.pickDate(v)}"
+
+                        android:enabled="false"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+
+                    android:elevation="8dp"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{v -> viewModel.pickDate(v)}"
+
+                    app:layout_constraintTop_toTopOf="@id/dateTextInputLayout"
+                    app:layout_constraintBottom_toBottomOf="@id/dateTextInputLayout"
+                    app:layout_constraintStart_toStartOf="@id/dateTextInputLayout"
+                    app:layout_constraintEnd_toEndOf="@id/dateTextInputLayout"/>
+
+                <TextView
+                    android:id="@+id/timeTextView"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    style="@style/TextTajawalMedium16"
+
+                    android:visibility="@{viewModel.currentSelectionIsDateAndTimeNotOrderNow}"
+                    tools:visibility="gone"
+
+                    android:text="@string/select_the_time_that_suits_you"
+
+                    android:layout_margin="16dp"
+
+                    app:layout_constraintTop_toBottomOf="@id/dateTextInputLayout"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/timeTextInputLayout"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+
+                    android:visibility="@{viewModel.currentSelectionIsDateAndTimeNotOrderNow}"
+                    tools:visibility="gone"
+
+                    android:hint="@string/select_the_time"
+                    app:hintTextColor="#000000"
+                    android:textColorHint="#000000"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{v -> viewModel.pickTime(v)}"
+
+                    android:background="@color/white"
+
+                    android:layout_margin="16dp"
+
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_arrow_down"
+                    app:endIconTint="#fa0"
+
+                    app:layout_constraintTop_toBottomOf="@id/timeTextView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        style="@style/TextTajawalRegular16"
+                        android:textColor="@color/black"
+                        android:text="@={viewModel.time}"
+                        android:inputType="none"
+
+                        android:background="@color/white"
+
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="@{v -> viewModel.pickTime(v)}"
+
+                        android:enabled="false"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+
+                    android:elevation="8dp"
+
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{v -> viewModel.pickTime(v)}"
+
+                    app:layout_constraintTop_toTopOf="@id/timeTextInputLayout"
+                    app:layout_constraintBottom_toBottomOf="@id/timeTextInputLayout"
+                    app:layout_constraintStart_toStartOf="@id/timeTextInputLayout"
+                    app:layout_constraintEnd_toEndOf="@id/timeTextInputLayout"/>
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+
+                    android:layout_margin="32dp"
+
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="order_now.json"
+                    app:lottie_loop="true"
+
+                    android:visibility="@{!viewModel.currentSelectionIsDateAndTimeNotOrderNow,default=gone}"
+                    tools:visibility="visible"
+
+                    app:layout_constraintTop_toBottomOf="@id/orderNowMaterialCardView"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nextButton"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+
+            android:background="@drawable/dr_project_round"
+            style="@style/Widget.MaterialComponents.Button"
+
+            android:text="@string/next"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextTajawalMedium16"
+            android:textColor="@color/black"
+
+            android:onClick="@{v -> viewModel.next(v)}"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
