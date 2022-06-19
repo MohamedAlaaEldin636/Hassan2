@@ -32,6 +32,7 @@
             tools:title="Title"
             android:title="@{viewModel.titleToolbar}"
             app:titleTextColor="#292D32"
+            app:titleTextAppearance="@style/TextTajawalMedium16"
 
             android:background="#F9F9F9"
 
