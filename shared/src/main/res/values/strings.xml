@@ -267,4 +267,9 @@
     <string name="change_permission_in_settings_of_device">Change permission from device\'s Settings</string>
     <string name="no_app_can_handle_this_action">لا يوجد تطبيق يمكنه التعامل مع هذا الاجراء</string>
     <string name="you_must_fill_your_data">يجب ملئ بياناتك الشخصية</string>
+    <string name="unknown_2">غير معروف</string>
+    <string name="paid_more_money_in_order">دفع مبلغ زائد فى الطلب</string>
+    <string name="app_took_percentage">خصم نسبة البرنامج من الطلب</string>
+    <string name="because_of">بسبب</string>
+    <string name="with_date">بتاريخ</string>
 </resources>

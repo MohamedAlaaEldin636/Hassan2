@@ -29,8 +29,17 @@ class VHItemWallet(parent: ViewGroup) : RecyclerView.ViewHolder(
         }else {
             R.string.wallet_addition_var
         }
+
+        val reason = binding.root.context.run {
+            "${getString(R.string.because_of)} ${item.getReadableReason(this)}"
+        }
+
+        val date = binding.root.context.run {
+            if (item.date.isNullOrEmpty()) "" else "${getString(R.string.with_date)} ${item.date.orEmpty()}"
+        }
+
         binding.descriptionTextView.text = binding.root.context.getString(res, item.amount.toString()).plus(
-            " ${item.date.orEmpty()}"
+            " $reason $date"
         )
     }
 
