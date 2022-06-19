@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.navigation.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.maproductions.mohamedalaa.hassanp.presentation.auth.RegisterFormFragment
 import com.maproductions.mohamedalaa.hassanp.presentation.auth.viewModel.RegisterFormViewModel
 import com.maproductions.mohamedalaa.hassanp.presentation.myAccount.PersonalDataFragment
 import com.maproductions.mohamedalaa.shared.R
@@ -41,21 +42,15 @@ class PersonalDataViewModel @Inject constructor(
         it?.birthDate?.split("-")?.joinToString(" / ")
     }
 
-    // todo de kda el files elle na2sa tb w el hagat el tanya la2 de 8alat
+    val imageFrontId = MutableLiveData<Uri>()
+    val imageBackId = MutableLiveData<Uri>()
 
-    val address = MutableLiveData("")
+    var imageType = RegisterFormViewModel.ImageType.ID_FRONT
+        private set
 
-    val relativePhone = MutableLiveData("")
+    fun pickImage(view: View, imageType: RegisterFormViewModel.ImageType) {
+        this.imageType = imageType
 
-    val showCategories = MutableLiveData(true)
-
-    val showServices = MutableLiveData(true)
-
-    fun toggleCategories() = showCategories.toggleValueIfNotNull()
-
-    fun toggleServices() = showServices.toggleValueIfNotNull()
-
-    fun pickImage(view: View) {
         view.findFragment<PersonalDataFragment>().pickImageOrRequestPermissions()
     }
 
