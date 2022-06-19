@@ -38,7 +38,7 @@ class OrdersFragment : MABaseFragment<FragmentOrdersBinding>() {
     private val channelEvent by lazy {
         PusherUtils.getChannelEvent(
             PusherUtils.getChannelNameOnChangeOrderStatusForAccount(
-                runBlocking { prefsAccount.getUserData().first()!!.id }
+                runBlocking { prefsAccount.getProviderData().first()!!.id }
             ),
             PusherUtils.EVENT_NAME_ON_CHANGE_ORDER_STATUS_FOR_ACCOUNT
         ) { data ->
