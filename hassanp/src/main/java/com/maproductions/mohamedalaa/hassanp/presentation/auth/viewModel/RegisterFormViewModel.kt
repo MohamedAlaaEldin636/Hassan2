@@ -44,7 +44,7 @@ class RegisterFormViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
     companion object {
-        private const val DIALOG_DATE_PICKER_KEY = "DIALOG_DATE_PICKER_KEY"
+        private const val DIALOG_DATE_PICKER_KEY = "RegisterFormViewModel.DIALOG_DATE_PICKER_KEY"
     }
 
     val categories = repoHome.getCategories().mapLatest { pagingData ->

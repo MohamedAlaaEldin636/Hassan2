@@ -36,9 +36,9 @@ class ServiceDateAndTimeSelectionViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
     companion object {
-        private const val DIALOG_DATE_PICKER_KEY = "DIALOG_DATE_PICKER_KEY"
+        private const val DIALOG_DATE_PICKER_KEY = "ServiceDateAndTimeSelectionViewModel.DIALOG_DATE_PICKER_KEY"
 
-        private const val DIALOG_TIME_PICKER_KEY = "DIALOG_TIME_PICKER_KEY"
+        private const val DIALOG_TIME_PICKER_KEY = "ServiceDateAndTimeSelectionViewModel.DIALOG_TIME_PICKER_KEY"
     }
 
     private var year: Int? = null
