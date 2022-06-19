@@ -141,7 +141,7 @@ class ChatDetailsFragment : MABaseFragment<FragmentChatDetailsBinding>() {
 
             viewModel.imageUrl.value = details.image
 
-            viewModel.name.value = details.image
+            viewModel.name.value = details.name
 
             viewModel.adapter.updateUrlOfProfileImage(details.image.orEmpty())
         }
