@@ -74,7 +74,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private val listOfOrdersIdsForTracking = mutableListOf<Int>()
+    private val listOfOrdersIdsForTracking = mutableSetOf<Int>()
 
     var channelHasBeenSubscribed = false
 
@@ -128,12 +128,16 @@ class MainViewModel @Inject constructor(
     }
 
     fun changeTrackingForOrder(orderId: Int, startTrackingElseStopIt: Boolean, listener: Listener) {
+        Timber.e("abc333 orderId $orderId $startTrackingElseStopIt")
+
         val oldSize = listOfOrdersIdsForTracking.size
         if (startTrackingElseStopIt) {
             listOfOrdersIdsForTracking += orderId
         }else {
             listOfOrdersIdsForTracking -= orderId
         }
+
+        Timber.e("abc333 listOfOrdersIdsForTracking $listOfOrdersIdsForTracking")
 
         if (listOfOrdersIdsForTracking.size != oldSize) {
             checkIfShouldRequestLocationUpdates(listener)

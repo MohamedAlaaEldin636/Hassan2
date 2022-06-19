@@ -155,7 +155,8 @@ class MainActivity : SharedMainActivity(), MainViewModel.Listener, LocationHandl
     }
 
     override fun onChangeLocationSuccess(location: Location) {
-        showSuccessToast(getString(com.maproductions.mohamedalaa.shared.R.string.your_location_is_being_tracked))
+        Timber.e("abc333 your_location_is_being_tracked")
+        //showSuccessToast(getString(com.maproductions.mohamedalaa.shared.R.string.your_location_is_being_tracked))
 
         viewModel.afterLocationChange(location)
     }

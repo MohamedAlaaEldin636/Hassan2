@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.map
 import com.maproductions.mohamedalaa.hassanp.R
+import com.maproductions.mohamedalaa.hassanp.core.changeOrderNotOnTheWay
 import com.maproductions.mohamedalaa.hassanp.presentation.order.CancellationReasonDialogFragment
 import com.maproductions.mohamedalaa.shared.R as SR
 import com.maproductions.mohamedalaa.hassanp.presentation.order.CancellationReasonDialogFragmentArgs
@@ -53,6 +54,8 @@ class CancellationReasonViewModel @Inject constructor(
             },
             afterHidingLoading = {
                 val navController = fragment.findNavControllerOfProject()
+
+                fragment.changeOrderNotOnTheWay(args.orderId)
 
                 navController.navigateUp()
                 navController.navigateUp()

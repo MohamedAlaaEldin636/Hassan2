@@ -21,6 +21,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 import com.google.maps.android.SphericalUtil
 import com.maproductions.mohamedalaa.hassanp.R
+import com.maproductions.mohamedalaa.hassanp.core.changeOrderNotOnTheWay
 import com.maproductions.mohamedalaa.hassanp.databinding.FragmentOrderDetailsBinding
 import com.maproductions.mohamedalaa.hassanp.presentation.order.viewModel.OrderDetailsViewModel
 import com.maproductions.mohamedalaa.shared.core.customTypes.ApiOrderStatus
@@ -142,6 +143,10 @@ class OrderDetailsFragment : MABaseFragment<FragmentOrderDetailsBinding>(), Loca
             viewLifecycleOwner,
             { it == true }
         ) {
+            viewModel.orderDetails.value?.id?.also { id ->
+                changeOrderNotOnTheWay(id)
+            }
+
             val navController = findNavControllerOfProject()
 
             navController.navigateUp()

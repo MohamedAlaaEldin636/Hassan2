@@ -7,6 +7,7 @@ import androidx.fragment.app.findFragment
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
+import com.maproductions.mohamedalaa.hassanp.core.changeOrderNotOnTheWay
 import com.maproductions.mohamedalaa.hassanp.presentation.order.OrderDetailsFragment
 import com.maproductions.mohamedalaa.hassanp.presentation.order.OrderDetailsFragmentArgs
 import com.maproductions.mohamedalaa.hassanp.presentation.order.adapter.RVItemServiceNameAndPrice
@@ -265,6 +266,10 @@ class OrderDetailsViewModel @Inject constructor(
             afterHidingLoading = {
                 if (orderStatus.value == ApiOrderStatus.ON_THE_WAY) {
                     fragment.locationHandler.stopLocationUpdates()
+
+                    orderDetails.value?.id?.also {
+                        fragment.changeOrderNotOnTheWay(it)
+                    }
                 }
 
                 retryAbleOrderDetails.retry()
