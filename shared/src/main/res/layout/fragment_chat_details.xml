@@ -152,6 +152,7 @@
 
                         android:alpha="@{viewModel.canSend ? 1.0f : 0.5f}"
 
+                        app:srcCompat="@drawable/ic_send_with_circle"
                         android:src="@drawable/ic_send_with_circle"/>
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -167,12 +168,13 @@
                         android:gravity="center_vertical"
 
                         android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
+
+                        android:maxLines="1"
 
                         android:text="@={viewModel.message}"
                         style="@style/TextTajawalRegular12"
 
-                        android:inputType="textMultiLine"
+                        android:inputType="text"
                         android:imeOptions="actionDone|flagNoFullscreen"/>
 
                 </LinearLayout>
@@ -186,6 +188,8 @@
                 android:layout_height="36dp"
 
                 app:cardCornerRadius="36dp"
+
+                app:cardPreventCornerOverlap="false"
 
                 app:cardElevation="0dp"
                 app:cardMaxElevation="0dp"
