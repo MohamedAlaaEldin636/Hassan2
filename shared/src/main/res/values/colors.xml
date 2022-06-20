@@ -19,4 +19,6 @@
     <color name="coloredText">#FFBC23</color>
     <color name="indicator_selected_color">#FFBC23</color>
     <color name="indicator_unselected_color">#AFAFAF</color>
+    <color name="card_view_stroke_normal">#F9F9F9</color>
+    <color name="card_view_stroke_error">#FF0000</color>
 </resources>

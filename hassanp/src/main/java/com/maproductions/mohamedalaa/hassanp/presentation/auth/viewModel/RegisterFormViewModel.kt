@@ -236,7 +236,18 @@ class RegisterFormViewModel @Inject constructor(
     }
 
     enum class ImageType {
-        PROFILE, ID_FRONT, ID_BACK, ADDRESS_FRONT, ADDRESS_BACK
+        PROFILE, ID_FRONT, ID_BACK, ADDRESS_FRONT, ADDRESS_BACK;
+
+        companion object {
+            fun fromProviderFileType(value: String?): ImageType? {
+                return when (value) {
+                    "image_front_id" -> ID_FRONT
+                    "image_back_id" -> ID_BACK
+                    "image" -> PROFILE
+                    else -> null
+                }
+            }
+        }
     }
 
 }

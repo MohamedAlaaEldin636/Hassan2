@@ -1,8 +1,11 @@
 package com.maproductions.mohamedalaa.shared.data.auth.repository
 
 import com.maproductions.mohamedalaa.shared.core.customTypes.LocationData
+import com.maproductions.mohamedalaa.shared.core.customTypes.MABaseResponse
+import com.maproductions.mohamedalaa.shared.core.extensions.flowInitialLoadingWithMinExecutionTime
 import com.maproductions.mohamedalaa.shared.data.auth.dataSource.remote.DataSourceAuth
 import com.maproductions.mohamedalaa.shared.data.local.preferences.PrefsAccount
+import com.maproductions.mohamedalaa.shared.domain.auth.ResponseProviderProfile
 import kotlinx.coroutines.flow.first
 import okhttp3.MultipartBody
 import timber.log.Timber
@@ -12,6 +15,10 @@ class RepoAuth @Inject constructor(
     private val dataSource: DataSourceAuth,
     private val prefsAccount: PrefsAccount,
 ) {
+
+    fun getProviderProfile() = flowInitialLoadingWithMinExecutionTime<MABaseResponse<ResponseProviderProfile>> {
+        emit(dataSource.getProviderProfile())
+    }
 
     suspend fun startReceiveOrders() = dataSource.toggleCanReceiveOrders(true, null)
 

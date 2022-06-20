@@ -16,6 +16,10 @@ class DataSourceAuth @Inject constructor(
     private val apiService: ApiAuthServices,
 ) : BaseRemoteDataSource() {
 
+    suspend fun getProviderProfile() = safeApiCall {
+        apiService.getProviderProfile(getAuthorizationHeader())
+    }
+
     suspend fun toggleCanReceiveOrders(canReceive: Boolean, hours: Int?) = safeApiCall {
         val map = mutableMapOf<String, String>()
         if (!canReceive && hours != null) map[ApiConst.Query.HOURS] = hours.toString()

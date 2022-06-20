@@ -3,6 +3,7 @@ package com.maproductions.mohamedalaa.shared.data.auth.dataSource.remote
 import com.maproductions.mohamedalaa.shared.core.customTypes.MABaseResponse
 import com.maproductions.mohamedalaa.shared.data.api.ApiConst
 import com.maproductions.mohamedalaa.shared.domain.auth.ProviderData
+import com.maproductions.mohamedalaa.shared.domain.auth.ResponseProviderProfile
 import com.maproductions.mohamedalaa.shared.domain.auth.ResponseUpdateProfile
 import com.maproductions.mohamedalaa.shared.domain.auth.ResponseVerifyCode
 import okhttp3.MultipartBody
@@ -10,6 +11,11 @@ import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiAuthServices {
+
+    @GET("provider/profile")
+    suspend fun getProviderProfile(
+        @HeaderMap headerMap: Map<String, String>,
+    ): MABaseResponse<ResponseProviderProfile>
 
     @FormUrlEncoded
     @POST("provider/update-service")

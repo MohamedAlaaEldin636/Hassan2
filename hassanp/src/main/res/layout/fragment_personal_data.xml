@@ -58,6 +58,7 @@
 
                     android:layout_marginTop="16dp"
 
+                    materialCardView_setStrokeColorResBA="@{viewModel.profileCardColorRes}"
                     app:strokeColor="@color/white"
                     app:strokeWidth="6dp"
 
@@ -75,7 +76,7 @@
 
                         android:src="@drawable/ic_person_1"
 
-                        imageView_setUrlViaGlideOrIgnore="@{viewModel.imageUrl}"/>
+                        imageView_setImageUriViaGlideOrPlaceholderMAImage="@{viewModel.imageProfile}"/>
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -258,7 +259,6 @@
                     app:layout_constraintStart_toStartOf="@id/phoneTextInputLayout"
                     app:layout_constraintEnd_toEndOf="@id/phoneTextInputLayout"/>
 
-                <!-- todo remove if not here -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -269,7 +269,7 @@
                     android:textSize="15sp"
                     android:textColor="#848484"
 
-                    android:visibility="invisible"
+                    android:visibility="@{viewModel.showIdsFields,default=gone}"
 
                     android:layout_margin="16dp"
 
@@ -289,11 +289,17 @@
 
                     android:text="@string/id_card_pic"
 
+                    tools:visibility="visible"
+                    android:visibility="@{!viewModel.showIdsFields,default=gone}"
+
                     app:layout_constraintTop_toBottomOf="@id/phoneTextInputLayout"
                     app:layout_constraintStart_toStartOf="parent"/>
 
                 <LinearLayout
                     android:layout_marginTop="16dp"
+
+                    tools:visibility="visible"
+                    android:visibility="@{!viewModel.showIdsFields,default=gone}"
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -325,7 +331,8 @@
                         android:focusable="true"
                         android:onClick="@{v -> viewModel.pickImage(v, TypeImage2.ID_FRONT)}"
 
-                        android:background="@drawable/dr_rounded_white_small">
+                        view_setBackgroundResBA="@{viewModel.frontIdBackgroundDrawableRes}"
+                        tools:background="@drawable/dr_rounded_white_small_with_red_border">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -350,7 +357,7 @@
 
                             android:visibility="@{viewModel.imageFrontId != null}"
 
-                            imageView_setUrlViaGlideOrIgnore="@{viewModel.imageFrontId}"
+                            imageView_setImageUriViaGlideOrPlaceholderMAImage="@{viewModel.imageFrontId}"
                             tools:scaleType="centerCrop"/>
 
                     </FrameLayout>
@@ -371,7 +378,8 @@
                         android:focusable="true"
                         android:onClick="@{v -> viewModel.pickImage(v, TypeImage2.ID_BACK)}"
 
-                        android:background="@drawable/dr_rounded_white_small">
+                        view_setBackgroundResBA="@{viewModel.backIdBackgroundDrawableRes}"
+                        tools:background="@drawable/dr_rounded_white_small">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -396,7 +404,7 @@
 
                             android:visibility="@{viewModel.imageBackId != null}"
 
-                            imageView_setUrlViaGlideOrIgnore="@{viewModel.imageBackId}"
+                            imageView_setImageUriViaGlideOrPlaceholderMAImage="@{viewModel.imageBackId}"
                             tools:scaleType="centerCrop"/>
 
                     </FrameLayout>

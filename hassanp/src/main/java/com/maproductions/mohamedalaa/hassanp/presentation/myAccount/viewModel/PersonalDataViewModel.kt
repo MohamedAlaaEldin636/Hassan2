@@ -7,19 +7,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import androidx.navigation.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.maproductions.mohamedalaa.hassanp.presentation.auth.RegisterFormFragment
 import com.maproductions.mohamedalaa.hassanp.presentation.auth.viewModel.RegisterFormViewModel
 import com.maproductions.mohamedalaa.hassanp.presentation.myAccount.PersonalDataFragment
 import com.maproductions.mohamedalaa.shared.R
+import com.maproductions.mohamedalaa.shared.core.customTypes.MAImage
+import com.maproductions.mohamedalaa.shared.core.customTypes.RetryAbleFlow
 import com.maproductions.mohamedalaa.shared.core.customTypes.map
 import com.maproductions.mohamedalaa.shared.core.extensions.minLengthOrPrefixZeros
-import com.maproductions.mohamedalaa.shared.core.extensions.navigateDeepLinkWithOptions
-import com.maproductions.mohamedalaa.shared.core.extensions.toggleValueIfNotNull
+import com.maproductions.mohamedalaa.shared.data.auth.repository.RepoAuth
 import com.maproductions.mohamedalaa.shared.data.local.preferences.PrefsAccount
-import com.maproductions.mohamedalaa.shared.domain.settings.ImageWithTextAndTitleFlag
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.Instant
 import java.time.LocalDateTime
@@ -29,30 +26,53 @@ import javax.inject.Inject
 @HiltViewModel
 class PersonalDataViewModel @Inject constructor(
     application: Application,
-    prefsAccount: PrefsAccount,
+    private val repoAuth: RepoAuth,
 ) : AndroidViewModel(application) {
 
-    private val providerData = prefsAccount.getProviderData().asLiveData()
+    val retryAbleFlow = RetryAbleFlow(repoAuth::getProviderProfile)
 
-    val imageUrl = providerData.map { it?.imageUrl }
-    var imageUri: Uri? = null
-    val name = providerData.map { it?.name }
-    val phone = providerData.map { it?.phone }
-    val birthDate = providerData.map {
-        it?.birthDate?.split("-")?.joinToString(" / ")
+    val imageProfile = MutableLiveData<MAImage>()
+    val name = MutableLiveData("")
+    val phone = MutableLiveData("")
+    val birthDate = MutableLiveData("")
+
+    val showIdsFields = MutableLiveData(false)
+
+    val imageFrontId = MutableLiveData<MAImage>()
+    val imageBackId = MutableLiveData<MAImage>()
+
+    val requireProfile = MutableLiveData(false)
+    val requireFrontId = MutableLiveData(false)
+    val requireBackId = MutableLiveData(false)
+
+    val profileCardColorRes = requireProfile.map {
+        if (it == true) R.color.card_view_stroke_error else R.color.white
     }
-
-    val imageFrontId = MutableLiveData<Uri>()
-    val imageBackId = MutableLiveData<Uri>()
+    val frontIdBackgroundDrawableRes = requireFrontId.map {
+        if (it == true) R.drawable.dr_rounded_white_small_with_red_border else R.drawable.dr_rounded_white_small
+    }
+    val backIdBackgroundDrawableRes = requireBackId.map {
+        if (it == true) R.drawable.dr_rounded_white_small_with_red_border else R.drawable.dr_rounded_white_small
+    }
 
     var imageType = RegisterFormViewModel.ImageType.ID_FRONT
         private set
 
-    // todo can be profile as well fa rakkez y kber isa.
     fun pickImage(view: View, imageType: RegisterFormViewModel.ImageType) {
         this.imageType = imageType
 
         view.findFragment<PersonalDataFragment>().pickImageOrRequestPermissions()
+    }
+
+    fun setImageUri(uri: Uri) {
+        val maImage = MAImage.IUri(uri)
+
+        when (imageType) {
+            RegisterFormViewModel.ImageType.PROFILE -> imageProfile.value = maImage
+            RegisterFormViewModel.ImageType.ID_FRONT -> imageFrontId.value = maImage
+            RegisterFormViewModel.ImageType.ID_BACK -> imageBackId.value = maImage
+            else -> {}
+        }
     }
 
     fun pickDate(view: View) {

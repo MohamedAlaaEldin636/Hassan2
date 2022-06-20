@@ -12,15 +12,12 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.maproductions.mohamedalaa.hassanp.R
-import com.maproductions.mohamedalaa.hassanp.databinding.FragmentMoreBinding
 import com.maproductions.mohamedalaa.hassanp.databinding.FragmentPersonalDataBinding
-import com.maproductions.mohamedalaa.hassanp.presentation.more.viewModel.MoreViewModel
+import com.maproductions.mohamedalaa.hassanp.presentation.auth.viewModel.RegisterFormViewModel
 import com.maproductions.mohamedalaa.hassanp.presentation.myAccount.viewModel.PersonalDataViewModel
+import com.maproductions.mohamedalaa.shared.core.customTypes.MAImage
 import com.maproductions.mohamedalaa.shared.core.customTypes.PermissionsHandler
-import com.maproductions.mohamedalaa.shared.core.extensions.checkSelfPermissionGranted
-import com.maproductions.mohamedalaa.shared.core.extensions.getUriFromBitmapRetrievedByCamera
-import com.maproductions.mohamedalaa.shared.core.extensions.showNormalToast
-import com.maproductions.mohamedalaa.shared.core.extensions.showPopup
+import com.maproductions.mohamedalaa.shared.core.extensions.*
 import com.maproductions.mohamedalaa.shared.presentation.base.MABaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -63,12 +60,7 @@ class PersonalDataFragment : MABaseFragment<FragmentPersonalDataBinding>(), Perm
 
             val uri = bitmap.getUriFromBitmapRetrievedByCamera(requireContext())
 
-            viewModel.imageUri = uri
-
-            Glide.with(this)
-                .load(uri)
-                .apply(RequestOptions().centerCrop())
-                .into(binding?.imageView ?: return@registerForActivityResult)
+            viewModel.setImageUri(uri)
         }
     }
 
@@ -78,12 +70,7 @@ class PersonalDataFragment : MABaseFragment<FragmentPersonalDataBinding>(), Perm
         if (it.resultCode == Activity.RESULT_OK) {
             val uri = it.data?.data ?: return@registerForActivityResult
 
-            viewModel.imageUri = uri
-
-            Glide.with(this)
-                .load(uri)
-                .apply(RequestOptions().centerCrop())
-                .into(binding?.imageView ?: return@registerForActivityResult)
+            viewModel.setImageUri(uri)
         }
     }
 
@@ -94,7 +81,47 @@ class PersonalDataFragment : MABaseFragment<FragmentPersonalDataBinding>(), Perm
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        handleRetryAbleFlowWithMustHaveResultWithNullability(viewModel.retryAbleFlow) { response ->
+            viewModel.showIdsFields.value = response.data?.isSuspendedAccount != true
+            viewModel.imageProfile.value = response.data?.imageUrl?.let {
+                MAImage.ILink(it)
+            }
+            viewModel.name.value = response.data?.name
+            viewModel.phone.value = response.data?.phone
+            viewModel.birthDate.value = response.data?.birthDate?.split("-")
+                ?.joinToString(" / ")
 
+            if (response.data?.isSuspendedAccount == true) {
+                val files = response.data?.files
+
+                val profileFile = files?.firstOrNull {
+                    RegisterFormViewModel.ImageType.fromProviderFileType(it.type) ==
+                            RegisterFormViewModel.ImageType.PROFILE
+                }
+                val profileRequired = profileFile?.isStatusApproved?.not() ?: false
+                val frontIdFile = files?.firstOrNull {
+                    RegisterFormViewModel.ImageType.fromProviderFileType(it.type) ==
+                            RegisterFormViewModel.ImageType.ID_FRONT
+                }
+                val frontIdRequired = frontIdFile?.isStatusApproved?.not() ?: false
+                val backIdFile = files?.firstOrNull {
+                    RegisterFormViewModel.ImageType.fromProviderFileType(it.type) ==
+                            RegisterFormViewModel.ImageType.ID_BACK
+                }
+                val backIdRequired = backIdFile?.isStatusApproved?.not() ?: false
+
+                viewModel.requireProfile.value = profileRequired
+                viewModel.requireFrontId.value = frontIdRequired
+                viewModel.requireBackId.value = backIdRequired
+
+                viewModel.imageFrontId.value = frontIdFile?.fileUrl?.let { MAImage.ILink(it) }
+                viewModel.imageBackId.value = backIdFile?.fileUrl?.let { MAImage.ILink(it) }
+            }else {
+                viewModel.requireProfile.value = false
+                viewModel.requireFrontId.value = false
+                viewModel.requireBackId.value = false
+            }
+        }
     }
 
     fun pickImageOrRequestPermissions() {
@@ -127,7 +154,14 @@ class PersonalDataFragment : MABaseFragment<FragmentPersonalDataBinding>(), Perm
         val camera = getString(com.maproductions.mohamedalaa.shared.R.string.camera)
         val gallery = getString(com.maproductions.mohamedalaa.shared.R.string.gallery)
 
-        binding?.imageMaterialCardView?.showPopup(listOf(camera, gallery)) {
+        val view = when (viewModel.imageType) {
+            RegisterFormViewModel.ImageType.PROFILE -> binding?.imageMaterialCardView
+            RegisterFormViewModel.ImageType.ID_FRONT -> binding?.idFrontFrameLayout
+            RegisterFormViewModel.ImageType.ID_BACK -> binding?.backFrontFrameLayout
+            else -> return
+        }
+
+        view?.showPopup(listOf(camera, gallery)) {
             pickImage(it.title?.toString() == camera)
         }
     }

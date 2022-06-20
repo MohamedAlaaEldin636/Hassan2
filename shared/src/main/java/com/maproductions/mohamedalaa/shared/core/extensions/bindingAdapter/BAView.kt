@@ -9,3 +9,8 @@ import androidx.databinding.BindingAdapter
 fun View.setVisibleOrInvisible(visible: Boolean?) {
     visibility = if (visible == true) View.VISIBLE else View.INVISIBLE
 }
+
+@BindingAdapter("view_setBackgroundResBA")
+fun View.setBackgroundResBA(@DrawableRes res: Int?) {
+    setBackgroundResource(res ?: return)
+}
