@@ -8,6 +8,7 @@ import com.maproductions.mohamedalaa.shared.domain.auth.ResponseUpdateProfile
 import com.maproductions.mohamedalaa.shared.domain.auth.ResponseVerifyCode
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.http.*
 
 interface ApiAuthServices {
@@ -156,6 +157,17 @@ interface ApiAuthServices {
         @Part(ApiConst.Query.PASSWORD_CONFIRMATION) passwordConfirmation: RequestBody,
         @Part list: List<@JvmSuppressWildcards MultipartBody.Part>,
     ): MABaseResponse<ResponseUpdateProfile>
+
+    @Multipart
+    @POST("provider/auth/update-profile")
+    suspend fun updateProviderProfileByRequestingApp(
+        @Part list: List<@JvmSuppressWildcards MultipartBody.Part>,
+        @Part(ApiConst.Query.NAME) name: RequestBody,
+        @Part(ApiConst.Query.BIRTH_DATE) birthDate: RequestBody,
+        @PartMap map: Map<String, @JvmSuppressWildcards RequestBody>,
+        @HeaderMap headerMap: Map<String, String>,
+        @Part(ApiConst.Query.ACCOUNT_TYPE) accountType: RequestBody = ApiConst.Query.PROVIDER.toRequestBody(),
+    ): MABaseResponse<Any>
 
     @Multipart
     @POST("user/auth/update-profile")

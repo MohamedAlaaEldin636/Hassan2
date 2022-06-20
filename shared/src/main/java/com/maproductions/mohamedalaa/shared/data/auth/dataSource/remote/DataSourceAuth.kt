@@ -201,4 +201,35 @@ class DataSourceAuth @Inject constructor(
         )
     }
 
+    suspend fun updateProviderProfileByRequestingApp(
+        image: MultipartBody.Part?,
+        name: String,
+        phone: String?,
+        imageFrontId: MultipartBody.Part?,
+        imageBackId: MultipartBody.Part?,
+        birthDay: Int,
+        birthMonth: Int,
+        birthYear: Int,
+    ) = safeApiCall {
+        val birthDate = birthYear.minLengthOrPrefixZeros(4) +
+                "-${birthMonth.minLengthOrPrefixZeros(2)}" +
+                "-${birthDay.minLengthOrPrefixZeros(2)}"
+
+        val list = mutableListOf<MultipartBody.Part>()
+        image?.also { list += it }
+        imageFrontId?.also { list += it }
+        imageBackId?.also { list += it }
+
+        val map = mutableMapOf<String, RequestBody>()
+        phone?.also { map[ApiConst.Query.PHONE] = it.toRequestBody() }
+
+        apiService.updateProviderProfileByRequestingApp(
+            list,
+            name.toRequestBody(),
+            birthDate.toRequestBody(),
+            map,
+            getAuthorizationHeader()
+        )
+    }
+
 }

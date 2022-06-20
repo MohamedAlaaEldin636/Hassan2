@@ -111,4 +111,24 @@ class RepoAuth @Inject constructor(
         imageBackAddress,
     )
 
+    suspend fun updateProviderProfileByRequestingApp(
+        image: MultipartBody.Part?,
+        name: String,
+        phone: String?,
+        imageFrontId: MultipartBody.Part?,
+        imageBackId: MultipartBody.Part?,
+        birthDay: Int,
+        birthMonth: Int,
+        birthYear: Int,
+    ) = dataSource.updateProviderProfileByRequestingApp(
+        image,
+        name,
+        phone,
+        imageFrontId,
+        imageBackId,
+        birthDay,
+        birthMonth,
+        birthYear
+    )
+
 }

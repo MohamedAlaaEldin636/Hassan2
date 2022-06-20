@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.maproductions.mohamedalaa.hassanp.presentation.auth.viewModel.RegisterFormViewModel
 import com.maproductions.mohamedalaa.hassanp.presentation.myAccount.PersonalDataFragment
@@ -14,10 +15,14 @@ import com.maproductions.mohamedalaa.shared.R
 import com.maproductions.mohamedalaa.shared.core.customTypes.MAImage
 import com.maproductions.mohamedalaa.shared.core.customTypes.RetryAbleFlow
 import com.maproductions.mohamedalaa.shared.core.customTypes.map
-import com.maproductions.mohamedalaa.shared.core.extensions.minLengthOrPrefixZeros
+import com.maproductions.mohamedalaa.shared.core.extensions.*
+import com.maproductions.mohamedalaa.shared.data.api.ApiConst
 import com.maproductions.mohamedalaa.shared.data.auth.repository.RepoAuth
 import com.maproductions.mohamedalaa.shared.data.local.preferences.PrefsAccount
+import com.maproductions.mohamedalaa.shared.domain.auth.ResponseProviderProfile
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -27,9 +32,12 @@ import javax.inject.Inject
 class PersonalDataViewModel @Inject constructor(
     application: Application,
     private val repoAuth: RepoAuth,
+    private val prefsAccount: PrefsAccount,
 ) : AndroidViewModel(application) {
 
     val retryAbleFlow = RetryAbleFlow(repoAuth::getProviderProfile)
+
+    var response: ResponseProviderProfile? = null
 
     val imageProfile = MutableLiveData<MAImage>()
     val name = MutableLiveData("")
@@ -98,7 +106,75 @@ class PersonalDataViewModel @Inject constructor(
     }
 
     fun send(view: View) {
-        // todo w mtnsash on success navUp + toast sent successfully isa.
+        val errorRes = when {
+            name.value.isNullOrEmpty() -> R.string.name_required
+            phone.value.isNullOrEmpty() -> R.string.phone_required
+            birthDate.value.isNullOrEmpty() -> R.string.birth_date_required
+            requireProfile.value == true && imageProfile.value == null -> R.string.profile_image_required
+            requireFrontId.value == true && imageFrontId.value == null -> R.string.front_id_image_required
+            requireBackId.value == true && imageBackId.value == null -> R.string.back_id_image_required
+            else -> null
+        }
+
+        if (errorRes != null) {
+            return view.context.showErrorToast(view.context.getString(errorRes))
+        }
+
+        val profile = imageProfile.value?.let {
+            (it as? MAImage.IUri)?.uri?.createMultipartBodyPart(view.context, ApiConst.Query.IMAGE)
+        }
+        val frontId = if (requireFrontId.value != true) null else imageFrontId.value?.let {
+            (it as? MAImage.IUri)?.uri?.createMultipartBodyPart(view.context, ApiConst.Query.IMAGE_FRONT_ID)
+        }
+        val backId = if (requireBackId.value != true) null else imageBackId.value?.let {
+            (it as? MAImage.IUri)?.uri?.createMultipartBodyPart(view.context, ApiConst.Query.IMAGE_BACK_ID)
+        }
+
+        val (birthDay, birthMonth, birthYear) = birthDate.value?.split(" / ")?.let {
+            if (it.size != 3) null else Triple(
+                it[0].toIntOrNull() ?: return@let null,
+                it[1].toIntOrNull() ?: return@let null,
+                it[2].toIntOrNull() ?: return@let null,
+            )
+        } ?: return view.context.showErrorToast(view.context.getString(R.string.date_ensure))
+
+        val fragment = view.findFragment<PersonalDataFragment>()
+
+        val phone = if (phone.value.orEmpty() == response?.phone) null else {
+            phone.value.orEmpty()
+        }
+
+        fragment.executeOnGlobalLoadingAndAutoHandleRetryCancellable(
+            afterShowingLoading = {
+                repoAuth.updateProviderProfileByRequestingApp(
+                    profile,
+                    name.value.orEmpty(),
+                    phone,
+                    frontId,
+                    backId,
+                    birthDay,
+                    birthMonth,
+                    birthYear
+                )
+            },
+            afterHidingLoading = {
+                fragment.context?.showSuccessToast(fragment.getString(R.string.sent_done_successfully))
+
+                viewModelScope.launch {
+                    val provider = prefsAccount.getProviderData().first()!!
+
+                    prefsAccount.setProviderData(
+                        provider.copy(
+                            phone = phone ?: provider.phone,
+                            name = name.value.orEmpty(),
+                            birthDate = "$birthYear-$birthMonth-$birthDay",
+                        )
+                    )
+
+                    fragment.findNavControllerOfProject().navigateUp()
+                }
+            }
+        )
     }
 
 }

@@ -82,13 +82,15 @@ class PersonalDataFragment : MABaseFragment<FragmentPersonalDataBinding>(), Perm
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         handleRetryAbleFlowWithMustHaveResultWithNullability(viewModel.retryAbleFlow) { response ->
+            viewModel.response = response.data
+
             viewModel.showIdsFields.value = response.data?.isSuspendedAccount != true
             viewModel.imageProfile.value = response.data?.imageUrl?.let {
                 MAImage.ILink(it)
             }
             viewModel.name.value = response.data?.name
             viewModel.phone.value = response.data?.phone
-            viewModel.birthDate.value = response.data?.birthDate?.split("-")
+            viewModel.birthDate.value = response.data?.birthDate?.split("-")?.reversed()
                 ?.joinToString(" / ")
 
             if (response.data?.isSuspendedAccount == true) {
