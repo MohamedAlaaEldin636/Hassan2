@@ -5,20 +5,14 @@ package com.maproductions.mohamedalaa.shared.presentation.search.viewModel
 import android.app.Application
 import android.view.View
 import androidx.lifecycle.*
-import com.maproductions.mohamedalaa.shared.NavSharedArgs
 import com.maproductions.mohamedalaa.shared.R
-import com.maproductions.mohamedalaa.shared.data.home.repository.RepoHome
 import com.maproductions.mohamedalaa.shared.data.shared.repository.RepoShared
 import com.maproductions.mohamedalaa.shared.domain.search.SearchType
 import com.maproductions.mohamedalaa.shared.presentation.search.SearchQueriesFragmentArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import androidx.lifecycle.switchMap
-import androidx.paging.PagingData
 import com.google.gson.Gson
-import com.maproductions.mohamedalaa.shared.core.customTypes.IdAndName
 import com.maproductions.mohamedalaa.shared.core.customTypes.OrdersCategory
-import com.maproductions.mohamedalaa.shared.core.customTypes.switchMap
 import com.maproductions.mohamedalaa.shared.core.extensions.*
 import com.maproductions.mohamedalaa.shared.data.orders.repository.RepoOrder
 import com.maproductions.mohamedalaa.shared.domain.home.DeliveryData
@@ -27,11 +21,7 @@ import com.maproductions.mohamedalaa.shared.domain.orders.ResponseOrder
 import com.maproductions.mohamedalaa.shared.presentation.search.SearchQueriesFragment
 import com.maproductions.mohamedalaa.shared.presentation.search.adapters.RVItemSearchQuery
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapLatest
-import timber.log.Timber
 
 @HiltViewModel
 class SearchQueriesViewModel @Inject constructor(
@@ -59,11 +49,11 @@ class SearchQueriesViewModel @Inject constructor(
     }
 
     val suggestionsOfUserOrders = search.asFlow().flatMapLatest {
-        repoOrder.searchOrders(it.orEmpty())
+        repoOrder.searchOrdersForUser(it.orEmpty())
     }
 
     val suggestionsOfProviderHomeOrders = search.asFlow().flatMapLatest {
-        repoOrder.searchOrders(OrdersCategory.PENDING, it.orEmpty())
+        repoOrder.searchOrdersForProvider(OrdersCategory.PENDING, it.orEmpty())
     }
 
     override fun onClick(view: View, jsonOfAny: String) {

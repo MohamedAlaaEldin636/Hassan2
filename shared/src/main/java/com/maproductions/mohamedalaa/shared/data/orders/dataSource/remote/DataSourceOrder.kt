@@ -1,16 +1,13 @@
 package com.maproductions.mohamedalaa.shared.data.orders.dataSource.remote
 
-import com.maproductions.mohamedalaa.shared.core.customTypes.ApiOrderStatus
-import com.maproductions.mohamedalaa.shared.core.customTypes.MABaseResponse
-import com.maproductions.mohamedalaa.shared.core.customTypes.OrdersCategory
-import com.maproductions.mohamedalaa.shared.core.customTypes.RequestOrderStatus
+import com.maproductions.mohamedalaa.shared.core.customTypes.*
 import com.maproductions.mohamedalaa.shared.data.api.ApiConst
-import com.maproductions.mohamedalaa.shared.data.home.dataSource.remote.ApiHomeServices
 import com.maproductions.mohamedalaa.shared.data.remote.BaseRemoteDataSource
 import com.maproductions.mohamedalaa.shared.domain.home.RequestServiceWithCount
+import com.maproductions.mohamedalaa.shared.domain.orders.ResponseForUserOrders
+import com.maproductions.mohamedalaa.shared.domain.orders.ResponseListOfOrders
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.http.*
 import javax.inject.Inject
 
 class DataSourceOrder @Inject constructor(
@@ -25,37 +22,75 @@ class DataSourceOrder @Inject constructor(
         apiService.getCancellationReasons()
     }
 
-    suspend fun searchOrders(
+    suspend fun searchOrdersForProvider(
         text: String?,
         categoryId: Int?,
         cityId: Int?,
         page: Int,
-    ) = safeApiCall {
+    ): MAResult.Immediate<MABaseResponse<ResponseListOfOrders>> = safeApiCall {
         val map = mutableMapOf<String, String>()
         if (!text.isNullOrEmpty()) map[ApiConst.Query.TEXT] = text
         if (categoryId != null) map[ApiConst.Query.CATEGORY_ID] = categoryId.toString()
         if (cityId != null) map[ApiConst.Query.CITY_ID] = cityId.toString()
 
-        apiService.searchOrders(
+        apiService.searchOrdersForProvider(
             page,
             map,
             getAuthorizationHeader()
         )
     }
 
-    suspend fun getOrders(
-        status: OrdersCategory,
+    suspend fun searchOrdersForUser(
         text: String?,
         categoryId: Int?,
         cityId: Int?,
         page: Int,
-    ) = safeApiCall {
+    ): MAResult.Immediate<MABaseResponse<ResponseForUserOrders>> = safeApiCall {
         val map = mutableMapOf<String, String>()
         if (!text.isNullOrEmpty()) map[ApiConst.Query.TEXT] = text
         if (categoryId != null) map[ApiConst.Query.CATEGORY_ID] = categoryId.toString()
         if (cityId != null) map[ApiConst.Query.CITY_ID] = cityId.toString()
 
-        apiService.getOrders(
+        apiService.searchOrdersForUser(
+            page,
+            map,
+            getAuthorizationHeader()
+        )
+    }
+
+    suspend fun getOrdersForProvider(
+        status: OrdersCategory,
+        text: String?,
+        categoryId: Int?,
+        cityId: Int?,
+        page: Int,
+    ): MAResult.Immediate<MABaseResponse<ResponseListOfOrders>> = safeApiCall {
+        val map = mutableMapOf<String, String>()
+        if (!text.isNullOrEmpty()) map[ApiConst.Query.TEXT] = text
+        if (categoryId != null) map[ApiConst.Query.CATEGORY_ID] = categoryId.toString()
+        if (cityId != null) map[ApiConst.Query.CITY_ID] = cityId.toString()
+
+        apiService.getOrdersForProvider(
+            status.apiValue,
+            page,
+            map,
+            getAuthorizationHeader()
+        )
+    }
+
+    suspend fun getOrdersForUser(
+        status: OrdersCategory,
+        text: String?,
+        categoryId: Int?,
+        cityId: Int?,
+        page: Int,
+    ): MAResult.Immediate<MABaseResponse<ResponseForUserOrders>> = safeApiCall {
+        val map = mutableMapOf<String, String>()
+        if (!text.isNullOrEmpty()) map[ApiConst.Query.TEXT] = text
+        if (categoryId != null) map[ApiConst.Query.CATEGORY_ID] = categoryId.toString()
+        if (cityId != null) map[ApiConst.Query.CITY_ID] = cityId.toString()
+
+        apiService.getOrdersForUser(
             status.apiValue,
             page,
             map,

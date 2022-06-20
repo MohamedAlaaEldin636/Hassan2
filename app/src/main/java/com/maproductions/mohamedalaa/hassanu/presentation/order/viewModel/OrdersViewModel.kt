@@ -7,16 +7,13 @@ import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
-import androidx.paging.PagingDataAdapter
 import com.google.gson.Gson
 import com.maproductions.mohamedalaa.hassanu.presentation.order.adapters.RVItemOrderCurrent
 import com.maproductions.mohamedalaa.hassanu.presentation.order.adapters.RVItemOrderFinished
 import com.maproductions.mohamedalaa.hassanu.presentation.order.adapters.RVItemOrderPending
 import com.maproductions.mohamedalaa.shared.core.customTypes.OrdersCategory
-import com.maproductions.mohamedalaa.shared.core.customTypes.map
 import com.maproductions.mohamedalaa.shared.core.extensions.findNavControllerOfProject
 import com.maproductions.mohamedalaa.shared.core.extensions.navigateDeepLinkWithOptions
-import com.maproductions.mohamedalaa.shared.data.home.repository.RepoHome
 import com.maproductions.mohamedalaa.shared.data.orders.repository.RepoOrder
 import com.maproductions.mohamedalaa.shared.domain.orders.OrdersFilter
 import com.maproductions.mohamedalaa.shared.domain.orders.orEmpty
@@ -24,7 +21,6 @@ import com.maproductions.mohamedalaa.shared.domain.search.SearchType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,7 +39,7 @@ class OrdersViewModel @Inject constructor(
     val adapterFinished = RVItemOrderFinished(gson)
 
     val ordersPending = filters.asFlow().flatMapLatest {
-        repoOrder.getOrders(
+        repoOrder.getOrdersForUser(
             OrdersCategory.PENDING,
             it?.search?.substringBefore(" "),
             it?.categoryId,
@@ -51,7 +47,7 @@ class OrdersViewModel @Inject constructor(
         )
     }
     val ordersCurrent = filters.asFlow().flatMapLatest {
-        repoOrder.getOrders(
+        repoOrder.getOrdersForUser(
             OrdersCategory.CURRENT,
             it?.search?.substringBefore(" "),
             it?.categoryId,
@@ -59,7 +55,7 @@ class OrdersViewModel @Inject constructor(
         )
     }
     val ordersFinished = filters.asFlow().flatMapLatest {
-        repoOrder.getOrders(
+        repoOrder.getOrdersForUser(
             OrdersCategory.FINISHED,
             it?.search?.substringBefore(" "),
             it?.categoryId,

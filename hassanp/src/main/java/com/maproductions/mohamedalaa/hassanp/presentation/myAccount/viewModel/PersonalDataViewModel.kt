@@ -48,6 +48,7 @@ class PersonalDataViewModel @Inject constructor(
     var imageType = RegisterFormViewModel.ImageType.ID_FRONT
         private set
 
+    // todo can be profile as well fa rakkez y kber isa.
     fun pickImage(view: View, imageType: RegisterFormViewModel.ImageType) {
         this.imageType = imageType
 
@@ -77,7 +78,7 @@ class PersonalDataViewModel @Inject constructor(
     }
 
     fun send(view: View) {
-        // todo
+        // todo w mtnsash on success navUp + toast sent successfully isa.
     }
 
 }

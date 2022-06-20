@@ -8,10 +8,10 @@ import android.os.CountDownTimer
 import android.view.View
 import androidx.fragment.app.findFragment
 import androidx.lifecycle.*
-import com.maproductions.mohamedalaa.hassanp.R
 import com.maproductions.mohamedalaa.hassanp.presentation.home.HomeFragment
 import com.maproductions.mohamedalaa.hassanp.presentation.home.adapters.RVItemOrderInHome
 import com.maproductions.mohamedalaa.shared.core.customTypes.OrdersCategory
+import com.maproductions.mohamedalaa.shared.core.customTypes.RetryAbleFlow
 import com.maproductions.mohamedalaa.shared.core.extensions.*
 import com.maproductions.mohamedalaa.shared.R as SR
 import com.maproductions.mohamedalaa.shared.data.auth.repository.RepoAuth
@@ -22,8 +22,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapLatest
-import timber.log.Timber
-import java.time.Instant
 import java.time.LocalTime
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -31,7 +29,6 @@ import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
-import kotlin.time.toJavaDuration
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -49,8 +46,10 @@ class HomeViewModel @Inject constructor(
 
     val search = MutableLiveData("")
 
+    val retryAbleFlowAllStatuses = RetryAbleFlow(repoOrder::getAllStatuses)
+
     val orders = search.asFlow().flatMapLatest {
-        repoOrder.getOrders(
+        repoOrder.getOrdersForProvider(
             OrdersCategory.PENDING,
             it.orEmpty(),
         )
@@ -64,8 +63,7 @@ class HomeViewModel @Inject constructor(
         myApp.getString(res, it.orEmpty())
     }
 
-    //val stopReceivingOrders = providerData.asLiveData().map { it?.stopReceivingOrders }
-    /** Ex. -> ( 04 : 45 : 12 ) */ // todo should be from api as long as tracking as well isa. then use activity view model and add list isa.
+    /** Ex. -> ( 04 : 45 : 12 ) */
     val timeToReceiveOrdersAfter = MutableLiveData("")
 
     fun clearSearchFilter() = View.OnClickListener {
@@ -105,13 +103,13 @@ class HomeViewModel @Inject constructor(
     }
 
     /** @param hours `0` means until i turn it back on isa. */
-    fun stopReceivingOrders(hours: Int) {
-        if (hours == 0) {
+    fun stopReceivingOrders(hours: Long, minutes: Long = 0L, seconds: Long = 0L) {
+        if (hours == 0L && minutes == 0L && seconds == 0L) {
             timer?.cancel()
 
             timeToReceiveOrdersAfter.value = "   "
         }else {
-            initiateTimer(hours.toLong(), 0L, 0L)
+            initiateTimer(hours, minutes, seconds)
         }
     }
 

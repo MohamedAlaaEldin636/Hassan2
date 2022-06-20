@@ -144,6 +144,19 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun startTrackingOrders(ordersIds: List<Int>, listener: Listener) {
+        Timber.e("abc333 ordersIds $ordersIds")
+
+        val oldSize = listOfOrdersIdsForTracking.size
+        listOfOrdersIdsForTracking.addAll(ordersIds)
+
+        Timber.e("abc333 listOfOrdersIdsForTracking from ordersIds $listOfOrdersIdsForTracking")
+
+        if (listOfOrdersIdsForTracking.size != oldSize) {
+            checkIfShouldRequestLocationUpdates(listener)
+        }
+    }
+
     fun checkIfShouldRequestLocationUpdates(listener: Listener) {
         if (listOfOrdersIdsForTracking.size > 0) {
             listener.startLocationTrackingAfterCheckingPermissions()

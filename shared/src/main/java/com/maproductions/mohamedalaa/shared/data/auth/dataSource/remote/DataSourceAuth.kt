@@ -22,7 +22,7 @@ class DataSourceAuth @Inject constructor(
 
         // 0 means can get orders, so only 1 means get hours isa.
         apiService.toggleCanReceiveOrders(
-            if (canReceive) 0 else 1,
+            if (canReceive) 1 else 0,
             map,
             getAuthorizationHeader()
         )

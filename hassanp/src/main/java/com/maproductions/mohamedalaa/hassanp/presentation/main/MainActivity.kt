@@ -101,6 +101,14 @@ class MainActivity : SharedMainActivity(), MainViewModel.Listener, LocationHandl
         }
     }
 
+    fun trackOrders(ordersIds: List<Int>) {
+        if (ordersIds.isEmpty()) {
+            return
+        }
+
+        viewModel.startTrackingOrders(ordersIds, this)
+    }
+
     private lateinit var locationHandler: LocationHandler
 
     override fun setupsInOnCreate() {

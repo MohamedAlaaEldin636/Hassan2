@@ -8,6 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.maproductions.mohamedalaa.hassanp.R
 import com.maproductions.mohamedalaa.hassanp.databinding.FragmentHomeBinding
@@ -16,6 +18,7 @@ import com.maproductions.mohamedalaa.hassanp.presentation.main.MainActivity
 import com.maproductions.mohamedalaa.hassanp.presentation.order.OrderDetailsFragment
 import com.maproductions.mohamedalaa.shared.core.customTypes.PusherUtils
 import com.maproductions.mohamedalaa.shared.core.extensions.*
+import com.maproductions.mohamedalaa.shared.domain.splash.SplashInitialLaunch
 import com.maproductions.mohamedalaa.shared.presentation.base.MABaseFragment
 import com.maproductions.mohamedalaa.shared.presentation.search.SearchQueriesFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,8 +61,6 @@ class HomeFragment : MABaseFragment<FragmentHomeBinding>() {
         binding?.viewModel = viewModel
     }
 
-    // todo will be changed to have 2 more flags orders_flag and approved == 2 meaning u have to
-    //  ffreeze account so see login view model kda isa,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         channelEvent.subscribe()
 
@@ -84,7 +85,7 @@ class HomeFragment : MABaseFragment<FragmentHomeBinding>() {
             viewLifecycleOwner,
             { it != null }
         ) {
-            viewModel.stopReceivingOrders(it.orZero())
+            viewModel.stopReceivingOrders(it.orZero().toLong())
         }
 
         savedStateHandle?.actOnGetIfNotInitialValueOrGetLiveData(
@@ -103,6 +104,40 @@ class HomeFragment : MABaseFragment<FragmentHomeBinding>() {
             { it == true }
         ) {
             viewModel.adapter.refresh()
+        }
+
+        handleRetryAbleFlowWithMustHaveResultWithNullability(viewModel.retryAbleFlowAllStatuses) { response ->
+            // Check suspended account flag
+            if (response.data?.isSuspendedAccount == true) {
+                viewModel.viewModelScope.launch {
+                    prefsSplash.setInitialLaunch(SplashInitialLaunch.PROVIDER_ACCOUNT_SUSPENDED)
+
+                    val navController = findNavController()
+
+                    navController.popAllBackStacks()
+
+                    navController.navigateDeepLinkWithOptions(
+                        "fragment-dest",
+                        "com.grand.hassan.shared.provider.bottom.nav.suspend.account",
+                        paths = arrayOf(true.toString())
+                    )
+                }
+
+                return@handleRetryAbleFlowWithMustHaveResultWithNullability
+            }
+
+            // Check orders flag isa.
+            val countDown = response.data?.getHoursAndMinutesAndSeconds()
+            if (countDown != null) {
+                viewModel.stopReceivingOrders(countDown.first, countDown.second, countDown.third)
+            }else if (response.data?.ordersFlag == 0) {
+                viewModel.stopReceivingOrders(0L)
+            }
+
+            // Check on the way orders
+            (activity as? MainActivity)?.trackOrders(
+                response.data?.onTheWayOrders?.map { it.id }.orEmpty()
+            )
         }
     }
 

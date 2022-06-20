@@ -1,14 +1,12 @@
 package com.maproductions.mohamedalaa.shared.data.orders.repository
 
+import androidx.paging.PagingData
 import com.maproductions.mohamedalaa.shared.core.customTypes.*
 import com.maproductions.mohamedalaa.shared.core.extensions.flowInitialLoadingWithMinExecutionTime
-import com.maproductions.mohamedalaa.shared.data.home.dataSource.remote.DataSourceHome
 import com.maproductions.mohamedalaa.shared.data.orders.dataSource.remote.DataSourceOrder
 import com.maproductions.mohamedalaa.shared.domain.home.RequestServiceWithCount
-import com.maproductions.mohamedalaa.shared.domain.home.ResponseHomeUser
-import com.maproductions.mohamedalaa.shared.domain.orders.ItemCancellationReason
-import com.maproductions.mohamedalaa.shared.domain.orders.ResponseAdditionalServices
-import com.maproductions.mohamedalaa.shared.domain.orders.ResponseOrderDetails
+import com.maproductions.mohamedalaa.shared.domain.orders.*
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class RepoOrder @Inject constructor(
@@ -23,34 +21,59 @@ class RepoOrder @Inject constructor(
         emit(dataSource.getAdditionalServices(orderId))
     }
 
-    fun searchOrders(
+    fun searchOrdersForUser(
         query: String,
-    ) = BasePaging.createFlowViaPager {
+    ): Flow<PagingData<ResponseOrder>> = BasePaging.createFlowViaPager {
         if (query.isNotEmpty()) {
-            dataSource.searchOrders(query, null, null, it)
+            dataSource.searchOrdersForUser(query, null, null, it).mapImmediate { response ->
+                MABaseResponse(response.data?.orders, response.message, response.code)
+            }
         }else {
             MAResult.Success(MABaseResponse(MABasePaging(emptyList()), "", 200))
         }
     }
 
-    fun searchOrders(
+    fun searchOrdersForProvider(
         ordersCategory: OrdersCategory,
         query: String,
-    ) = BasePaging.createFlowViaPager {
+    ): Flow<PagingData<ResponseOrder>> = BasePaging.createFlowViaPager {
         if (query.isNotEmpty()) {
-            dataSource.getOrders(ordersCategory, query, null, null, it)
+            dataSource.getOrdersForProvider(ordersCategory, query, null, null, it).mapImmediate { response ->
+                MABaseResponse(response.data?.orders, response.message, response.code)
+            }
         }else {
             MAResult.Success(MABaseResponse(MABasePaging(emptyList()), "", 200))
         }
     }
 
-    fun getOrders(
+    fun getOrdersForProvider(
         status: OrdersCategory,
         text: String? = null,
         categoryId: Int? = null,
         cityId: Int? = null,
-    ) = BasePaging.createFlowViaPager {
-        dataSource.getOrders(status, text, categoryId, cityId, it)
+    ): Flow<PagingData<ResponseOrder>> = BasePaging.createFlowViaPager {
+        dataSource.getOrdersForProvider(status, text, categoryId, cityId, it).mapImmediate { response ->
+            MABaseResponse(response.data?.orders, response.message, response.code)
+        }
+    }
+
+    fun getOrdersForUser(
+        status: OrdersCategory,
+        text: String? = null,
+        categoryId: Int? = null,
+        cityId: Int? = null,
+    ): Flow<PagingData<ResponseOrder>> = BasePaging.createFlowViaPager {
+        dataSource.getOrdersForUser(status, text, categoryId, cityId, it).mapImmediate { response ->
+            MABaseResponse(response.data?.orders, response.message, response.code)
+        }
+    }
+
+    fun getAllStatuses() = flowInitialLoadingWithMinExecutionTime<MABaseResponse<ResponseListOfOrders>> {
+        emit(
+            dataSource.getOrdersForProvider(
+                OrdersCategory.PENDING, null, null, null, 1
+            )
+        )
     }
 
     suspend fun cancelOrder(id: Int) = dataSource.updateStatusForOrder(id, ApiOrderStatus.CANCELLED)

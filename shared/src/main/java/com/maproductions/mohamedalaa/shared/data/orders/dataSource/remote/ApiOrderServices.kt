@@ -5,10 +5,7 @@ import com.maproductions.mohamedalaa.shared.core.customTypes.MABasePaging
 import com.maproductions.mohamedalaa.shared.core.customTypes.MABaseResponse
 import com.maproductions.mohamedalaa.shared.data.api.ApiConst
 import com.maproductions.mohamedalaa.shared.domain.home.ResponseHomeUser
-import com.maproductions.mohamedalaa.shared.domain.orders.ItemCancellationReason
-import com.maproductions.mohamedalaa.shared.domain.orders.ResponseAdditionalServices
-import com.maproductions.mohamedalaa.shared.domain.orders.ResponseOrder
-import com.maproductions.mohamedalaa.shared.domain.orders.ResponseOrderDetails
+import com.maproductions.mohamedalaa.shared.domain.orders.*
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody
@@ -28,19 +25,34 @@ interface ApiOrderServices {
     ): MABaseResponse<ResponseAdditionalServices>
 
     @GET("orders")
-    suspend fun getOrders(
+    suspend fun getOrdersForProvider(
         @Query(ApiConst.Query.STATUS) status: String,
         @Query(ApiConst.Query.PAGE) page: Int,
         @QueryMap queryMap: Map<String, String>,
         @HeaderMap headerMap: Map<String, String>,
-    ): MABaseResponse<MABasePaging<ResponseOrder>>
+    ): MABaseResponse<ResponseListOfOrders>
 
     @GET("orders")
-    suspend fun searchOrders(
+    suspend fun getOrdersForUser(
+        @Query(ApiConst.Query.STATUS) status: String,
         @Query(ApiConst.Query.PAGE) page: Int,
         @QueryMap queryMap: Map<String, String>,
         @HeaderMap headerMap: Map<String, String>,
-    ): MABaseResponse<MABasePaging<ResponseOrder>>
+    ): MABaseResponse<ResponseForUserOrders>
+
+    @GET("orders")
+    suspend fun searchOrdersForProvider(
+        @Query(ApiConst.Query.PAGE) page: Int,
+        @QueryMap queryMap: Map<String, String>,
+        @HeaderMap headerMap: Map<String, String>,
+    ): MABaseResponse<ResponseListOfOrders>
+
+    @GET("orders")
+    suspend fun searchOrdersForUser(
+        @Query(ApiConst.Query.PAGE) page: Int,
+        @QueryMap queryMap: Map<String, String>,
+        @HeaderMap headerMap: Map<String, String>,
+    ): MABaseResponse<ResponseForUserOrders>
 
     @Multipart
     @POST("orders/{${ApiConst.Query.ID}}")

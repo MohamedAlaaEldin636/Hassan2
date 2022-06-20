@@ -49,7 +49,7 @@
 
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="@{v -> viewModel.pickImage(v)}"
+                    android:onClick="@{v -> viewModel.pickImage(v, TypeImage2.PROFILE)}"
 
                     app:cardCornerRadius="200dp"
 
