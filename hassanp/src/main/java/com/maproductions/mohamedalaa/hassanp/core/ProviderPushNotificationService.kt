@@ -63,6 +63,19 @@ class ProviderPushNotificationService : MyPushNotificationService() {
                     )
                     .createPendingIntent()
             }
+            NotificationType.COMPLETE_PROFILE -> {
+                NavDeepLinkBuilder(this)
+                    .setGraph(R.navigation.nav_main)
+                    .setDestination(
+                        R.id.dest_provider_bottom_nav,
+                        ProviderBottomNavFragmentArgs(
+                            startDestinationId = R.id.dest_my_account,
+                            suspendAccount = true
+                        ).toBundle()
+                    )
+                    .addDestination(R.id.dest_personal_data)
+                    .createPendingIntent()
+            }
         }
     }
 }

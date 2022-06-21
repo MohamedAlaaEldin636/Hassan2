@@ -33,6 +33,9 @@ object NotificationsUtils {
     private const val MESSAGE_DETAILS_CHANNEL_ID = "MESSAGE_DETAILS_CHANNEL_ID"
     private const val MESSAGE_DETAILS_NOTIFICATION_ID = 52
 
+    private const val COMPLETE_PROFILE_CHANNEL_ID = "MESSAGE_DETAILS_CHANNEL_ID"
+    private const val COMPLETE_PROFILE_NOTIFICATION_ID = 59
+
     fun getMainActivityPendingIntent(applicationContext: Context): PendingIntent {
         val intent = Intent(applicationContext, StaticValues.mainActivityClazz)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -77,6 +80,11 @@ object NotificationsUtils {
                 MESSAGE_DETAILS_CHANNEL_ID,
                 appContext.getString(R.string.chatting),
                 MESSAGE_DETAILS_NOTIFICATION_ID
+            )
+            NotificationType.COMPLETE_PROFILE -> Triple(
+                COMPLETE_PROFILE_CHANNEL_ID,
+                appContext.getString(R.string.complete_sign_in),
+                COMPLETE_PROFILE_NOTIFICATION_ID
             )
         }
 

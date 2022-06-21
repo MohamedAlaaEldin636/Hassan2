@@ -72,6 +72,10 @@ class UserPushNotificationService : MyPushNotificationService() {
                     )
                     .createPendingIntent()
             }
+            NotificationType.COMPLETE_PROFILE -> {
+                // Should never come to user but just in case just launch MainActivity isa.
+                NotificationsUtils.getMainActivityPendingIntent(applicationContext)
+            }
         }
     }
 

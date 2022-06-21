@@ -18,6 +18,7 @@
     <string name="empty_string"/>
     <string name="waiting_for_admin_approval">فى انتظار موافقة مقدم الخدمة</string>
     <string name="chatting">الدردشة</string>
+    <string name="complete_sign_in">استكمال تسجيل الدخول</string>
     <string name="arrival_is_done">تم الوصول</string>
     <string name="var_accepted_your_request">قام " %1$s " بقبول طلبك</string>
     <string name="good_morning_var">صباح الخير , %1$s</string>

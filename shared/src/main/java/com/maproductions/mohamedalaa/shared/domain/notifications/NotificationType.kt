@@ -6,4 +6,5 @@ enum class NotificationType(val apiValue: String) {
     WALLET("wallet"),
     CONFIRM_ADDITIONAL_SERVICES("confirm-additional-services"),
     MESSAGE("message"),
+    COMPLETE_PROFILE("complete-profile"),
 }
