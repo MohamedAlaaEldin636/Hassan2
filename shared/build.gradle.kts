@@ -76,6 +76,7 @@ dependencies {
     //api("com.github.chintan369:MultiImagePicker:1.0.8")
     //api("gun0912.ted:tedbottompicker:2.0.1")
     //api("com.asksira.android:bsimagepicker:1.3.2")
+    //api("io.github.ParkSangGwon:tedimagepicker:1.2.8")
 
     api("com.facebook.android:facebook-login:13.2.0")
 

@@ -25,7 +25,6 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 import com.maproductions.mohamedalaa.shared.R as SR
 
-
 @AndroidEntryPoint
 class ServiceImageAndDescriptionSelectionFragment : MABaseFragment<FragmentServiceImageAndDescriptionSelectionBinding>() {
 
@@ -158,6 +157,15 @@ class ServiceImageAndDescriptionSelectionFragment : MABaseFragment<FragmentServi
                 .build()
 
             multiSelectionPicker.show(childFragmentManager, "tageee")*/
+
+            /*val context = context ?: return
+
+            TedImagePicker.with(context)
+                .image()
+                .max(12, getString(SR.string.only_12_have_been_picked))
+                .startMultiImage { list ->
+                    viewModel.adapter.addItemsUri(list.take(12))
+                }*/
 
             /*
             For multiple selection see -> https://stackoverflow.com/a/47023265
