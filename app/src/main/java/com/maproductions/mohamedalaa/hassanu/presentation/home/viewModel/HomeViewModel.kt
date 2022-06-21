@@ -52,11 +52,13 @@ class HomeViewModel @Inject constructor(
 
         val locationData = locationData.value
 
-        val (authority, paths) = if (locationData != null) {
+        val (authority, paths) = if (locationData != null && locationData.latitude.isNotEmpty() && locationData.longitude.isNotEmpty()) {
             Pair(
                 "com.grand.hassan.shared.location.selection.all.params",
                 arrayOf(
-                    locationData.latitude, locationData.longitude, true.toString(),
+                    locationData.latitude,
+                    locationData.longitude,
+                    true.toString(),
                     if (args.isGuest) LocationSelectionApiAction.NONE.name else LocationSelectionApiAction.UPDATE_USER_PROFILE.name
                 )
             )
