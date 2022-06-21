@@ -174,7 +174,7 @@
                             android:layout_width="0dp"
                             android:layout_height="0dp"
 
-                            android:src="@drawable/ic_urgent_service"
+                            android:src="@drawable/ic_emergency_2122"
 
                             android:visibility="@{viewModel.currentSelectionIsDateAndTimeNotOrderNow}"
 
