@@ -131,7 +131,11 @@ class PreviousWorksFragment : MABaseFragment<FragmentPreviousWorksBinding>() {
         if (it.resultCode == Activity.RESULT_OK) {
             val uri = it.data?.data ?: return@registerForActivityResult
 
-            viewModel.videoMAImage.value = MAImage.IUri(uri)
+            if (uri.checkSizeAndLengthOfVideo(context ?: return@registerForActivityResult)) {
+                viewModel.videoMAImage.value = MAImage.IUri(uri)
+            }else {
+                context?.showErrorToast(getString(SR.string.max_video_hint))
+            }
         }
     }
 
@@ -141,7 +145,11 @@ class PreviousWorksFragment : MABaseFragment<FragmentPreviousWorksBinding>() {
         if (it.resultCode == Activity.RESULT_OK) {
             val uri = it.data?.data ?: return@registerForActivityResult
 
-            viewModel.videoMAImage.value = MAImage.IUri(uri)
+            if (uri.checkSizeAndLengthOfVideo(context ?: return@registerForActivityResult)) {
+                viewModel.videoMAImage.value = MAImage.IUri(uri)
+            }else {
+                context?.showErrorToast(getString(SR.string.max_video_hint))
+            }
         }
     }
 
