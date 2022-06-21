@@ -14,6 +14,7 @@ import javax.inject.Inject
 import com.google.gson.Gson
 import com.maproductions.mohamedalaa.shared.core.customTypes.OrdersCategory
 import com.maproductions.mohamedalaa.shared.core.extensions.*
+import com.maproductions.mohamedalaa.shared.data.local.preferences.PrefsAccount
 import com.maproductions.mohamedalaa.shared.data.orders.repository.RepoOrder
 import com.maproductions.mohamedalaa.shared.domain.home.DeliveryData
 import com.maproductions.mohamedalaa.shared.domain.home.SliderHomeCategory
@@ -22,6 +23,8 @@ import com.maproductions.mohamedalaa.shared.presentation.search.SearchQueriesFra
 import com.maproductions.mohamedalaa.shared.presentation.search.adapters.RVItemSearchQuery
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 @HiltViewModel
 class SearchQueriesViewModel @Inject constructor(
@@ -30,6 +33,7 @@ class SearchQueriesViewModel @Inject constructor(
     repoShared: RepoShared,
     private val gson: Gson,
     repoOrder: RepoOrder,
+    private val prefsAccount: PrefsAccount,
 ) : AndroidViewModel(application), RVItemSearchQuery.Listener {
 
     val hintText by lazy {
@@ -70,51 +74,63 @@ class SearchQueriesViewModel @Inject constructor(
             SearchType.USER_HOME -> {
                 val category = jsonOfAny.fromJson<SliderHomeCategory>(gson)
 
-                view.findNavControllerOfProject().navigateDeepLinkWithOptions(
-                    "fragment-dest",
-                    "com.grand.hassan.shared.services.selection",
-                    paths = arrayOf(
-                        category.name,
-                        category.id.toString(),
-                        DeliveryData(
-                            category.deliveryFees,
-                            category.orderMinPrice,
-                            category.orderMinPriceForExtra
-                        ).toJson(gson)
+                viewModelScope.launch {
+                    prefsAccount.addSearchCategoriesSuggestions(category)
+
+                    view.findNavControllerOfProject().navigateDeepLinkWithOptions(
+                        "fragment-dest",
+                        "com.grand.hassan.shared.services.selection",
+                        paths = arrayOf(
+                            category.name,
+                            category.id.toString(),
+                            DeliveryData(
+                                category.deliveryFees,
+                                category.orderMinPrice,
+                                category.orderMinPriceForExtra
+                            ).toJson(gson)
+                        )
                     )
-                )
+                }
             }
             SearchType.USER_ORDERS -> {
                 val order = jsonOfAny.fromJson<ResponseOrder>(gson)
 
-                val navController = view.findNavControllerOfProject()
+                viewModelScope.launch {
+                    prefsAccount.addSearchUserOrdersSuggestions(order)
 
-                val provider = order.provider?.let { provider ->
-                    " - ${provider.name} "
-                } ?: " "
+                    val navController = view.findNavControllerOfProject()
 
-                val text = "${order.orderNumber}$provider- ${order.category}"
+                    val provider = order.provider?.let { provider ->
+                        " - ${provider.name} "
+                    } ?: " "
 
-                navController.navigateUp()
+                    val text = "${order.orderNumber}$provider- ${order.category}"
 
-                navController.currentBackStackEntry?.savedStateHandle?.set(
-                    SearchQueriesFragment.SAVED_STATE_TEXT,
-                    text
-                )
+                    navController.navigateUp()
+
+                    navController.currentBackStackEntry?.savedStateHandle?.set(
+                        SearchQueriesFragment.SAVED_STATE_TEXT,
+                        text
+                    )
+                }
             }
             SearchType.PROVIDER_HOME -> {
                 val order = jsonOfAny.fromJson<ResponseOrder>(gson)
 
-                val navController = view.findNavControllerOfProject()
+                viewModelScope.launch {
+                    prefsAccount.addSearchProviderOrdersSuggestions(order)
 
-                val text = "${order.user.name} - ${order.orderNumber}"
+                    val navController = view.findNavControllerOfProject()
 
-                navController.navigateUp()
+                    val text = "${order.user.name} - ${order.orderNumber}"
 
-                navController.currentBackStackEntry?.savedStateHandle?.set(
-                    SearchQueriesFragment.SAVED_STATE_TEXT,
-                    text
-                )
+                    navController.navigateUp()
+
+                    navController.currentBackStackEntry?.savedStateHandle?.set(
+                        SearchQueriesFragment.SAVED_STATE_TEXT,
+                        text
+                    )
+                }
             }
         }
     }

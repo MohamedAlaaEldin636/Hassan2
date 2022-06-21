@@ -3,14 +3,17 @@ package com.maproductions.mohamedalaa.shared.data.orders.repository
 import androidx.paging.PagingData
 import com.maproductions.mohamedalaa.shared.core.customTypes.*
 import com.maproductions.mohamedalaa.shared.core.extensions.flowInitialLoadingWithMinExecutionTime
+import com.maproductions.mohamedalaa.shared.data.local.preferences.PrefsAccount
 import com.maproductions.mohamedalaa.shared.data.orders.dataSource.remote.DataSourceOrder
 import com.maproductions.mohamedalaa.shared.domain.home.RequestServiceWithCount
 import com.maproductions.mohamedalaa.shared.domain.orders.*
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject
 
 class RepoOrder @Inject constructor(
     private val dataSource: DataSourceOrder,
+    private val prefsAccount: PrefsAccount,
 ) {
 
     fun getCancellationReasons() = flowInitialLoadingWithMinExecutionTime<MABaseResponse<List<ItemCancellationReason>>> {
@@ -29,7 +32,9 @@ class RepoOrder @Inject constructor(
                 MABaseResponse(response.data?.orders, response.message, response.code)
             }
         }else {
-            MAResult.Success(MABaseResponse(MABasePaging(emptyList()), "", 200))
+            MAResult.Success(MABaseResponse(MABasePaging(
+                prefsAccount.getSearchUserOrdersSuggestions().firstOrNull().orEmpty()
+            ), "", 200))
         }
     }
 
@@ -42,7 +47,9 @@ class RepoOrder @Inject constructor(
                 MABaseResponse(response.data?.orders, response.message, response.code)
             }
         }else {
-            MAResult.Success(MABaseResponse(MABasePaging(emptyList()), "", 200))
+            MAResult.Success(MABaseResponse(MABasePaging(
+                prefsAccount.getSearchProviderOrdersSuggestions().firstOrNull().orEmpty()
+            ), "", 200))
         }
     }
 
