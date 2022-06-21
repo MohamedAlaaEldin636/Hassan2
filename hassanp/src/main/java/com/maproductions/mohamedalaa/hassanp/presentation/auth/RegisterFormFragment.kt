@@ -119,7 +119,11 @@ class RegisterFormFragment : MABaseFragment<FragmentRegisterFormBinding>() {
         if (it.resultCode == Activity.RESULT_OK) {
             val uri = it.data?.data ?: return@registerForActivityResult
 
-            viewModel.video.value = uri
+            if (uri.checkSizeAndLengthOfVideo(context ?: return@registerForActivityResult)) {
+                viewModel.video.value = uri
+            }else {
+                context?.showErrorToast(getString(SR.string.max_video_hint))
+            }
         }
     }
 
@@ -129,7 +133,11 @@ class RegisterFormFragment : MABaseFragment<FragmentRegisterFormBinding>() {
         if (it.resultCode == Activity.RESULT_OK) {
             val uri = it.data?.data ?: return@registerForActivityResult
 
-            viewModel.video.value = uri
+            if (uri.checkSizeAndLengthOfVideo(context ?: return@registerForActivityResult)) {
+                viewModel.video.value = uri
+            }else {
+                context?.showErrorToast(getString(SR.string.max_video_hint))
+            }
         }
     }
 

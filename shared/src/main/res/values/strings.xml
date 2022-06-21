@@ -281,4 +281,5 @@
     <string name="app_took_percentage">خصم نسبة البرنامج من الطلب</string>
     <string name="because_of">بسبب</string>
     <string name="with_date">بتاريخ</string>
+    <string name="max_video_hint">الفيديو بحد اقصى 15 ثانية</string>
 </resources>

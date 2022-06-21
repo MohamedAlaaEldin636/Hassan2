@@ -4,6 +4,7 @@ import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.provider.MediaStore
 import android.webkit.MimeTypeMap
@@ -78,6 +79,35 @@ private fun Uri.getMimeType(context: Context): String? {
 		MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(File(path ?: return null))?.toString())
 	}
 }
+
+/**
+ * @return true if seconds is 15 or less & 10 mb or less
+ */
+fun Uri.checkSizeAndLengthOfVideo(context: Context): Boolean {
+	val retriever = MediaMetadataRetriever()
+	// use one of overloaded setDataSource() functions to set your data source
+	retriever.setDataSource(context, this)
+	val time = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+	val timeInMilliSeconds = time?.toLongOrNull() ?: 0L
+	val durationTimeInSecond = timeInMilliSeconds / 1000
+
+	if (durationTimeInSecond > 15) {
+		return false
+	}
+
+	// todo -> https://stackoverflow.com/questions/49415012/get-file-size-using-uri-in-android
+	//val fileSize = Integer.parseInt(String.valueOf((volleyFileObject.getFile().length() / 1024) / 1024));
+
+	return true
+}
+
+/*
+
+Timber.e("duration:" + durationTime);
+Timber.e("file length:" + volleyFileObject.getFile().length());
+long fileSize = Integer.parseInt(String.valueOf((volleyFileObject.getFile().length() / 1024) / 1024));
+Log.d(TAG, "file_size_old:" + fileSize);
+ */
 
 /*
 	public static String getNameOfPdfUriAndCheckSize(Context context, Uri uri) {
