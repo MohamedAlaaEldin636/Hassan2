@@ -97,6 +97,7 @@ fun Uri.checkSizeAndLengthOfVideo(context: Context): Boolean {
 
 	// todo -> https://stackoverflow.com/questions/49415012/get-file-size-using-uri-in-android
 	//val fileSize = Integer.parseInt(String.valueOf((volleyFileObject.getFile().length() / 1024) / 1024));
+	// https://stackoverflow.com/a/67251625
 
 	return true
 }
