@@ -65,6 +65,12 @@
             style="@style/Widget.MaterialComponents.Button"
             android:textAppearance="@style/TextTajawalMedium16"
 
+            android:padding="4dp"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMaxTextSize="16sp"
+            android:maxLines="1"
+
+            tools:text="yes cancel order cancel order"
             android:text="@string/yes_cancel_order"
             android:textColor="@android:color/black"
 
@@ -87,6 +93,11 @@
 
             style="@style/Widget.MaterialComponents.Button"
             android:textAppearance="@style/TextTajawalMedium16"
+
+            android:padding="4dp"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMaxTextSize="16sp"
+            android:maxLines="1"
 
             android:text="@string/no_back"
             android:textColor="@android:color/white"
