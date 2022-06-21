@@ -178,7 +178,7 @@
 
                             android:visibility="@{viewModel.currentSelectionIsDateAndTimeNotOrderNow}"
 
-                            app:layout_constraintWidth_percent="0.3"
+                            app:layout_constraintWidth_percent="0.4"
                             app:layout_constraintDimensionRatio="1:1"
 
                             app:layout_constraintHorizontal_bias="1"
