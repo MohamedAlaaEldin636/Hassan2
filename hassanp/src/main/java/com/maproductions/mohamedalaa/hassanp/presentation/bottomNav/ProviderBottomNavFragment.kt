@@ -114,6 +114,8 @@ class ProviderBottomNavFragment : BottomNavFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         activityViewModel?.getNotificationsCount(this, false) {
+            Timber.e("count of notification is ${it.data}")
+
             lifecycleScope.launch {
                 prefsAccount.setNotificationsCount(it.data.orZero())
             }

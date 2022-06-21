@@ -148,6 +148,8 @@ class UserBottomNavFragment : BottomNavFragment() {
         channelEvent?.subscribe()
 
         activityViewModel?.getNotificationsCount(this, args.isGuest) {
+            Timber.e("count of notification is ${it.data}")
+
             lifecycleScope.launch {
                 prefsAccount.setNotificationsCount(it.data.orZero())
             }
