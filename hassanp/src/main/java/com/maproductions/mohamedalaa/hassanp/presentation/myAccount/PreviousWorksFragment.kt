@@ -64,7 +64,7 @@ class PreviousWorksFragment : MABaseFragment<FragmentPreviousWorksBinding>() {
             val uri = bitmap.getUriFromBitmapRetrievedByCamera(requireContext())
 
             val images = listOf(MAImage.IUri(uri))
-            viewModel.images.value = images
+            viewModel.images.value = viewModel.images.value.orEmpty() + images
             viewModel.adapter.addList(
                 images.map { maImage -> ItemUri(-1, maImage) }
             )
@@ -87,15 +87,19 @@ class PreviousWorksFragment : MABaseFragment<FragmentPreviousWorksBinding>() {
                 return@registerForActivityResult
             }
 
-            if (list.size > 12) {
+            if (list.size + viewModel.adapter.itemCount > 12) {
                 context?.showNormalToast(getString(com.maproductions.mohamedalaa.shared.R.string.only_12_have_been_picked))
             }
 
-            val images = list.take(12).map { uri -> MAImage.IUri(uri) }
-            viewModel.images.value = images
-            viewModel.adapter.addList(
-                images.map { maImage -> ItemUri(-1, maImage) }
-            )
+            val amountToTake = 12 - viewModel.adapter.itemCount
+
+            if (amountToTake > 0) {
+                val images = list.take(amountToTake).map { uri -> MAImage.IUri(uri) }
+                viewModel.images.value = viewModel.images.value.orEmpty() + images
+                viewModel.adapter.addList(
+                    images.map { maImage -> ItemUri(-1, maImage) }
+                )
+            }
         }
     }
 

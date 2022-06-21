@@ -80,11 +80,15 @@ class ServiceImageAndDescriptionSelectionFragment : MABaseFragment<FragmentServi
                 return@registerForActivityResult
             }
 
-            if (list.size > 12) {
+            if (/*list.size > 12 || */viewModel.adapter.currentList.size + list.size > 12) {
                 context?.showNormalToast(getString(SR.string.only_12_have_been_picked))
             }
 
-            viewModel.adapter.addItemsUri(list.take(12))
+            val amountToTake = 12 - viewModel.adapter.currentList.size
+
+            if (amountToTake > 0) {
+                viewModel.adapter.addItemsUri(list.take(amountToTake))
+            }
         }
     }
 

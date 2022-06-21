@@ -13,9 +13,11 @@ import com.maproductions.mohamedalaa.hassanu.presentation.service.ServiceImageAn
 import com.maproductions.mohamedalaa.hassanu.presentation.service.ServiceImageAndDescriptionSelectionFragmentArgs
 import com.maproductions.mohamedalaa.hassanu.presentation.service.ServiceImageAndDescriptionSelectionFragmentDirections
 import com.maproductions.mohamedalaa.hassanu.presentation.settings.PersonalDataFragment
+import com.maproductions.mohamedalaa.shared.R
 import com.maproductions.mohamedalaa.shared.core.customTypes.MAImage
 import com.maproductions.mohamedalaa.shared.core.extensions.dpToPx
 import com.maproductions.mohamedalaa.shared.core.extensions.myApp
+import com.maproductions.mohamedalaa.shared.core.extensions.showNormalToast
 import com.maproductions.mohamedalaa.shared.core.extensions.toJson
 import com.maproductions.mohamedalaa.shared.data.api.ApiConst
 import com.maproductions.mohamedalaa.shared.presentation.base.adapters.RVItemImageRect
@@ -35,7 +37,11 @@ class ServiceImageAndDescriptionSelectionViewModel @Inject constructor(
     val description = MutableLiveData("")
 
     fun uploadImages(view: View) {
-        view.findFragment<ServiceImageAndDescriptionSelectionFragment>().pickImageOrRequestPermissions()
+        if (adapter.currentList.size == 12) {
+            myApp.showNormalToast(myApp.getString(R.string.only_12_have_been_picked))
+        }else {
+            view.findFragment<ServiceImageAndDescriptionSelectionFragment>().pickImageOrRequestPermissions()
+        }
     }
 
     fun next(view: View) {
