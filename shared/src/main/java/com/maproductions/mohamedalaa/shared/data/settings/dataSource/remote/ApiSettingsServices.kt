@@ -87,12 +87,13 @@ interface ApiSettingsServices {
     suspend fun addAddress(
         @Field(ApiConst.Query.TITLE) title: String,
         @Field(ApiConst.Query.STREET_NAME) streetName: String,
-        @Field(ApiConst.Query.EXTRA_DESCRIPTION) extraDescription: String,
+        //@Field(ApiConst.Query.EXTRA_DESCRIPTION) extraDescription: String,
         @Field(ApiConst.Query.LATITUDE) latitude: String,
         @Field(ApiConst.Query.LONGITUDE) longitude: String,
         @Field(ApiConst.Query.ADDRESS) address: String,
         @Field(ApiConst.Query.CITY_ID) cityId: Int,
         @Field(ApiConst.Query.AREA_ID) areaId: Int,
+        @FieldMap map: Map<String, String>,
         @HeaderMap headerMap: Map<String, String>,
     ): MABaseResponse<Any>
 

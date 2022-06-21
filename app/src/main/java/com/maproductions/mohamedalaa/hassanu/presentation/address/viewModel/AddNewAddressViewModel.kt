@@ -68,7 +68,7 @@ class AddNewAddressViewModel @Inject constructor(
 
     fun addAddress(view: View) {
         if (addressName.value.isNullOrEmpty() || streetName.value.isNullOrEmpty()
-            || extraDescription.value.isNullOrEmpty()) {
+            /*|| extraDescription.value.isNullOrEmpty()*/) {
             return view.context.showErrorToast(view.context.getString(SR.string.all_fields_required))
         }
 
