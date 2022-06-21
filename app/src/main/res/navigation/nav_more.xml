@@ -28,11 +28,12 @@
     <fragment
         android:id="@+id/dest_get_discounts"
         android:name="com.maproductions.mohamedalaa.hassanu.presentation.settings.GetDiscountsFragment"
-        tools:layout="@layout/fragment_get_discounts" >
+        android:label="@string/send_and_win"
+        tools:layout="@layout/fragment_get_discounts">
         <deepLink
             android:id="@+id/deep_link_dest_get_discounts"
             android:autoVerify="true"
-            app:uri="fragment-dest://com.grand.hassan.user.get.discounts"/>
+            app:uri="fragment-dest://com.grand.hassan.user.get.discounts" />
         <action
             android:id="@+id/action_dest_get_discounts_to_dest_get_discount_code_dialog"
             app:destination="@id/dest_get_discount_code_dialog" />

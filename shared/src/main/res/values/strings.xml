@@ -29,6 +29,7 @@
     <string name="nav_app_bar_open_drawer_description_1">افتح القائمة</string>
     <string name="nav_app_bar_navigate_up_description_1">الرجوع للخلف</string>
     <string name="something_went_wrong">حدث خطأ ما</string>
+    <string name="send_and_win">ارسل وأكسب</string>
     <string name="date_ensure">تاكد من تاريخ الميلاد</string>
     <string name="determination_min_one_hour">التحديد على الاقل يجب ان يكون ساعة من الان</string>
     <string name="retry">إعادة المحاولة</string>

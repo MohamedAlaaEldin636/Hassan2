@@ -78,7 +78,16 @@ abstract class SharedMainActivity : MABaseActivity<ActivityMainBinding>() {
 
     protected abstract val destinationsShowNotificationIcon: Set<Int>
     private val allDestinationsShowNotificationIcon by lazy {
-        destinationsShowNotificationIcon
+        destinationsShowNotificationIcon/* + setOf(
+
+        )*/
+    }
+
+    protected open val notCenteredTitleToolbarDestinations: Set<Int> = emptySet()
+    private val allNotCenteredTitleToolbarDestinations by lazy {
+        notCenteredTitleToolbarDestinations/* + setOf(
+
+        )*/
     }
 
     protected abstract val pusherInterests: Set<String>
@@ -146,6 +155,15 @@ abstract class SharedMainActivity : MABaseActivity<ActivityMainBinding>() {
                         (binding?.materialToolbar?.navigationIcon as? DrawerArrowDrawable)?.color = color
                         binding?.materialToolbar?.setTitleTextColor(color)
                         binding?.materialToolbar?.background = drawable
+                    }
+                }
+
+                if (destination.id !in destinationsIgnoreToolbarVisibility) {
+                    binding?.materialToolbar?.post {
+                        val newValue = destination.id !in allNotCenteredTitleToolbarDestinations
+                        if (binding?.materialToolbar?.isTitleCentered != newValue) {
+                            binding?.materialToolbar?.isTitleCentered = newValue
+                        }
                     }
                 }
             }

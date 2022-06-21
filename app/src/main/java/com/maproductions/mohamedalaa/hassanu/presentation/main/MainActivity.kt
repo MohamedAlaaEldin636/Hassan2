@@ -45,4 +45,8 @@ class MainActivity : SharedMainActivity() {
         "users",
     )
 
+    override val notCenteredTitleToolbarDestinations = setOf(
+        R.id.dest_get_discounts,
+    )
+
 }

@@ -153,6 +153,7 @@
     <string name="num_point">%1$d نقطة</string>
     <string name="address_details">تفاصيل العنوان</string>
     <string name="discount_codes">أكواد الخصم</string>
+    <string name="send_and_win">ارسل وأكسب</string>
     <string name="get_discount_3">ارسل الرابط الخاص بك الي أصدقائك وعند استخدامهم التطبيق عن طريق الرابط الخاص بك ستحصل علي ؟ نقطه عن كل شخص</string>
     <string name="get_discount_3_var">ارسل الرابط الخاص بك الي أصدقائك وعند استخدامهم التطبيق عن طريق الرابط الخاص بك ستحصل علي %1$s نقطه عن كل شخص</string>
     <string name="get_discount_4">في نظام الدعوات لا يسمح بأرسال أكثر من دعوة لنفس الشخص أكثر من مره , يرجي تجنب ذلك لتفادي إيقاف الحساب من النظام تلقائياً , تطبق الشروط والاحكام</string>
