@@ -54,9 +54,9 @@
                 android:focusable="true"
                 android:onClick="@{v -> activityViewModel.onNotificationsClick(v)}"
 
-                android:padding="4dp"
+                android:padding="8dp"
 
-                tools:src="@drawable/ic_notification"
+                tools:src="@drawable/ic_notification_new_data"
                 android:src="@{activityViewModel.menuItemNotificationsVisibility == MenuItemVisibility.SHOW ? @drawable/ic_notification : @drawable/ic_notification_new_data}"
 
                 android:layout_marginEnd="16dp"
@@ -278,20 +278,23 @@
 
                 tools:ignore="ContentDescription" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
-                app:layout_constraintWidth_percent="0.45"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintWidth_percent="0.55"
 
                 style="@style/TextTajawalBold18"
 
                 android:text="@string/become_provider"
-                tools:text="الاشتراك كمقدم خدمة الاشتراك كمقدم خدمةالاشتراك كمقدم خدمة"
+                tools:text="الاشتراك كمقدم خدمة الاشتراك "
 
                 android:gravity="center"
-                android:maxLines="2"
+                android:maxLines="1"
                 android:ellipsize="end"
+
+                app:autoSizeTextType="uniform"
 
                 app:layout_constraintTop_toTopOf="@id/providerImageView"
                 app:layout_constraintBottom_toBottomOf="@id/providerImageView"
