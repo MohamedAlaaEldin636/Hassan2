@@ -12,10 +12,7 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.maproductions.mohamedalaa.hassanu.R
-import com.maproductions.mohamedalaa.shared.R as SR
 import com.maproductions.mohamedalaa.hassanu.databinding.FragmentServiceImageAndDescriptionSelectionBinding
 import com.maproductions.mohamedalaa.hassanu.presentation.service.viewModel.ServiceImageAndDescriptionSelectionViewModel
 import com.maproductions.mohamedalaa.shared.core.extensions.checkSelfPermissionGranted
@@ -26,6 +23,8 @@ import com.maproductions.mohamedalaa.shared.presentation.base.MABaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 import java.util.*
+import com.maproductions.mohamedalaa.shared.R as SR
+
 
 @AndroidEntryPoint
 class ServiceImageAndDescriptionSelectionFragment : MABaseFragment<FragmentServiceImageAndDescriptionSelectionBinding>() {
@@ -133,6 +132,33 @@ class ServiceImageAndDescriptionSelectionFragment : MABaseFragment<FragmentServi
             activityResultImageCamera.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
         }else {
             // From gallery
+            /*MultiImagePicker.with(this)
+                .setSelectionLimit(12)
+                .open()*/
+
+            /*TedBottomPicker.with()
+                .setSelectMaxCount(12)
+                .showTitle(false)
+                //.setCompleteButtonText("Done")
+                //.setEmptySelectionText("No Select")
+                //.setSelectedUriList(selectedUriList)
+                .showMultiImage {
+                    // here is selected image uri list
+                }*/
+
+            /*val multiSelectionPicker = BSImagePicker.Builder("com.yourdomain.yourpackage.fileprovider")
+                .isMultiSelect //Set this if you want to use multi selection mode.
+                //.setMinimumMultiSelectCount(3) //Default: 1.
+                .setMaximumMultiSelectCount(12) //Default: Integer.MAX_VALUE (i.e. User can select as many images as he/she wants)
+                //.setMultiSelectBarBgColor(android.R.color.white) //Default: #FFFFFF. You can also set it to a translucent color.
+                //.setMultiSelectTextColor(R.color.primary_text) //Default: #212121(Dark grey). This is the message in the multi-select bottom bar.
+                //.setMultiSelectDoneTextColor(R.color.colorAccent) //Default: #388e3c(Green). This is the color of the "Done" TextView.
+                //.setOverSelectTextColor(R.color.error_text) //Default: #b71c1c. This is the color of the message shown when user tries to select more than maximum select count.
+                //.disableOverSelectionMessage() //You can also decide not to show this over select message.
+                .build()
+
+            multiSelectionPicker.show(childFragmentManager, "tageee")*/
+
             /*
             For multiple selection see -> https://stackoverflow.com/a/47023265
              */
@@ -143,6 +169,23 @@ class ServiceImageAndDescriptionSelectionFragment : MABaseFragment<FragmentServi
             activityResultImageGallery.launch(intent)
         }
     }
+
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == MultiImagePicker.REQUEST_PICK_MULTI_IMAGES && resultCode == Activity.RESULT_OK) {
+            val result = MultiImagePicker.Result(data)
+            if (result.isSuccess()) {
+                val list = result.getImageList().toList()
+
+                if (list.size > 12) {
+                    context?.showNormalToast(getString(SR.string.only_12_have_been_picked))
+                }
+
+                viewModel.adapter.addItemsUri(list.take(12))
+            }
+        }else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+    }*/
 
     private fun pickImageViaChooser() {
         val camera = getString(com.maproductions.mohamedalaa.shared.R.string.camera)
