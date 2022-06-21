@@ -185,6 +185,7 @@
         <entry key="..\:/Grand/hassan/app/src/main/res/layout/item_service_in_selection.xml" value="0.3307291666666667" />
         <entry key="..\:/Grand/hassan/app/src/main/res/menu/menu_bottom_nav.xml" value="0.3307291666666667" />
         <entry key="..\:/Grand/hassan/hassanp/src/main/res/drawable/ic_profile_provider.xml" value="0.194" />
+        <entry key="..\:/Grand/hassan/hassanp/src/main/res/drawable/ic_swap.xml" value="0.169" />
         <entry key="..\:/Grand/hassan/hassanp/src/main/res/layout/dialog_fragment_accepted_order.xml" value="0.33" />
         <entry key="..\:/Grand/hassan/hassanp/src/main/res/layout/dialog_fragment_cancellation_reason.xml" value="0.24259259259259258" />
         <entry key="..\:/Grand/hassan/hassanp/src/main/res/layout/dialog_fragment_confirm_finishing_work.xml" value="0.3307291666666667" />
@@ -205,7 +206,7 @@
         <entry key="..\:/Grand/hassan/hassanp/src/main/res/layout/fragment_orders.xml" value="0.3307291666666667" />
         <entry key="..\:/Grand/hassan/hassanp/src/main/res/layout/fragment_personal_data.xml" value="0.27037037037037037" />
         <entry key="..\:/Grand/hassan/hassanp/src/main/res/layout/fragment_previous_works.xml" value="0.3117948717948718" />
-        <entry key="..\:/Grand/hassan/hassanp/src/main/res/layout/fragment_register_form.xml" value="0.2175925925925926" />
+        <entry key="..\:/Grand/hassan/hassanp/src/main/res/layout/fragment_register_form.xml" value="0.25" />
         <entry key="..\:/Grand/hassan/hassanp/src/main/res/layout/fragment_specializations_and_services.xml" value="0.31666666666666665" />
         <entry key="..\:/Grand/hassan/hassanp/src/main/res/layout/fragment_wallet.xml" value="0.3307291666666667" />
         <entry key="..\:/Grand/hassan/hassanp/src/main/res/layout/item_adding_services.xml" value="0.31666666666666665" />

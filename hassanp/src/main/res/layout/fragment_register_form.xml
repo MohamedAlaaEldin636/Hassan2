@@ -769,6 +769,11 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
 
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+
                         android:padding="16dp"
 
                         android:gravity="center"
@@ -782,19 +787,22 @@
                         android:ellipsize="end"
 
                         app:drawableEndCompat="@drawable/ic_swap"
-                        android:drawablePadding="16dp"
+                        android:drawablePadding="4dp"
 
                         android:background="@drawable/dr_rounded_white_small"/>
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_weight="1.5"
                         android:layout_height="wrap_content"
 
-                        android:padding="16dp"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
 
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
 
                         android:gravity="center"
 
@@ -807,7 +815,7 @@
                         android:ellipsize="end"
 
                         app:drawableEndCompat="@drawable/ic_swap"
-                        android:drawablePadding="16dp"
+                        android:drawablePadding="4dp"
 
                         android:background="@drawable/dr_rounded_white_small"/>
 
@@ -816,7 +824,10 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
 
-                        android:padding="16dp"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
 
                         android:gravity="center"
 
@@ -829,7 +840,7 @@
                         android:ellipsize="end"
 
                         app:drawableEndCompat="@drawable/ic_swap"
-                        android:drawablePadding="16dp"
+                        android:drawablePadding="4dp"
 
                         android:background="@drawable/dr_rounded_white_small"/>
 
