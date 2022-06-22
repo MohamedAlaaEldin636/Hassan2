@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.maproductions.mohamedalaa.shared.R
 import com.maproductions.mohamedalaa.shared.core.customTypes.MAImage
+import com.maproductions.mohamedalaa.shared.core.extensions.listenerOnResourceReadyFitXY
 
 @BindingAdapter("imageView_setSRCDrawableResBA")
 fun ImageView.setSRCDrawableResBA(@DrawableRes drawableRes: Int?) {
@@ -24,6 +25,27 @@ fun ImageView.setUrlViaGlideOrIgnore(url: String?) {
             .apply(RequestOptions().centerCrop())
             .placeholder(R.drawable.ic_logo_app_placeholder)
             .error(R.drawable.ic_logo_app_placeholder)
+            .into(this)
+    }
+}
+
+fun ImageView.setUrlViaGlideOrIgnoreWithFitXY(url: String?) {
+    if (!url.isNullOrEmpty()) {
+        /*
+        Glide.with(binding.imageView.context)
+			.load(slider.imageUrl)
+			//.apply(RequestOptions().centerCrop())
+			.placeholder(R.drawable.ic_logo_samee_placeholder)
+			.error(R.drawable.ic_logo_samee_placeholder)
+			.listenerOnResourceReadyFitXY(binding.imageView)
+			.into(binding.imageView)
+         */
+        Glide.with(context)
+            .load(url)
+            //.apply(RequestOptions().centerCrop())
+            .placeholder(R.drawable.ic_logo_app_placeholder)
+            .error(R.drawable.ic_logo_app_placeholder)
+            .listenerOnResourceReadyFitXY(this)
             .into(this)
     }
 }

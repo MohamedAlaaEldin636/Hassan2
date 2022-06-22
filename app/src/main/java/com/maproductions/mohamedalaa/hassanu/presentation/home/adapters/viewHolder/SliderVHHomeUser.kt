@@ -14,6 +14,7 @@ import com.maproductions.mohamedalaa.hassanu.R
 import com.maproductions.mohamedalaa.shared.core.customTypes.SliderLinkType
 import com.maproductions.mohamedalaa.shared.core.extensions.*
 import com.maproductions.mohamedalaa.shared.core.extensions.bindingAdapter.setUrlViaGlideOrIgnore
+import com.maproductions.mohamedalaa.shared.core.extensions.bindingAdapter.setUrlViaGlideOrIgnoreWithFitXY
 import com.maproductions.mohamedalaa.shared.R as SR
 import com.maproductions.mohamedalaa.shared.databinding.ItemImageBinding
 import com.maproductions.mohamedalaa.shared.databinding.ItemImageHomeUserSliderBinding
@@ -68,7 +69,7 @@ class SliderVHHomeUser(parent: ViewGroup, private val gson: Gson, private val is
     fun bind(slider: SliderHomeUser) {
         binding.imageView.setTagViaGson(slider, gson, SR.id.view_holder_id)
 
-        binding.imageView.setUrlViaGlideOrIgnore(slider.imageUrl)
+        binding.imageView.setUrlViaGlideOrIgnoreWithFitXY(slider.imageUrl)
     }
 
 }
