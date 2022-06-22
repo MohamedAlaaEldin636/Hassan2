@@ -1,5 +1,7 @@
 package com.maproductions.mohamedalaa.hassanp.presentation.home
 
+import android.content.Context
+import android.location.Location
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,10 +14,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.maproductions.mohamedalaa.hassanp.R
+import com.maproductions.mohamedalaa.hassanp.core.shouldUpdateProfileLocationToApi
 import com.maproductions.mohamedalaa.hassanp.databinding.FragmentHomeBinding
 import com.maproductions.mohamedalaa.hassanp.presentation.home.viewModel.HomeViewModel
 import com.maproductions.mohamedalaa.hassanp.presentation.main.MainActivity
 import com.maproductions.mohamedalaa.hassanp.presentation.order.OrderDetailsFragment
+import com.maproductions.mohamedalaa.shared.core.customTypes.LocationData
+import com.maproductions.mohamedalaa.shared.core.customTypes.LocationHandler
 import com.maproductions.mohamedalaa.shared.core.customTypes.PusherUtils
 import com.maproductions.mohamedalaa.shared.core.extensions.*
 import com.maproductions.mohamedalaa.shared.domain.splash.SplashInitialLaunch
@@ -27,11 +32,14 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber
+import java.lang.Exception
 
 @AndroidEntryPoint
-class HomeFragment : MABaseFragment<FragmentHomeBinding>() {
+class HomeFragment : MABaseFragment<FragmentHomeBinding>(), LocationHandler.Listener {
 
     private val viewModel by viewModels<HomeViewModel>()
+
+    private lateinit var locationHandler: LocationHandler
 
     private val channelEvent by lazy {
         PusherUtils.getChannelEvent(
@@ -49,6 +57,13 @@ class HomeFragment : MABaseFragment<FragmentHomeBinding>() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        locationHandler = LocationHandler(
+            this,
+            lifecycle,
+            requireContext(),
+            this
+        )
+
         super.onCreate(savedInstanceState)
 
         (activity as? MainActivity)?.subscribeToChannel()
@@ -138,6 +153,43 @@ class HomeFragment : MABaseFragment<FragmentHomeBinding>() {
             (activity as? MainActivity)?.trackOrders(
                 response.data?.onTheWayOrders?.map { it.id }.orEmpty()
             )
+
+            if (shouldUpdateProfileLocationToApi()) {
+                locationHandler.requestCurrentLocation(true)
+            }
+        }
+    }
+
+    override fun onCurrentLocationResultSuccess(location: Location) {
+        val address = context?.getAddressFromLatitudeAndLongitude(
+            location.latitude,
+            location.longitude
+        ) ?: getString(com.maproductions.mohamedalaa.shared.R.string.your_address_has_been_selected_successfully)
+
+        executeOnGlobalLoadingAndAutoHandleRetryCancellable(
+            canCancelDialog = false,
+            afterShowingLoading = {
+                viewModel.repoAuth.updateProviderProfile(
+                    LocationData(
+                        location.latitude.toString(),
+                        location.longitude.toString(),
+                        address,
+                    )
+                )
+            },
+            afterHidingLoading = {
+                // tam taghyeer 3nwanak b naga7 isa.
+                Timber.e("tam taghyeer 3enwanak b naga7")
+            }
+        )
+    }
+
+    override fun onCurrentLocationResultFailure(context: Context?, exception: Exception?) {
+        executeShowingErrorOnce(
+            false,
+            getString(com.maproductions.mohamedalaa.shared.R.string.there_is_an_error_in_detecting_your_location)
+        ) {
+            locationHandler.requestCurrentLocation(true)
         }
     }
 

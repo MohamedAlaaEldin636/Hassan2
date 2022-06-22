@@ -35,7 +35,7 @@ class HomeViewModel @Inject constructor(
     application: Application,
     prefsAccount: PrefsAccount,
     repoOrder: RepoOrder,
-    private val repoAuth: RepoAuth,
+    val repoAuth: RepoAuth,
 ) : AndroidViewModel(application) {
 
     private var timer: CountDownTimer? = null
