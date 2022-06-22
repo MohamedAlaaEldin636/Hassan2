@@ -47,6 +47,8 @@ object ApiConst {
 
         const val SERVICES = "services"
 
+        const val PROMO_ID = "promo_id"
+
         const val INTRO_VIDEO = "intro_video"
         const val VIDEO = "video"
 

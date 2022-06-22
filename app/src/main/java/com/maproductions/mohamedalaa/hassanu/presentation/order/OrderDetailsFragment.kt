@@ -140,9 +140,19 @@ class OrderDetailsFragment : MABaseFragment<FragmentOrderDetailsBinding>() {
 
         val total = (response.total + deliveryCost).coerceAtLeast(0f)
 
-        return listOf(
+        val discount = response.promo?.let {
+            if (it.isPercent) {
+                // Negative indicate percent isa.
+                it.value * -1
+            }else {
+                it.value
+            }
+        }
+
+        return listOfNotNull(
             response.total.createServiceInCategoryWithCount(getString(com.maproductions.mohamedalaa.shared.R.string.services_cost)),
             deliveryCost.createServiceInCategoryWithCount(getString(com.maproductions.mohamedalaa.shared.R.string.delivery_cost)),
+            discount?.createServiceInCategoryWithCount(getString(com.maproductions.mohamedalaa.shared.R.string.discount_value)),
             total.createServiceInCategoryWithCount(getString(com.maproductions.mohamedalaa.shared.R.string.total_cost))
         )
     }

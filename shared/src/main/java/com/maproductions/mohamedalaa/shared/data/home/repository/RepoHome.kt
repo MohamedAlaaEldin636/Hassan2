@@ -43,9 +43,11 @@ class RepoHome @Inject constructor(
         extraNotes: String,
 
         total: Float,
+
+        promoId: Int?,
     ): MAResult.Immediate<MABaseResponse<Int>> {
         return dataSource.createOrder(
-            categoryId, services, addressId, orderedAt, orderType, images, extraNotes, total
+            categoryId, services, addressId, orderedAt, orderType, images, extraNotes, total, promoId
         )
     }
 

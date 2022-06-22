@@ -12,3 +12,6 @@ data class ResponseCheckPromoCode(
     val isPercent get() = discountType == "percent"
 
 }
+
+
+//"promo":{"id":30,"code":"MHJFV","discount_type":"percent","value":50}

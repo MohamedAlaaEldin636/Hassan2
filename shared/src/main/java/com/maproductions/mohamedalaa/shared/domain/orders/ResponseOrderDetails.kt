@@ -3,6 +3,7 @@ package com.maproductions.mohamedalaa.shared.domain.orders
 import com.google.gson.annotations.SerializedName
 import com.maproductions.mohamedalaa.shared.core.customTypes.ApiOrderStatus
 import com.maproductions.mohamedalaa.shared.core.customTypes.OrderStatus
+import com.maproductions.mohamedalaa.shared.domain.home.ResponseCheckPromoCode
 import com.maproductions.mohamedalaa.shared.domain.settings.ResponseAddress
 
 data class ResponseOrderDetails(
@@ -20,6 +21,7 @@ data class ResponseOrderDetails(
     @SerializedName("cancellation_fees") var cancellationFeesPercent: Float,
     var services: List<ServiceInOrderDetails>,
     @SerializedName("order_min_price_for_extra") var orderMinPriceForExtra: Float?,
+    var promo: ResponseCheckPromoCode?,
 ) {
     val statusOfOrder get() = ApiOrderStatus.values().first { it.apiValue == orderStatus }
 }

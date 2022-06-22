@@ -52,12 +52,19 @@ class DataSourceHome @Inject constructor(
         extraNotes: String,
 
         total: Float,
+
+        promoId: Int?,
     ): MAResult.Immediate<MABaseResponse<Int>> = safeApiCall {
         val map = mutableMapOf<String, RequestBody>()
         for ((index, item) in services.withIndex()) {
             map["${ApiConst.Query.SERVICES}[$index][${ApiConst.Query.SERVICE_ID}]"] = item.serviceInCategory.id.toString().toRequestBody()
             map["${ApiConst.Query.SERVICES}[$index][${ApiConst.Query.PRICE}]"] = item.serviceInCategory.price.toString().toRequestBody()
             map["${ApiConst.Query.SERVICES}[$index][${ApiConst.Query.COUNT}]"] = item.count.toString().toRequestBody()
+        }
+
+        Timber.e("promo id discount.value?.id $promoId")
+        if (promoId != null) {
+            map[ApiConst.Query.PROMO_ID] = promoId.toString().toRequestBody()
         }
 
         apiService.createOrder(

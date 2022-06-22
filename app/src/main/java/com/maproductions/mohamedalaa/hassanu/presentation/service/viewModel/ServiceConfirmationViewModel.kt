@@ -24,6 +24,7 @@ import com.maproductions.mohamedalaa.shared.domain.home.ServiceInCategory
 import com.maproductions.mohamedalaa.shared.domain.home.ServiceInCategoryWithCount
 import com.maproductions.mohamedalaa.shared.presentation.base.adapters.RVItemImageRect
 import dagger.hilt.android.lifecycle.HiltViewModel
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.math.absoluteValue
 
@@ -93,6 +94,8 @@ class ServiceConfirmationViewModel @Inject constructor(
                     adapterServicesSummary.currentList[1].serviceInCategory.price
                 )
 
+                Timber.e("promo id ${discount.value?.id}")
+
                 repoHome.createOrder(
                     args.categoryId,
 
@@ -109,7 +112,9 @@ class ServiceConfirmationViewModel @Inject constructor(
 
                     args.extraNotes,
 
-                    total
+                    total,
+
+                    discount.value?.id
                 )
             },
             afterHidingLoading = {
