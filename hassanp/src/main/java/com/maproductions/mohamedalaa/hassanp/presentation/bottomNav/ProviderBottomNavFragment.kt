@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.gson.Gson
 import com.maproductions.mohamedalaa.hassanp.NavBottomNavDirections
 import com.maproductions.mohamedalaa.hassanp.R
+import com.maproductions.mohamedalaa.shared.core.customTypes.LocationHandler
 import com.maproductions.mohamedalaa.shared.core.customTypes.PusherUtils
 import com.maproductions.mohamedalaa.shared.core.extensions.*
 import com.maproductions.mohamedalaa.shared.domain.pusher.ResponsePusherOrder
@@ -23,7 +24,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ProviderBottomNavFragment : BottomNavFragment() {
+class ProviderBottomNavFragment : BottomNavFragment(), LocationHandler.Listener {
 
     private val args by navArgs<ProviderBottomNavFragmentArgs>()
 
@@ -55,6 +56,9 @@ class ProviderBottomNavFragment : BottomNavFragment() {
             }
         }
     }
+
+    // todo make location on app launch to be changed isa. see maybe in home fragment isa.
+    //private lateinit var locationHandler: LocationHandler
 
     override val destinationsShowToolbar: Set<Int> = setOf(
         R.id.dest_orders,
@@ -110,6 +114,17 @@ class ProviderBottomNavFragment : BottomNavFragment() {
         navController.navigate(directions)
 
         return true
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        /*locationHandler = LocationHandler(
+            this,
+            lifecycle,
+            requireContext(),
+            this
+        )*/
+
+        super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
