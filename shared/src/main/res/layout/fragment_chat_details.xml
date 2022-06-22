@@ -126,8 +126,6 @@
                 android:layout_weight="1"
                 android:layout_height="40dp"
 
-                android:padding="3dp"
-
                 android:clipToPadding="false"
 
                 android:background="@drawable/drawable_radius_1">
@@ -158,11 +156,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
 
-                        android:background="@drawable/dr_input_round_white"
-
                         android:hint="@string/type_your_msg_here"
                         app:hintTextColor="#AFAFAF"
                         android:textColorHint="#AFAFAF"
+
+                        android:background="@android:color/transparent"
 
                         android:gravity="center_vertical"
 
