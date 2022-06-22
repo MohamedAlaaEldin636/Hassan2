@@ -8,6 +8,7 @@ import android.os.CountDownTimer
 import android.view.View
 import androidx.fragment.app.findFragment
 import androidx.lifecycle.*
+import com.maproductions.mohamedalaa.hassanp.R
 import com.maproductions.mohamedalaa.hassanp.presentation.home.HomeFragment
 import com.maproductions.mohamedalaa.hassanp.presentation.home.adapters.RVItemOrderInHome
 import com.maproductions.mohamedalaa.shared.core.customTypes.OrdersCategory
@@ -61,6 +62,12 @@ class HomeViewModel @Inject constructor(
         val res = if (LocalTime.now().hour < 12) SR.string.good_morning_var else SR.string.good_evening_var
 
         myApp.getString(res, it.orEmpty())
+    }
+
+    val greetingRes = name.map {
+        val res = if (LocalTime.now().hour < 12) R.drawable.ic_good_morning else SR.drawable.ic_good_2
+
+        res
     }
 
     /** Ex. -> ( 04 : 45 : 12 ) */

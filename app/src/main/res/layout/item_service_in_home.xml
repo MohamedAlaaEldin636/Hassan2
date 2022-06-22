@@ -28,10 +28,10 @@
 
         app:layout_constraintDimensionRatio="1:1"
 
-        app:cardCornerRadius="1000dp"
+        app:cardCornerRadius="0dp"
 
-        app:cardElevation="2dp"
-        app:cardMaxElevation="2dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
 
         android:scaleType="fitCenter"
 
@@ -39,11 +39,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageView"
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
 
             android:src="@drawable/ic_logo_app_placeholder"
             tools:ignore="ContentDescription" />

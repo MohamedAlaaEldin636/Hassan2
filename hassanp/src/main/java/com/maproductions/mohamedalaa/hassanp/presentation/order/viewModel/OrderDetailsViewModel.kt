@@ -50,7 +50,7 @@ class OrderDetailsViewModel @Inject constructor(
             ApiOrderStatus.PENDING, ApiOrderStatus.CANCELLED, ApiOrderStatus.REJECTED -> 0
             ApiOrderStatus.ACCEPTED -> R.drawable.ic_request_is_received
             ApiOrderStatus.ON_THE_WAY -> R.drawable.ic_on_the_way
-            ApiOrderStatus.ARRIVED -> R.drawable.ic_arrived
+            ApiOrderStatus.ARRIVED -> R.drawable.ic_good_1
             ApiOrderStatus.WORK_STARTED -> R.drawable.ic_start_working
             ApiOrderStatus.FINISHED -> R.drawable.ic_finished_working
         }

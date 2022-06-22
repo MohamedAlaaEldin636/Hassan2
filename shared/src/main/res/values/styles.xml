@@ -64,6 +64,14 @@
         <item name="cornerSizeBottomLeft">0dp</item>
     </style>
 
+    <style name="ShapeAppearanceOverlay.MaterialCardView.V1" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">1000dp</item>
+        <item name="cornerSizeTopLeft">1000dp</item>
+        <item name="cornerSizeBottomRight">1000dp</item>
+        <item name="cornerSizeBottomLeft">1000dp</item>
+    </style>
+
     <style name="ShapeAppearanceOverlay.MaterialCardView.LeftOnly" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopRight">0dp</item>

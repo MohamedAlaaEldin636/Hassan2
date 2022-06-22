@@ -184,6 +184,7 @@
         <entry key="..\:/Grand/hassan/app/src/main/res/layout/item_service_in_location_selection.xml" value="0.31666666666666665" />
         <entry key="..\:/Grand/hassan/app/src/main/res/layout/item_service_in_selection.xml" value="0.3307291666666667" />
         <entry key="..\:/Grand/hassan/app/src/main/res/menu/menu_bottom_nav.xml" value="0.3307291666666667" />
+        <entry key="..\:/Grand/hassan/hassanp/src/main/res/drawable/ic_good_morning.xml" value="0.169" />
         <entry key="..\:/Grand/hassan/hassanp/src/main/res/drawable/ic_profile_provider.xml" value="0.194" />
         <entry key="..\:/Grand/hassan/hassanp/src/main/res/drawable/ic_swap.xml" value="0.169" />
         <entry key="..\:/Grand/hassan/hassanp/src/main/res/layout/dialog_fragment_accepted_order.xml" value="0.33" />
@@ -226,8 +227,10 @@
         <entry key="..\:/Grand/hassan/shared/src/main/res/drawable/dr_rounded_white_small_with_red_border.xml" value="0.1195" />
         <entry key="..\:/Grand/hassan/shared/src/main/res/drawable/dr_scrim_1.xml" value="0.194" />
         <entry key="..\:/Grand/hassan/shared/src/main/res/drawable/dr_top_round_white.xml" value="0.194" />
+        <entry key="..\:/Grand/hassan/shared/src/main/res/drawable/ic_arrived.xml" value="0.169" />
         <entry key="..\:/Grand/hassan/shared/src/main/res/drawable/ic_checked.xml" value="0.194" />
         <entry key="..\:/Grand/hassan/shared/src/main/res/drawable/ic_done_green.xml" value="0.194" />
+        <entry key="..\:/Grand/hassan/shared/src/main/res/drawable/ic_good_1.xml" value="0.169" />
         <entry key="..\:/Grand/hassan/shared/src/main/res/drawable/ic_not_checked.xml" value="0.194" />
         <entry key="..\:/Grand/hassan/shared/src/main/res/drawable/ic_not_checked_5.xml" value="0.194" />
         <entry key="..\:/Grand/hassan/shared/src/main/res/drawable/ic_notification.xml" value="0.194" />
