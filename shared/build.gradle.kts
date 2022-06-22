@@ -80,6 +80,8 @@ dependencies {
 
     api("com.facebook.android:facebook-login:13.2.0")
 
+    api("com.github.bumptech.glide:okhttp3-integration:4.13.0")
+
     api(Deps.pusher)
     api("com.google.firebase:firebase-core:21.0.0")
     api("com.google.firebase:firebase-messaging:23.0.5")

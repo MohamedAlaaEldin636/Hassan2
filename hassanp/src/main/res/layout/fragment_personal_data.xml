@@ -51,16 +51,16 @@
                     android:focusable="true"
                     android:onClick="@{v -> viewModel.pickImage(v, TypeImage2.PROFILE)}"
 
-                    app:cardCornerRadius="200dp"
+                    app:cardCornerRadius="0dp"
 
-                    app:cardElevation="4dp"
-                    app:cardMaxElevation="4dp"
+                    app:cardElevation="0dp"
+                    app:cardMaxElevation="0dp"
 
                     android:layout_marginTop="16dp"
 
                     materialCardView_setStrokeColorResBA="@{viewModel.profileCardColorRes}"
                     app:strokeColor="@color/white"
-                    app:strokeWidth="6dp"
+                    app:strokeWidth="2dp"
 
                     app:cardBackgroundColor="#F9F9F9"
 
@@ -68,11 +68,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent">
 
-                    <ImageView
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/imageView"
 
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
 
                         android:src="@drawable/ic_person_1"
 
