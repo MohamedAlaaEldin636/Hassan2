@@ -185,22 +185,24 @@ class PreviousWorksFragment : MABaseFragment<FragmentPreviousWorksBinding>() {
         handleRetryAbleFlowWithMustHaveResultWithNullability(viewModel.retryAbleFlowPreviousWorkData) { maBaseResponse ->
             val response = maBaseResponse.data ?: return@handleRetryAbleFlowWithMustHaveResultWithNullability
 
-            viewModel.buttonText.value = if (response.description.isEmpty() && response.files.isEmpty()) {
+            viewModel.buttonText.value = if (response.description.isNullOrEmpty() && response.files.orEmpty().isEmpty()) {
                 getString(R.string.save)
             }else {
                 getString(R.string.save_changes)
             }
 
-            viewModel.showDescFirstLook.value = response.description.isEmpty()
+            viewModel.showDescFirstLook.value = response.description.isNullOrEmpty()
             viewModel.description.value = response.description
 
-            val videoItemFile = response.files.firstOrNull { it.fileType == FileType.VIDEO }
+            val videoItemFile = response.files.orEmpty().firstOrNull { it.fileType == FileType.VIDEO }
             viewModel.videoMAImage.value = videoItemFile?.fileUrl?.let { MAImage.ILink(it) }
 
-            viewModel.showImagesFirstLook.value = response.files.isEmpty()
+            viewModel.showImagesFirstLook.value = response.files.orEmpty().isEmpty()
 
-            val imagesFiles = response.files.filter { it.fileType == FileType.IMAGE }
-            val images = imagesFiles.map { ItemUri(it.id, MAImage.ILink(it.fileUrl)) }
+            val imagesFiles = response.files.orEmpty().filter { it.fileType == FileType.IMAGE }
+            val images = imagesFiles.map {
+                ItemUri(it.id.orZero(), MAImage.ILink(it.fileUrl.orEmpty()))
+            }
             viewModel.images.value = images.map { it.maImage }
             viewModel.adapter.submitList(images)
         }
