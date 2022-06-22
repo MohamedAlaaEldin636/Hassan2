@@ -50,7 +50,7 @@
             android:src="@drawable/ic_logo_app_placeholder"
             tools:scaleType="centerCrop"
 
-            imageView_setUrlViaGlideOrIgnore="@{viewModel.imageUrl}"
+            imageView_setUrlViaGlideOrIgnoreWithFitXY="@{viewModel.imageUrl}"
 
             android:padding="7dp"
 

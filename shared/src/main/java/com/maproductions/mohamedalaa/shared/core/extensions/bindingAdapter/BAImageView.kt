@@ -29,6 +29,7 @@ fun ImageView.setUrlViaGlideOrIgnore(url: String?) {
     }
 }
 
+@BindingAdapter("imageView_setUrlViaGlideOrIgnoreWithFitXY")
 fun ImageView.setUrlViaGlideOrIgnoreWithFitXY(url: String?) {
     if (!url.isNullOrEmpty()) {
         /*
