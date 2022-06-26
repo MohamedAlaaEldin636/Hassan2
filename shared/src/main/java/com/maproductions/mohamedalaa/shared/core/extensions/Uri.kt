@@ -95,6 +95,13 @@ fun Uri.checkSizeAndLengthOfVideo(context: Context): Boolean {
 		return false
 	}
 
+	/*
+	https://stackoverflow.com/a/63529377
+
+	ParcelFileDescriptor pfd = getContentResolver().openFileDescriptor(imageUri, "r");
+	fileLength = pfd.getStatSize();
+	pfd.close();
+	 */
 	// todo -> https://stackoverflow.com/questions/49415012/get-file-size-using-uri-in-android
 	//val fileSize = Integer.parseInt(String.valueOf((volleyFileObject.getFile().length() / 1024) / 1024));
 	// https://stackoverflow.com/a/67251625
