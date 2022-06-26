@@ -56,7 +56,9 @@ class PersonalDataViewModel @Inject constructor(
                     imageUri?.createMultipartBodyPart(myApp, ApiConst.Query.IMAGE),
                     name.value.orEmpty(),
                     if (userData.value?.email == email.value) null else email.value,
-                    phone.value.orEmpty(),
+                    if (phone.value.orEmpty() == userData.value?.phone) null else {
+                        phone.value.orEmpty()
+                    },
                 )
             },
             afterHidingLoading = { response ->

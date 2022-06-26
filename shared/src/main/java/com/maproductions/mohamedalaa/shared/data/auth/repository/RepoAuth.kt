@@ -60,7 +60,7 @@ class RepoAuth @Inject constructor(
         image: MultipartBody.Part?,
         name: String,
         email: String?,
-        phone: String,
+        phone: String?,
     ) = dataSource.updateUserProfile(image, name, email, phone)
 
     /*fun getOnBoardScreenFor(isUserNotProvider: Boolean) = flowInitialLoadingWithMinExecutionTime<MABaseResponse<List<ItemOnBoard>>> {

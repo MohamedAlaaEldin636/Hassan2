@@ -131,15 +131,18 @@ class DataSourceAuth @Inject constructor(
         image: MultipartBody.Part?,
         name: String,
         email: String?,
-        phone: String,
+        phone: String?,
     ) = safeApiCall {
         val map = mutableMapOf(
             ApiConst.Query.NAME to name.toRequestBody(),
-            ApiConst.Query.PHONE to phone.toRequestBody(),
+            //ApiConst.Query.PHONE to phone.toRequestBody(),
             ApiConst.Query.ACCOUNT_TYPE to ApiConst.Query.USER.toRequestBody(),
         )
         if (!email.isNullOrEmpty()) {
             map[ApiConst.Query.EMAIL] = email.toRequestBody()
+        }
+        if (!phone.isNullOrEmpty()) {
+            map[ApiConst.Query.PHONE] = phone.toRequestBody()
         }
 
         if (image != null) {
