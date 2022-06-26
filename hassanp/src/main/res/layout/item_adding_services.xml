@@ -98,6 +98,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:src="@drawable/ic_plus_in_rect"/>
+        android:src="@drawable/ic_plus_999"/>
 
 </LinearLayout>
