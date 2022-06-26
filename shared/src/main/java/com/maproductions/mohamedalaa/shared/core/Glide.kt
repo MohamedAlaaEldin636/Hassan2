@@ -12,7 +12,7 @@ import okhttp3.OkHttpClient
 import java.io.InputStream
 import java.util.concurrent.TimeUnit
 
-@GlideModule
+/*@GlideModule
 class GlideModule : AppGlideModule() {
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         val builder = OkHttpClient.Builder()
@@ -25,4 +25,4 @@ class GlideModule : AppGlideModule() {
             OkHttpUrlLoader.Factory(builder.build())
         )
     }
-}
+}*/
