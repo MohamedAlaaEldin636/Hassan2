@@ -92,6 +92,7 @@ class LogInViewModel @Inject constructor(
         /*
          AccessToken.getCurrentAccessToken() and Profile.getCurrentProfile().
          */
+        LoginManager.getInstance().logOut()
 
         val accessToken = AccessToken.getCurrentAccessToken()
         val isLoggedIn = accessToken != null && !accessToken.isExpired
