@@ -13,7 +13,7 @@ data class SliderHomeUser(
     @SerializedName("image") var imageUrl: String,
     var category: SliderHomeCategory?,
 ) {
-    val linkType get() = SliderLinkType.values().first { it.apiValue == typeOfLink }
+    val linkType get() = SliderLinkType.values().firstOrNull { it.apiValue == typeOfLink }
 
     val accountType get() = AccountType.values().first { it.apiValue == type }
 }

@@ -33,34 +33,43 @@ class SliderVHHomeUser(parent: ViewGroup, private val gson: Gson, private val is
             val slider = binding.imageView.getTagViaGson<SliderHomeUser>(gson, SR.id.view_holder_id)
                 ?: return@setOnClickListener
 
-            if (slider.linkType == SliderLinkType.IMAGE) {
-                it.findNavControllerOfProject().navigateDeepLinkWithoutOptions(
-                    "dialog-dest",
-                    "com.grand.hassan.shared.showing.image.dialog",
-                    slider.imageUrl
-                )
-            }else {
-                if (isGuest) {
+            when (slider.linkType) {
+                SliderLinkType.IMAGE -> {
                     it.findNavControllerOfProject().navigateDeepLinkWithoutOptions(
-                        "fragment-dest",
-                        "com.grand.hassan.shared.guest.please.login.dialog"
+                        "dialog-dest",
+                        "com.grand.hassan.shared.showing.image.dialog",
+                        slider.imageUrl
                     )
-                }else {
-                    it.findNavControllerOfProject().navigateDeepLinkWithOptions(
-                        "fragment-dest",
-                        "com.grand.hassan.shared.services.selection",
-                        paths = arrayOf(
-                            slider.category?.name.orEmpty(),
-                            slider.linkId.toString(),
-                            slider.category?.let { category ->
-                                DeliveryData(
-                                    category.deliveryFees,
-                                    category.orderMinPrice,
-                                    category.orderMinPriceForExtra
-                                ).toJson(gson)
-                            }.orEmpty()
+                }
+                SliderLinkType.LINK -> {
+                    it.context.launchBrowser(slider.imageUrl)
+                }
+                SliderLinkType.SERVICE -> {
+                    if (isGuest) {
+                        it.findNavControllerOfProject().navigateDeepLinkWithoutOptions(
+                            "fragment-dest",
+                            "com.grand.hassan.shared.guest.please.login.dialog"
                         )
-                    )
+                    }else {
+                        it.findNavControllerOfProject().navigateDeepLinkWithOptions(
+                            "fragment-dest",
+                            "com.grand.hassan.shared.services.selection",
+                            paths = arrayOf(
+                                slider.category?.name.orEmpty(),
+                                slider.linkId.toString(),
+                                slider.category?.let { category ->
+                                    DeliveryData(
+                                        category.deliveryFees,
+                                        category.orderMinPrice,
+                                        category.orderMinPriceForExtra
+                                    ).toJson(gson)
+                                }.orEmpty()
+                            )
+                        )
+                    }
+                }
+                else -> {
+                    it.context.showErrorToast(it.context.getString(com.maproductions.mohamedalaa.shared.R.string.something_went_wrong))
                 }
             }
         }

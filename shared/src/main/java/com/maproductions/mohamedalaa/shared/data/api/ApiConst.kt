@@ -94,6 +94,8 @@ object ApiConst {
         const val SERVICE = "service"
         const val IMAGE = "image"
 
+        const val LINK = "link"
+
         const val IMAGES = "images"
 
         const val LATITUDE = "latitude"
