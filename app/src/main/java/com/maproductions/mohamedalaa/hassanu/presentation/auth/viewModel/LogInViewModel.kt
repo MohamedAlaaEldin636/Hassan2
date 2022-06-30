@@ -11,6 +11,7 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.maproductions.mohamedalaa.hassanu.R
 import com.maproductions.mohamedalaa.hassanu.presentation.auth.LogInFragment
 import com.maproductions.mohamedalaa.hassanu.presentation.auth.LogInFragmentDirections
 import com.maproductions.mohamedalaa.shared.core.extensions.*
@@ -56,6 +57,12 @@ class LogInViewModel @Inject constructor(
         if (phone.value.isNullOrEmpty()) {
             return view.context.showErrorToast(view.context.getString(SR.string.field_required))
         }
+
+        if (!phone.value.isValidIraqPhoneWithoutPrefix964()) {
+            return view.context.showErrorToast(view.context.getString(SR.string.phone_number_is_wrong))
+        }
+
+        // https://en.wikipedia.org/wiki/Telephone_numbers_in_Iraq
 
         if (agreeOnTermsAndConditions.value != true) {
             return view.context.showErrorToast(view.context.getString(SR.string.must_accept_terms_and_conditions))

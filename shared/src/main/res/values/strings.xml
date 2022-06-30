@@ -47,6 +47,7 @@
     <string name="enter_verification_code_instruction">أدخل كود التفعيل المرسل لك على رقم الهاتف الخاص بك</string>
     <string name="enter_verification_code_instruction_2">أدخل كود التأكيد المرسل لك على رقم الهاتف .</string>
     <string name="confirm">تأكيد</string>
+    <string name="phone_number_is_wrong">رقم الهاتف خاطئ</string>
     <string name="field_required">هذا الحقل مطلوب</string>
     <string name="same_or_more_of_required_amount_must_be_received">يجب استلام نفس المبلغ المطلوب او اكثر</string>
     <string name="at_least_name_or_image_required">على الاقل حقل الاسم او حقل الصورة مطلوب</string>

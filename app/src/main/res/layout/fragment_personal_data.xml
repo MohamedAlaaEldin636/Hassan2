@@ -228,6 +228,10 @@
                     android:textColorHint="#717171"
                     android:background="@drawable/dr_input_round_white"
 
+                    app:suffixText="964+"
+                    app:suffixTextColor="#717171"
+                    app:expandedHintEnabled="false"
+
                     app:layout_constraintTop_toBottomOf="@id/phoneTextView"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent">

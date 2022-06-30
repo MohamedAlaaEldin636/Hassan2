@@ -49,6 +49,10 @@ class PersonalDataViewModel @Inject constructor(
             return view.context.showErrorToast(view.context.getString(SR.string.all_fields_required_except_email))
         }
 
+        if (!phone.value.isValidIraqPhoneWithoutPrefix964()) {
+            return view.context.showErrorToast(view.context.getString(SR.string.phone_number_is_wrong))
+        }
+
         val fragment = view.findFragment<PersonalDataFragment>()
         fragment.executeOnGlobalLoadingAndAutoHandleRetryCancellable(
             afterShowingLoading = {

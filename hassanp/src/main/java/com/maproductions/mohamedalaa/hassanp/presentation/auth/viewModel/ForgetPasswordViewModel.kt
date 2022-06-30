@@ -7,10 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.maproductions.mohamedalaa.hassanp.presentation.auth.ForgetPasswordFragment
 import com.maproductions.mohamedalaa.shared.R
-import com.maproductions.mohamedalaa.shared.core.extensions.executeOnGlobalLoadingAndAutoHandleRetryCancellable
-import com.maproductions.mohamedalaa.shared.core.extensions.findNavControllerOfProject
-import com.maproductions.mohamedalaa.shared.core.extensions.navigateDeepLinkWithOptions
-import com.maproductions.mohamedalaa.shared.core.extensions.showErrorToast
+import com.maproductions.mohamedalaa.shared.core.extensions.*
 import com.maproductions.mohamedalaa.shared.data.auth.repository.RepoAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -25,6 +22,10 @@ class ForgetPasswordViewModel @Inject constructor(
     fun send(view: View) {
         if (phone.value.isNullOrEmpty()) {
             return view.context.showErrorToast(view.context.getString(R.string.something_went_wrong))
+        }
+
+        if (!phone.value.isValidIraqPhoneWithoutPrefix964()) {
+            return view.context.showErrorToast(view.context.getString(R.string.phone_number_is_wrong))
         }
 
         val fragment = view.findFragment<ForgetPasswordFragment>()
