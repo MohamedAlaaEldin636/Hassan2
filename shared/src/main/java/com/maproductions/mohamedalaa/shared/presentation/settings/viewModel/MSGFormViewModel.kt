@@ -55,6 +55,10 @@ class MSGFormViewModel @Inject constructor(
             return view.context.showErrorToast(view.context.getString(R.string.all_fields_required))
         }
 
+        if (!phone.value.isValidIraqPhoneWithoutPrefix964()) {
+            return view.context.showErrorToast(view.context.getString(R.string.phone_number_is_wrong))
+        }
+
         view.findFragment<MSGFormFragment>().executeOnGlobalLoadingAndAutoHandleRetryCancellable2(
             afterShowingLoading = {
                 repoSettings.contactUsOrSendComplainsOrSuggestions(

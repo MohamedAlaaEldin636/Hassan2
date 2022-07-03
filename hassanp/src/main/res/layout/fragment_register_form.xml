@@ -186,6 +186,10 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
 
+                    app:suffixText="964+"
+                    app:suffixTextColor="#717171"
+                    app:expandedHintEnabled="false"
+
                     app:hintTextColor="#717171"
                     android:textColorHint="#717171"
                     android:background="@drawable/dr_input_round_white">
@@ -248,6 +252,10 @@
 
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
+
+                    app:suffixText="964+"
+                    app:suffixTextColor="#717171"
+                    app:expandedHintEnabled="false"
 
                     app:hintTextColor="#717171"
                     android:textColorHint="#717171"

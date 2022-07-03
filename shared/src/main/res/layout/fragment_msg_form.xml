@@ -98,6 +98,10 @@
 
             android:background="@color/white"
 
+            app:suffixText="964+"
+            app:suffixTextColor="#717171"
+            app:expandedHintEnabled="false"
+
             android:hint="@string/phone_number_2"
             app:hintTextColor="#292D32"
             android:textColorHint="#292D32">

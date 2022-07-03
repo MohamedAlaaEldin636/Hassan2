@@ -177,6 +177,14 @@ class RegisterFormViewModel @Inject constructor(
             return view.context.showErrorToast(view.context.getString(R.string.must_accept_terms_and_conditions))
         }
 
+        if (!phone.value.isValidIraqPhoneWithoutPrefix964()) {
+            return view.context.showErrorToast(view.context.getString(R.string.phone_number_is_wrong))
+        }
+
+        if (!relativePhone.value.isValidIraqPhoneWithoutPrefix964()) {
+            return view.context.showErrorToast(view.context.getString(R.string.relative_phone_number_is_wrong))
+        }
+
         if (imageProfile.value == null || name.value.isNullOrEmpty() || phone.value.isNullOrEmpty()
             || address.value.isNullOrEmpty() || relativePhone.value.isNullOrEmpty()
             || adapterServices.getSelectedItemsIds().isEmpty() || imageFrontId.value == null

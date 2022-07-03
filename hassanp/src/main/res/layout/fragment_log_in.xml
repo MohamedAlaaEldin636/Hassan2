@@ -150,6 +150,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
+                        app:suffixText="964+"
+                        app:suffixTextColor="#717171"
+                        app:expandedHintEnabled="false"
+
                         android:hint="@string/password"
 
                         app:startIconDrawable="@drawable/ic_password"

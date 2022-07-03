@@ -42,6 +42,10 @@ class LogInViewModel @Inject constructor(
             return view.context.showErrorToast(view.context.getString(com.maproductions.mohamedalaa.shared.R.string.all_fields_required))
         }
 
+        if (!phone.value.isValidIraqPhoneWithoutPrefix964()) {
+            return view.context.showErrorToast(view.context.getString(SR.string.phone_number_is_wrong))
+        }
+
         val fragment = view.findFragment<LogInFragment>()
         fragment.executeOnGlobalLoadingAndAutoHandleRetryCancellable2(
             afterShowingLoading = {

@@ -120,6 +120,10 @@ class PersonalDataViewModel @Inject constructor(
             return view.context.showErrorToast(view.context.getString(errorRes))
         }
 
+        if (!phone.value.isValidIraqPhoneWithoutPrefix964()) {
+            return view.context.showErrorToast(view.context.getString(R.string.phone_number_is_wrong))
+        }
+
         val profile = imageProfile.value?.let {
             (it as? MAImage.IUri)?.uri?.createMultipartBodyPart(view.context, ApiConst.Query.IMAGE)
         }
