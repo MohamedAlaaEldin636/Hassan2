@@ -174,7 +174,7 @@ class ServiceDateAndTimeSelectionViewModel @Inject constructor(
                 return view.context.showErrorToast(msg)
             }
         }else {
-            val now = LocalDateTime.now()
+            val now = LocalDateTime.now().plusHours(1)
 
             val date = "${now.year}-${now.monthValue.minLengthOrPrefixZeros(2)}-${now.dayOfMonth.minLengthOrPrefixZeros(2)}"
             val time = "${now.hour.minLengthOrPrefixZeros(2)}:${now.minute.minLengthOrPrefixZeros(2)}"
