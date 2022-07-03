@@ -1,6 +1,7 @@
 package com.maproductions.mohamedalaa.shared.core.extensions.bindingAdapter
 
 import android.view.View
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
@@ -19,4 +20,9 @@ fun TextInputLayout.setEndIconAsCloseOrEmptyBA(performSet: Boolean?, listener: V
 @BindingAdapter("textInputLayout_onEndIconClicksBA2")
 fun TextInputLayout.setEndIconAsCloseOrEmptyBA2(listener: View.OnClickListener?) {
     setEndIconOnClickListener(listener)
+}
+
+@BindingAdapter("textInputLayout_setErrorResBA")
+fun TextInputLayout.setErrorRes(@StringRes errorRes: Int?) {
+    error = if (errorRes == 0 || errorRes == null) null else context.getString(errorRes)
 }

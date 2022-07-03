@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.textfield.TextInputLayout
 import com.maproductions.mohamedalaa.hassanp.presentation.auth.viewModel.RegisterFormViewModel
 import com.maproductions.mohamedalaa.hassanp.presentation.myAccount.PersonalDataFragment
 import com.maproductions.mohamedalaa.shared.R
@@ -52,6 +53,10 @@ class PersonalDataViewModel @Inject constructor(
     val requireProfile = MutableLiveData(false)
     val requireFrontId = MutableLiveData(false)
     val requireBackId = MutableLiveData(false)
+
+    val errorName: MutableLiveData<Int?> = name.map { null }
+    val errorPhone: MutableLiveData<Int?> = phone.map { null }
+    val errorBirthDate: MutableLiveData<Int?> = birthDate.map { null }
 
     val profileCardColorRes = requireProfile.map {
         if (it == true) R.color.card_view_stroke_error else R.color.white
@@ -106,10 +111,31 @@ class PersonalDataViewModel @Inject constructor(
     }
 
     fun send(view: View) {
+        var errorMsgRes: Int? = null
+        if (name.value.isNullOrEmpty()) {
+            errorName.value = R.string.name_required
+
+            errorMsgRes = if (errorMsgRes == null) R.string.name_required else R.string.all_fields_required
+        }
+        if (phone.value.isNullOrEmpty()) {
+            errorPhone.value = R.string.phone_required
+
+            errorMsgRes = if (errorMsgRes == null) R.string.phone_required else R.string.all_fields_required
+        }
+        if (birthDate.value.isNullOrEmpty()) {
+            errorBirthDate.value = R.string.birth_date_required
+
+            errorMsgRes = if (errorMsgRes == null) R.string.birth_date_required else R.string.all_fields_required
+        }
+
+        if (errorMsgRes != null) {
+            return view.context.showErrorToast(view.context.getString(errorMsgRes))
+        }
+
         val errorRes = when {
-            name.value.isNullOrEmpty() -> R.string.name_required
-            phone.value.isNullOrEmpty() -> R.string.phone_required
-            birthDate.value.isNullOrEmpty() -> R.string.birth_date_required
+            //name.value.isNullOrEmpty() -> R.string.name_required
+            //phone.value.isNullOrEmpty() -> R.string.phone_required
+            //birthDate.value.isNullOrEmpty() -> R.string.birth_date_required
             requireProfile.value == true && imageProfile.value == null -> R.string.profile_image_required
             requireFrontId.value == true && imageFrontId.value == null -> R.string.front_id_image_required
             requireBackId.value == true && imageBackId.value == null -> R.string.back_id_image_required

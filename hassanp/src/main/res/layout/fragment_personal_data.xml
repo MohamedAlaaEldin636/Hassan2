@@ -111,6 +111,8 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
 
+                    textInputLayout_setErrorResBA="@{viewModel.errorName}"
+
                     app:hintTextColor="#717171"
                     android:textColorHint="#717171"
                     android:background="@drawable/dr_input_round_white"
@@ -154,6 +156,8 @@
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+
+                    textInputLayout_setErrorResBA="@{viewModel.errorPhone}"
 
                     android:layout_margin="16dp"
 
@@ -209,6 +213,8 @@
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+
+                    textInputLayout_setErrorResBA="@{viewModel.errorBirthDate}"
 
                     android:layout_margin="16dp"
 
