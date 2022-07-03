@@ -7,8 +7,11 @@ import com.google.gson.Gson
 import com.maproductions.mohamedalaa.hassanp.presentation.service.adapters.viewHolder.VHItemAddingServices
 import com.maproductions.mohamedalaa.shared.domain.home.ServiceInCategory
 import com.maproductions.mohamedalaa.shared.domain.home.ServiceInCategoryWithCount
+import timber.log.Timber
 
-class RVItemAddingServices(private val gson: Gson) : PagingDataAdapter<ServiceInCategory, VHItemAddingServices>(COMPARATOR) {
+class RVItemAddingServices(
+    private val gson: Gson,
+) : PagingDataAdapter<ServiceInCategory, VHItemAddingServices>(COMPARATOR) {
 
     /** [Map.Entry.key] represents [ServiceInCategory.id] */
     private val map = mutableMapOf<Int, ServiceInCategoryWithCount>()
@@ -25,6 +28,10 @@ class RVItemAddingServices(private val gson: Gson) : PagingDataAdapter<ServiceIn
                 newItem: ServiceInCategory
             ): Boolean = oldItem == newItem
         }
+    }
+
+    fun addExistingSelections(map: Map<Int, ServiceInCategoryWithCount>) {
+        this.map.putAll(map)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VHItemAddingServices {

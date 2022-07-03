@@ -37,7 +37,8 @@ class ConfirmFinishingWorkViewModel @Inject constructor(
             args.orderId.toString(),
             args.categoryId.toString(),
             args.amountToPay.toString(),
-            args.orderMinPriceForExtra.toString()
+            args.orderMinPriceForExtra.toString(),
+            args.jsonOfServicesInOrderDetails
         )
     }
 

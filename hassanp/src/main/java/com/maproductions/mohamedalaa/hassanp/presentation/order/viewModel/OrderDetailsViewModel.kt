@@ -7,6 +7,7 @@ import androidx.fragment.app.findFragment
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
+import com.google.gson.Gson
 import com.maproductions.mohamedalaa.hassanp.core.changeOrderNotOnTheWay
 import com.maproductions.mohamedalaa.hassanp.presentation.order.OrderDetailsFragment
 import com.maproductions.mohamedalaa.hassanp.presentation.order.OrderDetailsFragmentArgs
@@ -30,7 +31,8 @@ import kotlin.math.roundToInt
 class OrderDetailsViewModel @Inject constructor(
     application: Application,
     private val repoOrder: RepoOrder,
-    val args: OrderDetailsFragmentArgs
+    val args: OrderDetailsFragmentArgs,
+    private val gson: Gson,
 ) : AndroidViewModel(application) {
 
     val retryAbleOrderDetails = RetryAbleFlow {
@@ -213,7 +215,8 @@ class OrderDetailsViewModel @Inject constructor(
                     orderDetails.value?.id?.toString() ?: return,
                     orderDetails.value?.services?.firstOrNull()?.categoryId?.toString() ?: return,
                     amountToPay.toString(),
-                    orderDetails.value?.orderMinPriceForExtra.orZero().toString()
+                    orderDetails.value?.orderMinPriceForExtra.orZero().toString(),
+                    orderDetails.value?.services?.toJsonOrNull(gson).orEmpty()
                 )
             }
             else -> return

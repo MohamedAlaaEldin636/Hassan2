@@ -31,13 +31,16 @@
         <deepLink
             android:id="@+id/deep_link_dest_confirm_finishing_work_dialog"
             android:autoVerify="true"
-            app:uri="dialog-dest://com.grand.hassan.shared.confirm.finishing.work.dialog/{orderId}/{categoryId}/{amountToPay}/{orderMinPriceForExtra}"/>
+            app:uri="dialog-dest://com.grand.hassan.shared.confirm.finishing.work.dialog/{orderId}/{categoryId}/{amountToPay}/{orderMinPriceForExtra}/{jsonOfServicesInOrderDetails}"/>
         <argument
             android:name="amountToPay"
             app:argType="float" />
         <argument
             android:name="orderMinPriceForExtra"
             app:argType="float" />
+        <argument
+            android:name="jsonOfServicesInOrderDetails"
+            app:argType="string" />
     </dialog>
     <dialog
         android:id="@+id/dest_money_received_dialog"
@@ -80,10 +83,13 @@
         <argument
             android:name="orderMinPriceForExtra"
             app:argType="float" />
+        <argument
+            android:name="jsonOfServicesInOrderDetails"
+            app:argType="string" />
         <deepLink
             android:id="@+id/deep_link_dest_adding_services"
             android:autoVerify="true"
-            app:uri="fragment-dest://com.grand.hassan.shared.adding.services/{orderId}/{categoryId}/{amountToPay}/{orderMinPriceForExtra}"/>
+            app:uri="fragment-dest://com.grand.hassan.shared.adding.services/{orderId}/{categoryId}/{amountToPay}/{orderMinPriceForExtra}/{jsonOfServicesInOrderDetails}"/>
     </fragment>
     <dialog
         android:id="@+id/dest_cancellation_reason_dialog"

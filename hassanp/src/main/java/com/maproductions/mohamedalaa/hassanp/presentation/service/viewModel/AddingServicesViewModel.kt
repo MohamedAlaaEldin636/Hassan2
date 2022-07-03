@@ -13,14 +13,17 @@ import com.google.gson.Gson
 import com.maproductions.mohamedalaa.hassanp.presentation.service.AddingServicesFragmentArgs
 import com.maproductions.mohamedalaa.hassanp.presentation.service.adapters.RVItemAddingServices
 import com.maproductions.mohamedalaa.shared.R
+import com.maproductions.mohamedalaa.shared.core.customTypes.RetryAbleFlow
 import com.maproductions.mohamedalaa.shared.core.extensions.*
 import com.maproductions.mohamedalaa.shared.data.home.repository.RepoHome
 import com.maproductions.mohamedalaa.shared.domain.home.DeliveryData
 import com.maproductions.mohamedalaa.shared.domain.home.RequestServiceWithCount
+import com.maproductions.mohamedalaa.shared.domain.orders.ServiceInOrderDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapLatest
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,6 +33,13 @@ class AddingServicesViewModel @Inject constructor(
     repoHome: RepoHome,
     private val gson: Gson,
 ) : AndroidViewModel(application) {
+
+    val currentServices = args.jsonOfServicesInOrderDetails
+        .fromJsonOrNull<List<ServiceInOrderDetails>>(gson).orEmpty()
+
+    val retryAbleFlow = RetryAbleFlow {
+        repoHome.getServicesOfCategoryAllPages(args.categoryId)
+    }
 
     val search = MutableLiveData("")
 
