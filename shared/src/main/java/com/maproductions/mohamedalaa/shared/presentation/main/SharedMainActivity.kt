@@ -12,6 +12,7 @@ import androidx.lifecycle.distinctUntilChanged
 import androidx.navigation.NavArgument
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import com.google.firebase.messaging.FirebaseMessaging
@@ -195,6 +196,23 @@ abstract class SharedMainActivity : MABaseActivity<ActivityMainBinding>() {
                     )
                 }
             }
+        }
+    }
+
+    override fun onBackPressed() {
+        val navController = try {
+            Navigation.findNavController(
+                this,
+                R.id.mainNavHostFragment
+            )
+        }catch (e: IllegalStateException) {
+            null
+        }
+
+        if (navController?.previousBackStackEntry != null) {
+            super.onBackPressed()
+        }else {
+            Timber.e("Show dialog isa.")
         }
     }
 
