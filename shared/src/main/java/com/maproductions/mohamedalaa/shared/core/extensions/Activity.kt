@@ -2,6 +2,7 @@ package com.maproductions.mohamedalaa.shared.core.extensions
 
 import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.DialogInterface
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
@@ -21,6 +22,31 @@ fun FragmentActivity.showAlertDialog(
             getString(R.string.ok)
         ) { _, _ ->
             onPositiveButtonClick()
+        }
+        .setOnDismissListener {
+            onDismissListener()
+        }
+        .create()
+        .show()
+}
+
+fun FragmentActivity.showAlertDialog(
+    title: String,
+    message: String,
+    positiveText: CharSequence,
+    negativeText: CharSequence,
+    onPositiveButtonClick: (DialogInterface) -> Unit,
+    onNegativeButtonClick: (DialogInterface) -> Unit,
+    onDismissListener: () -> Unit = {},
+) {
+    AlertDialog.Builder(this)
+        .setTitle(title)
+        .setMessage(message)
+        .setPositiveButton(positiveText) { dialog, _ ->
+            onPositiveButtonClick(dialog)
+        }
+        .setNegativeButton(negativeText) { dialog, _ ->
+            onNegativeButtonClick(dialog)
         }
         .setOnDismissListener {
             onDismissListener()

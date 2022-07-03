@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="exit_from_app">الخروج من التطبيق</string>
+    <string name="are_you_sure_to_exit_from_app">هل انت متاكد من الخروج من التطبيق</string>
+    <string name="yes">نعم</string>
+    <string name="cancel_action">الغاء الامر</string>
     <string name="order_additions_9">إضافات الطلب</string>
     <string name="wallet_specific_limit_var">عند وصول رصيدك الي -%1$s سيتم إيقاف حسابك مباشرة حتي تقوم بتسديد المبلغ المطلوب الي إدارة التطبيق</string>
     <string name="var_points_have_been_replaced_by_discount_code">تم استبدال %1$s نقطه من نقاطك بكود الخصم</string>

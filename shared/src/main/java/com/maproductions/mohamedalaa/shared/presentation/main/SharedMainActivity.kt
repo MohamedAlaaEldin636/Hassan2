@@ -26,6 +26,7 @@ import com.maproductions.mohamedalaa.shared.core.customTypes.StaticValues
 import com.maproductions.mohamedalaa.shared.core.extensions.inflateGraph
 import com.maproductions.mohamedalaa.shared.core.extensions.navigateDeepLinkWithoutOptions
 import com.maproductions.mohamedalaa.shared.core.extensions.setupWithNavControllerMA
+import com.maproductions.mohamedalaa.shared.core.extensions.showAlertDialog
 import com.maproductions.mohamedalaa.shared.databinding.ActivityMainBinding
 import com.maproductions.mohamedalaa.shared.presentation.base.MABaseActivity
 import com.maproductions.mohamedalaa.shared.presentation.main.viewModels.MainViewModel
@@ -212,7 +213,18 @@ abstract class SharedMainActivity : MABaseActivity<ActivityMainBinding>() {
         if (navController?.previousBackStackEntry != null) {
             super.onBackPressed()
         }else {
-            Timber.e("Show dialog isa.")
+            showAlertDialog(
+                getString(R.string.exit_from_app),
+                getString(R.string.are_you_sure_to_exit_from_app),
+                positiveText = getString(R.string.yes),
+                negativeText = getString(R.string.cancel_action),
+                onPositiveButtonClick = {
+                    super.onBackPressed()
+                },
+                onNegativeButtonClick = {
+                    it.dismiss()
+                }
+            )
         }
     }
 
