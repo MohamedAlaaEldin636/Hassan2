@@ -8,9 +8,13 @@ import com.maproductions.mohamedalaa.hassanu.databinding.FragmentAddingNewAddres
 import com.maproductions.mohamedalaa.hassanu.databinding.FragmentServicesSelectionBinding
 import com.maproductions.mohamedalaa.hassanu.presentation.address.viewModel.AddNewAddressViewModel
 import com.maproductions.mohamedalaa.hassanu.presentation.service.viewModel.ServicesSelectionViewModel
+import com.maproductions.mohamedalaa.shared.core.customTypes.MABaseResponse
+import com.maproductions.mohamedalaa.shared.core.customTypes.MAResult
+import com.maproductions.mohamedalaa.shared.core.customTypes.RetryAbleFlow
 import com.maproductions.mohamedalaa.shared.core.extensions.handleRetryAbleFlowWithMustHaveResultWithNullability
 import com.maproductions.mohamedalaa.shared.presentation.base.MABaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.emptyFlow
 
 @AndroidEntryPoint
 class AddNewAddressFragment : MABaseFragment<FragmentAddingNewAddressBinding>() {
@@ -28,11 +32,7 @@ class AddNewAddressFragment : MABaseFragment<FragmentAddingNewAddressBinding>() 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        handleRetryAbleFlowWithMustHaveResultWithNullability(viewModel.retryAbleFlowCities) {
-            viewModel.listOfCities.value = it.data
-
-            viewModel.loadAreas(this)
-        }
+        activityViewModel?.globalLoading?.postValue(false)
     }
 
 }

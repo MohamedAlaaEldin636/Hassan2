@@ -31,7 +31,6 @@ class AddNewAddressViewModel @Inject constructor(
 
     val addressName = MutableLiveData("")
 
-    val retryAbleFlowCities = RetryAbleFlow(repoSettings::getCities)
     val listOfCities = MutableLiveData(emptyList<IdAndName>())
     private val selectedCityIndex = MutableLiveData(0)
     val city = switchMapMultiple2(listOfCities, selectedCityIndex) {
@@ -49,13 +48,30 @@ class AddNewAddressViewModel @Inject constructor(
     val extraDescription = MutableLiveData("")
 
     fun showGovernoratesSelection(view: View) {
-        view.showPopup(listOfCities.value.orEmpty().map { it.name }) { menuItem ->
-            val title = menuItem.title?.toString().orEmpty()
-            if (title == city.value) {
-                return@showPopup
+        val action = {
+            view.showPopup(listOfCities.value.orEmpty().map { it.name }) { menuItem ->
+                val title = menuItem.title?.toString().orEmpty()
+                if (title == city.value) {
+                    return@showPopup
+                }
+                selectedCityIndex.value = listOfCities.value.orEmpty().indexOfFirst { it.name == title }
+                loadAreas(view.findFragment())
             }
-            selectedCityIndex.value = listOfCities.value.orEmpty().indexOfFirst { it.name == title }
-            loadAreas(view.findFragment())
+        }
+
+        if (!listOfCities.value.isNullOrEmpty()) {
+            action()
+        }else {
+            val fragment = view.findFragment<AddNewAddressFragment>()
+
+            fragment.executeOnGlobalLoadingAndAutoHandleRetryCancellable(
+                afterShowingLoading = {
+                    repoSettings.getCitiesSuspend()
+                },
+                afterHidingLoading = {
+                    action()
+                }
+            )
         }
     }
 
@@ -67,9 +83,8 @@ class AddNewAddressViewModel @Inject constructor(
     }
 
     fun addAddress(view: View) {
-        if (addressName.value.isNullOrEmpty() || streetName.value.isNullOrEmpty()
-            /*|| extraDescription.value.isNullOrEmpty()*/) {
-            return view.context.showErrorToast(view.context.getString(SR.string.all_fields_required))
+        if (addressName.value.isNullOrEmpty()) {
+            return view.context.showErrorToast(view.context.getString(SR.string.address_required))
         }
 
         val fragment = view.findFragment<AddNewAddressFragment>()
@@ -83,8 +98,8 @@ class AddNewAddressViewModel @Inject constructor(
                     locationData.latitude,
                     locationData.longitude,
                     locationData.address,
-                    getSelectedCity()?.id.orZero(),
-                    getSelectedArea()?.id.orZero(),
+                    getSelectedCity()?.id,
+                    getSelectedArea()?.id,
                 )
             },
             afterHidingLoading = {
@@ -100,7 +115,7 @@ class AddNewAddressViewModel @Inject constructor(
         )
     }
 
-    fun loadAreas(fragment: AddNewAddressFragment) {
+    private fun loadAreas(fragment: AddNewAddressFragment) {
         fragment.executeOnGlobalLoadingAndAutoHandleRetryCancellable2(
             canCancelDialog = false,
             afterShowingLoading = {

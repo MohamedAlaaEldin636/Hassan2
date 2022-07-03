@@ -96,6 +96,8 @@ class RepoSettings @Inject constructor(
         emit(dataSource.getCities())
     }
 
+    suspend fun getCitiesSuspend() = dataSource.getCities()
+
     suspend fun getAreas(cityId: Int) = dataSource.getAreas(cityId)
 
     suspend fun addAddress(
@@ -105,8 +107,8 @@ class RepoSettings @Inject constructor(
         latitude: String,
         longitude: String,
         address: String,
-        cityId: Int,
-        areaId: Int,
+        cityId: Int?,
+        areaId: Int?,
     ) = dataSource.addAddress(title, streetName, extraDescription, latitude, longitude, address, cityId, areaId)
 
     fun getNotificationsCount() = flowInitialLoadingWithMinExecutionTime<MABaseResponse<Int>> {

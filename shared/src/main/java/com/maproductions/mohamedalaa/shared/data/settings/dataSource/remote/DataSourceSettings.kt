@@ -105,18 +105,29 @@ class DataSourceSettings @Inject constructor(
         latitude: String,
         longitude: String,
         address: String,
-        cityId: Int,
-        areaId: Int,
+        cityId: Int?,
+        areaId: Int?,
     ) = safeApiCall {
         val map = mutableMapOf<String, String>()
         if (extraDescription.isNotEmpty()) {
             map[ApiConst.Query.EXTRA_DESCRIPTION] = extraDescription
         }
 
+        if (cityId != null) {
+            map[ApiConst.Query.CITY_ID] = cityId.toString()
+        }
+
+        if (streetName.isNotEmpty()) {
+            map[ApiConst.Query.STREET_NAME] = streetName
+        }
+
+        if (areaId != null) {
+            map[ApiConst.Query.AREA_ID] = areaId.toString()
+        }
+
         apiService.addAddress(
-            title, streetName,
+            title,
             latitude, longitude, address,
-            cityId, areaId,
             map,
             getAuthorizationHeader()
         )
