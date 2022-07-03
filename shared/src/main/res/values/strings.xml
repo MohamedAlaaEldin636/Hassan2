@@ -54,6 +54,10 @@
     <string name="at_least_name_or_image_required">على الاقل حقل الاسم او حقل الصورة مطلوب</string>
     <string name="name_required">حقل الاسم مطلوب</string>
     <string name="phone_required">حقل رقم الهاتف مطلوب</string>
+    <string name="relative_phone_required">حقل رقم هاتف قريب من الدرجه الاولي مطلوب</string>
+    <string name="password_required">حقل كلمة المرور مطلوب</string>
+    <string name="confirm_password_required">حقل كلمة تاكيد المرور مطلوب</string>
+    <string name="address_required">حقل العنوان مطلوب</string>
     <string name="birth_date_required">حقل تاريخ الميلاد مطلوب</string>
     <string name="profile_image_required">حقل صورتك مطلوب</string>
     <string name="front_id_image_required">حقل صورة البطاقة الامامية مطلوب</string>

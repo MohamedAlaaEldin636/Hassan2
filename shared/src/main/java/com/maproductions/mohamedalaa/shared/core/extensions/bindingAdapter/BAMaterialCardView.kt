@@ -9,6 +9,13 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.google.android.material.card.MaterialCardView
+import com.maproductions.mohamedalaa.shared.core.extensions.dpToPx
+import kotlin.math.roundToInt
+
+@BindingAdapter("materialCardView_setStrokeWidthIntInDpBA")
+fun MaterialCardView.setStrokeWidthIntInDpBA(widthInDp: Int?) {
+	strokeWidth = context?.dpToPx(widthInDp?.toFloat() ?: return)?.roundToInt() ?: return
+}
 
 @BindingAdapter("materialCardView_setStrokeWidthBA")
 fun MaterialCardView.setStrokeWidthBA(@Px widthInPixels: Int?) {

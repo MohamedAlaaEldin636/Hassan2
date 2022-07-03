@@ -7,16 +7,15 @@ import android.net.Uri
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
+import androidx.lifecycle.*
 import androidx.navigation.findNavController
 import androidx.paging.map
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.maproductions.mohamedalaa.hassanp.presentation.auth.RegisterFormFragment
 import com.maproductions.mohamedalaa.shared.R
+import com.maproductions.mohamedalaa.shared.core.customTypes.ErrorMsgNoneSingleAll
 import com.maproductions.mohamedalaa.shared.core.customTypes.IdAndName
+import com.maproductions.mohamedalaa.shared.core.customTypes.map
 import com.maproductions.mohamedalaa.shared.core.extensions.*
 import com.maproductions.mohamedalaa.shared.data.api.ApiConst
 import com.maproductions.mohamedalaa.shared.data.auth.repository.RepoAuth
@@ -110,6 +109,18 @@ class RegisterFormViewModel @Inject constructor(
 
     val video = MutableLiveData<Uri>()
 
+    val errorImageProfile: MutableLiveData<Boolean> = imageProfile.map { false }
+    val errorName: MutableLiveData<Int?> = name.map { null }
+    val errorPhone: MutableLiveData<Int?> = phone.map { null }
+    val errorAddress: MutableLiveData<Int?> = address.map { null }
+    val errorRelativePhone: MutableLiveData<Int?> = relativePhone.map { null }
+    //val errorServices: MutableLiveData<Boolean> = imageProfile.map { false }
+    val errorImageFrontId: MutableLiveData<Boolean> = imageFrontId.map { false }
+    val errorImageBackId: MutableLiveData<Boolean> = imageBackId.map { false }
+    val errorBirthDate: MutableLiveData<Int?> = dateYear.map { null }
+    val errorPassword: MutableLiveData<Int?> = password.map { null }
+    val errorConfirmPassword: MutableLiveData<Int?> = confirmPassword.map { null }
+
     fun goBack(view: View) {
         view.findNavController().navigateUp()
     }
@@ -172,9 +183,62 @@ class RegisterFormViewModel @Inject constructor(
         view.findFragment<RegisterFormFragment>().pickVideoOrRequestPermissions()
     }
 
+    private fun checkInputsThenReturnStringResErrorMsgOrNull(): Int? {
+        val errorMsg = ErrorMsgNoneSingleAll(R.string.check_required_fields)
+
+        val checker: LiveData<String>.(MutableLiveData<Int?>, Int) -> Unit = { mutableLiveDtata, res ->
+            if (value.isNullOrEmpty()) {
+                res.also {
+                    mutableLiveDtata.value = it
+                    errorMsg.value = it
+                }
+            }
+        }
+
+        if (imageProfile.value == null) {
+            errorImageProfile.value = true
+            errorMsg.value = R.string.profile_image_required
+        }
+
+        name.checker(errorName, R.string.name_required)
+
+        phone.checker(errorPhone, R.string.phone_required)
+
+        address.checker(errorAddress, R.string.address_required)
+
+        relativePhone.checker(errorRelativePhone, R.string.relative_phone_required)
+
+        if (adapterServices.getSelectedItemsIds().isEmpty()) {
+            //errorServices.value = true
+            errorMsg.value = R.string.select_at_least_one_service
+        }
+
+        if (imageFrontId.value == null) {
+            errorImageFrontId.value = true
+            errorMsg.value = R.string.front_id_image_required
+        }
+
+        if (imageBackId.value == null) {
+            errorImageBackId.value = true
+            errorMsg.value = R.string.back_id_image_required
+        }
+
+        dateYear.checker(errorBirthDate, R.string.birth_date_required)
+
+        password.checker(errorPassword, R.string.password_required)
+
+        confirmPassword.checker(errorConfirmPassword, R.string.confirm_password_required)
+
+        return errorMsg.value
+    }
+
     fun next(view: View) {
         if (agreeOnTermsAndConditions.value != true) {
             return view.context.showErrorToast(view.context.getString(R.string.must_accept_terms_and_conditions))
+        }
+
+        checkInputsThenReturnStringResErrorMsgOrNull()?.also {
+            return view.context.showErrorToast(view.context.getString(it))
         }
 
         if (!phone.value.isValidIraqPhoneWithoutPrefix964()) {
@@ -183,22 +247,6 @@ class RegisterFormViewModel @Inject constructor(
 
         if (!relativePhone.value.isValidIraqPhoneWithoutPrefix964()) {
             return view.context.showErrorToast(view.context.getString(R.string.relative_phone_number_is_wrong))
-        }
-
-        if (imageProfile.value == null || name.value.isNullOrEmpty() || phone.value.isNullOrEmpty()
-            || address.value.isNullOrEmpty() || relativePhone.value.isNullOrEmpty()
-            || adapterServices.getSelectedItemsIds().isEmpty() || imageFrontId.value == null
-            || imageBackId.value == null || dateDay.value.isNullOrEmpty()
-            || dateMonth.value.isNullOrEmpty() || dateYear.value.isNullOrEmpty()
-            || password.value.isNullOrEmpty() || confirmPassword.value.isNullOrEmpty()) {
-            Timber.e("${imageProfile.value == null} || ${name.value.isNullOrEmpty()} || ${phone.value.isNullOrEmpty()}\n" +
-                    "            || ${address.value.isNullOrEmpty()} || ${relativePhone.value.isNullOrEmpty()}\n" +
-                    "            || ${adapterServices.getSelectedItemsIds().isNotEmpty()} || ${imageFrontId.value == null}\n" +
-                    "            ||  || ${dateDay.value.isNullOrEmpty()}\n" +
-                    "            || ${dateMonth.value.isNullOrEmpty()} || ${dateYear.value.isNullOrEmpty()}\n" +
-                    "            || ${password.value.isNullOrEmpty()} || ${confirmPassword.value.isNullOrEmpty()}")
-
-            return view.context.showErrorToast(view.context.getString(R.string.check_required_fields))
         }
 
         if (password.value != confirmPassword.value) {
