@@ -236,7 +236,7 @@ class OrderDetailsFragment : MABaseFragment<FragmentOrderDetailsBinding>(), Loca
             it / 1000.0
         }
 
-        viewModel.canPressOnArrived.value = distanceInKm <= 5
+        viewModel.canPressOnArrived.value = distanceInKm <= 1
     }
 
     override fun onChangeLocationFailure(context: Context?, exception: Exception?) {
