@@ -143,6 +143,8 @@ class MainActivity : SharedMainActivity(), MainViewModel.Listener, LocationHandl
     override fun onDestroy() {
         channelEvent.unsubscribe()
 
+        stopLocationTracking()
+
         super.onDestroy()
     }
 
