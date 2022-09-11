@@ -32,13 +32,13 @@ class AddNewAddressViewModel @Inject constructor(
     val addressName = MutableLiveData("")
 
     val listOfCities = MutableLiveData(emptyList<IdAndName>())
-    private val selectedCityIndex = MutableLiveData(0)
+    private val selectedCityIndex = MutableLiveData(-1)
     val city = switchMapMultiple2(listOfCities, selectedCityIndex) {
         getSelectedCity()?.name.orEmpty()
     }
 
     private val listOfAreas = MutableLiveData(emptyList<IdAndName>())
-    private val selectedAreaIndex = MutableLiveData(0)
+    private val selectedAreaIndex = MutableLiveData(-1)
     val area = switchMapMultiple2(listOfAreas, selectedAreaIndex) {
         getSelectedArea()?.name.orEmpty()
     }
@@ -48,19 +48,20 @@ class AddNewAddressViewModel @Inject constructor(
     val extraDescription = MutableLiveData("")
 
     fun showGovernoratesSelection(view: View) {
-        val action = {
-            view.showPopup(listOfCities.value.orEmpty().map { it.name }) { menuItem ->
+        val action: (List<IdAndName>) -> Unit = { list ->
+            view.showPopup(list.map { it.name }) { menuItem ->
                 val title = menuItem.title?.toString().orEmpty()
                 if (title == city.value) {
                     return@showPopup
                 }
+                listOfCities.value = list
                 selectedCityIndex.value = listOfCities.value.orEmpty().indexOfFirst { it.name == title }
                 loadAreas(view.findFragment())
             }
         }
 
         if (!listOfCities.value.isNullOrEmpty()) {
-            action()
+            action(listOfCities.value.orEmpty())
         }else {
             val fragment = view.findFragment<AddNewAddressFragment>()
 
@@ -69,7 +70,7 @@ class AddNewAddressViewModel @Inject constructor(
                     repoSettings.getCitiesSuspend()
                 },
                 afterHidingLoading = {
-                    action()
+                    action(it.orEmpty())
                 }
             )
         }
@@ -115,6 +116,18 @@ class AddNewAddressViewModel @Inject constructor(
         )
     }
 
+    /*fun loadListOfGovernorates(fragment: AddNewAddressFragment) {
+        fragment.executeOnGlobalLoadingAndAutoHandleRetryCancellable2(
+            canCancelDialog = false,
+            afterShowingLoading = {
+                repoSettings.getCities()
+            },
+            afterHidingLoading = {
+                listOfAreas.value = it.data
+            }
+        )
+    }*/
+
     private fun loadAreas(fragment: AddNewAddressFragment) {
         fragment.executeOnGlobalLoadingAndAutoHandleRetryCancellable2(
             canCancelDialog = false,
@@ -123,6 +136,11 @@ class AddNewAddressViewModel @Inject constructor(
             },
             afterHidingLoading = {
                 listOfAreas.value = it.data
+
+                showCitiesSelection(
+                    fragment.binding?.cityTextInputLayout
+                        ?: return@executeOnGlobalLoadingAndAutoHandleRetryCancellable2
+                )
             }
         )
     }

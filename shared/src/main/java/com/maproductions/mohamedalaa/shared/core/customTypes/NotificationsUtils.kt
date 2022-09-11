@@ -107,6 +107,7 @@ object NotificationsUtils {
         channelId: String,
         channelName: String,
         notificationId: Int,
+        //type: NotificationType?,
         uri: Uri? = null
     ) {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
