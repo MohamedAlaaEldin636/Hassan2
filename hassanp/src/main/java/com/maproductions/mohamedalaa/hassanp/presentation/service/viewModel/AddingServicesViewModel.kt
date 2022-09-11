@@ -92,7 +92,7 @@ class AddingServicesViewModel @Inject constructor(
             "dialog-dest",
             "com.grand.hassan.shared.money.received.dialog.with.list.of.services",
             args.orderId.toString(),
-            args.amountToPay.toString(),
+            total.toString(),
             jsonListOfRequestServiceWithCount
         )
     }
