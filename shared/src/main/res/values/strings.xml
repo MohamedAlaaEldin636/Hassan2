@@ -261,6 +261,7 @@
     <string name="order_details">تفاصيل الطلب</string>
     <string name="filter_orders">تصفية الطلبات</string>
     <string name="are_you_sure_about_order_cancellation">هل انت متأكد من الغاء الطلب</string>
+    <string name="are_you_sure_you_wanna_cancel_order">هل أنت متأكد من الغاء الطلب ؟</string>
     <string name="are_you_sure_about_order_cancellation_with_fees_part_1">هل انت متأكد من الغاء الطلب لقد تحرك مقدم الخدمة بالفعل في الطريق سيتم فرض غرامه</string>
     <string name="are_you_sure_about_order_cancellation_with_fees_part_2">اذا قمت بإلغاء الطلب</string>
     <string name="my_account">حسابي</string>

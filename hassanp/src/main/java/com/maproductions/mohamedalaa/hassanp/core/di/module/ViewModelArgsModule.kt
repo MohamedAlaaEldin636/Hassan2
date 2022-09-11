@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import com.maproductions.mohamedalaa.hassanp.presentation.auth.NewPasswordFragmentArgs
 import com.maproductions.mohamedalaa.hassanp.presentation.home.NewOrderDialogFragmentArgs
 import com.maproductions.mohamedalaa.hassanp.presentation.myAccount.MyAccountFragmentArgs
-import com.maproductions.mohamedalaa.hassanp.presentation.order.CancellationReasonDialogFragmentArgs
 import com.maproductions.mohamedalaa.hassanp.presentation.order.ConfirmFinishingWorkDialogFragmentArgs
 import com.maproductions.mohamedalaa.hassanp.presentation.order.MoneyReceivedDialogFragmentArgs
 import com.maproductions.mohamedalaa.hassanp.presentation.order.OrderDetailsFragmentArgs
@@ -32,11 +31,6 @@ object ViewModelArgsModule {
     @Provides
     fun provideNewOrderDialogFragmentArgs(state: SavedStateHandle): NewOrderDialogFragmentArgs {
         return NewOrderDialogFragmentArgs.fromBundle(state.asBundle())
-    }
-
-    @Provides
-    fun provideCancellationReasonDialogFragmentArgs(state: SavedStateHandle): CancellationReasonDialogFragmentArgs {
-        return CancellationReasonDialogFragmentArgs.fromBundle(state.asBundle())
     }
 
     @Provides

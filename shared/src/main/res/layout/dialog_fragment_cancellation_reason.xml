@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    tools:context="com.maproductions.mohamedalaa.hassanp.presentation.order.CancellationReasonDialogFragment"
+    tools:context="com.maproductions.mohamedalaa.shared.presentation.order.CancellationReasonDialogFragment"
 
     tools:ignore="ContentDescription">
 
     <data>
         <variable
             name="viewModel"
-            type="com.maproductions.mohamedalaa.hassanp.presentation.order.viewModel.CancellationReasonViewModel" />
+            type="com.maproductions.mohamedalaa.shared.presentation.order.viewModel.CancellationReasonViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

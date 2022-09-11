@@ -50,7 +50,6 @@ class MainActivity : SharedMainActivity(), MainViewModel.Listener, LocationHandl
         R.id.dest_accepted_order_dialog,
         R.id.dest_confirm_finishing_work_dialog,
         R.id.dest_money_received_dialog,
-        R.id.dest_cancellation_reason_dialog,
         R.id.dest_new_order_dialog,
         R.id.dest_registration_done_dialog,
         R.id.dest_stop_recieving_orders_dialog,

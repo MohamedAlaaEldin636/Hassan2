@@ -354,5 +354,20 @@
             android:autoVerify="true"
             app:uri="fragment-dest://com.grand.hassan.shared.location.tracking/{orderId}/{latitude}/{longitude}/{name}/{imageUrl}/{averageRate}" />
     </fragment>
+    <dialog
+        android:id="@+id/dest_cancellation_reason_dialog"
+        android:name="com.maproductions.mohamedalaa.shared.presentation.order.CancellationReasonDialogFragment"
+        tools:layout="@layout/dialog_fragment_cancellation_reason" >
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <argument
+            android:name="cancellationFees"
+            app:argType="float" />
+        <deepLink
+            android:id="@+id/deep_link_dest_cancellation_reason_dialog"
+            android:autoVerify="true"
+            app:uri="dialog-dest://com.grand.hassan.shared.cancellation.reason.dialog/{orderId}/{cancellationFees}"/>
+    </dialog>
 
 </navigation>

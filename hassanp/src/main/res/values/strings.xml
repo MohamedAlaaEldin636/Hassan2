@@ -22,7 +22,6 @@
     <string name="reject">رفض</string>
     <string name="new_order">طلب جديد</string>
     <string name="select_recieving_orders_stopping_period">اختر مدة إيقاف تلقي الطلبات</string>
-    <string name="are_you_sure_you_wanna_cancel_order">هل أنت متأكد من الغاء الطلب ؟</string>
     <string name="one_hour">ساعه واحدة</string>
     <string name="hours_8">8 ساعات</string>
     <string name="hours_12">12 ساعة</string>

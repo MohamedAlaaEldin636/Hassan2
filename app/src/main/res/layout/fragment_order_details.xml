@@ -851,6 +851,31 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/arrivedStatusCancelOrderButton"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    materialButton_backgroundTintBA="@{viewModel.orderStatus == ApiOrderStatus.PENDING ? @color/colorPrimaryDark : @color/black}"
+                    android:background="@{viewModel.orderStatus == ApiOrderStatus.PENDING ? @drawable/dr_project_round_buttom_enable : @drawable/dr_black_round}"
+                    tools:background="@drawable/dr_black_round"
+                    style="@style/Widget.MaterialComponents.Button"
+
+                    android:text="@string/cancel_order"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextTajawalMedium16"
+                    android:textColor="@{viewModel.orderStatus == ApiOrderStatus.PENDING ? @color/black : @color/white}"
+                    tools:textColor="@color/white"
+
+                    android:onClick="@{v -> viewModel.cancelOrder(v)}"
+
+                    android:visibility="@{viewModel.orderStatus == ApiOrderStatus.ARRIVED,default=gone}"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>

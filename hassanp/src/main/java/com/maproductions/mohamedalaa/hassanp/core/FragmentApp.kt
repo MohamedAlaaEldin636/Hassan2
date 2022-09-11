@@ -10,9 +10,3 @@ fun MABaseFragment<*>.changeOrderNotOnTheWay(orderId: Int) {
         orderId, false, activity as? MainViewModel.Listener ?: return
     )
 }
-
-fun MADialogFragment<*>.changeOrderNotOnTheWay(orderId: Int) {
-    activityViewModel?.changeTrackingForOrder(
-        orderId, false, activity as? MainViewModel.Listener ?: return
-    )
-}

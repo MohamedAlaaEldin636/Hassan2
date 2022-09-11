@@ -60,7 +60,8 @@ abstract class SharedMainActivity : MABaseActivity<ActivityMainBinding>() {
             R.id.dest_lottie_loader_dialog,
             R.id.dest_showing_image_dialog,
             R.id.dest_video_player_dialog,
-            R.id.dest_cancel_order_dialog
+            R.id.dest_cancel_order_dialog,
+            R.id.dest_cancellation_reason_dialog,
         )
     }
 

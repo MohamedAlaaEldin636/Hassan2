@@ -147,8 +147,6 @@ class OrderDetailsViewModel @Inject constructor(
     fun cancelOrder(view: View) {
         val context = view.context ?: return
 
-        val orderId = orderDetails.value?.id ?: return
-
         val cancellationFeesPercent = orderDetails.value?.cancellationFeesPercent
             ?.roundHalfUpToIntOrFloat(1)?.toFloat() ?: return
 
@@ -160,12 +158,31 @@ class OrderDetailsViewModel @Inject constructor(
             context.getString(R.string.are_you_sure_about_order_cancellation)
         }
 
-        view.findNavControllerOfProject().navigateDeepLinkWithoutOptions(
+        /*view.findNavControllerOfProject().navigateDeepLinkWithoutOptions(
             "dialog-dest",
             "com.grand.hassan.shared.cancel.order.dialog",
             orderId.toString(),
             text
-        )
+        )*/
+
+        val details = orderDetails.value ?: return
+
+        if (orderStatus.value == ApiOrderStatus.ACCEPTED
+            || orderStatus.value == ApiOrderStatus.PENDING) {
+            view.findNavControllerOfProject().navigateDeepLinkWithoutOptions(
+                "dialog-dest",
+                "com.grand.hassan.shared.cancel.order.dialog",
+                details.id.toString(),
+                text
+            )
+        }else {
+            view.findNavControllerOfProject().navigateDeepLinkWithoutOptions(
+                "dialog-dest",
+                "com.grand.hassan.shared.cancellation.reason.dialog",
+                details.id.toString(),
+                details.cancellationFeesPercent.toString()
+            )
+        }
     }
 
     fun rateProvider(view: View) {

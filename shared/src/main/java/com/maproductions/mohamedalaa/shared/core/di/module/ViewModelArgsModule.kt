@@ -11,6 +11,7 @@ import com.maproductions.mohamedalaa.shared.presentation.location.LocationSelect
 import com.maproductions.mohamedalaa.shared.presentation.location.LocationTrackingFragmentArgs
 import com.maproductions.mohamedalaa.shared.presentation.location.LocationViewerFragmentArgs
 import com.maproductions.mohamedalaa.shared.presentation.order.CancelOrderDialogFragmentArgs
+import com.maproductions.mohamedalaa.shared.presentation.order.CancellationReasonDialogFragmentArgs
 import com.maproductions.mohamedalaa.shared.presentation.search.SearchQueriesFragmentArgs
 import com.maproductions.mohamedalaa.shared.presentation.settings.ImageWithTextAndTitleFragmentArgs
 import com.maproductions.mohamedalaa.shared.presentation.settings.MSGFormFragmentArgs
@@ -22,6 +23,11 @@ import dagger.hilt.android.components.ViewModelComponent
 @Module
 @InstallIn(ViewModelComponent::class)
 object ViewModelArgsModule {
+
+    @Provides
+    fun provideCancellationReasonDialogFragmentArgs(state: SavedStateHandle): CancellationReasonDialogFragmentArgs {
+        return CancellationReasonDialogFragmentArgs.fromBundle(state.asBundle())
+    }
 
     @Provides
     fun provideNavSharedArgs(): NavSharedArgs {
