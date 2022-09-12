@@ -293,4 +293,5 @@
     <string name="because_of">بسبب</string>
     <string name="with_date">بتاريخ</string>
     <string name="max_video_hint">الفيديو بحد اقصى 15 ثانية</string>
+    <string name="new_order">طلب جديد</string>
 </resources>

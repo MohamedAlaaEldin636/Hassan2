@@ -36,8 +36,11 @@ object NotificationsUtils {
     private const val MESSAGE_DETAILS_CHANNEL_ID = "MESSAGE_DETAILS_CHANNEL_ID"
     private const val MESSAGE_DETAILS_NOTIFICATION_ID = 52
 
-    private const val COMPLETE_PROFILE_CHANNEL_ID = "MESSAGE_DETAILS_CHANNEL_ID"
+    private const val COMPLETE_PROFILE_CHANNEL_ID = "COMPLETE_PROFILE_CHANNEL_ID"
     private const val COMPLETE_PROFILE_NOTIFICATION_ID = 59
+
+    private const val NEW_ORDER_CHANNEL_ID = "NEW_ORDER_CHANNEL_ID"
+    private const val NEW_ORDER_NOTIFICATION_ID = 63
 
     fun getMainActivityPendingIntent(applicationContext: Context): PendingIntent {
         val intent = Intent(applicationContext, StaticValues.mainActivityClazz)
@@ -59,37 +62,65 @@ object NotificationsUtils {
         type: NotificationType?,
         sound: String?,
     ) {
-        val (channelId, channelName, notificationId) = when (type) {
-            null, NotificationType.ADMIN -> Triple(
-                NOTIFICATIONS_CHANNEL_ID,
-                appContext.getString(R.string.the_notifications),
-                NOTIFICATIONS_NOTIFICATION_ID
+        val uri = if (sound.isNullOrEmpty() || sound == "default") null else {
+            val indexOfDot = sound.indexOf(".")
+
+            val resSound: Int = appContext.resources.getIdentifier(
+                if (indexOfDot == -1) sound else sound.substring(0, indexOfDot).apply {
+                    Timber.e("NotificationsService -> string $this")
+                },
+                "raw",
+                appContext.packageName
             )
-            NotificationType.ORDER -> Triple(
-                ORDER_DETAILS_CHANNEL_ID,
-                appContext.getString(R.string.order_details),
-                ORDER_DETAILS_NOTIFICATION_ID
+
+            Timber.e("NotificationsService -> resSound $resSound")
+
+            if (resSound == 0) null else Uri.Builder()
+                .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(appContext.packageName)
+                .appendPath(resSound.toString())
+                .build()
+        }
+
+        val (channelId, channelName, notificationId) = if (uri != null) {
+            Triple(
+                NEW_ORDER_CHANNEL_ID,
+                appContext.getString(R.string.new_order),
+                NEW_ORDER_NOTIFICATION_ID
             )
-            NotificationType.WALLET -> Triple(
-                WALLET_DETAILS_CHANNEL_ID,
-                appContext.getString(R.string.wallet),
-                WALLET_DETAILS_NOTIFICATION_ID
-            )
-            NotificationType.CONFIRM_ADDITIONAL_SERVICES -> Triple(
-                CONFIRM_ADDITIONAL_SERVICES_DETAILS_CHANNEL_ID,
-                appContext.getString(R.string.addition_of_services),
-                CONFIRM_ADDITIONAL_SERVICES_DETAILS_NOTIFICATION_ID
-            )
-            NotificationType.MESSAGE -> Triple(
-                MESSAGE_DETAILS_CHANNEL_ID,
-                appContext.getString(R.string.chatting),
-                MESSAGE_DETAILS_NOTIFICATION_ID
-            )
-            NotificationType.COMPLETE_PROFILE -> Triple(
-                COMPLETE_PROFILE_CHANNEL_ID,
-                appContext.getString(R.string.complete_sign_in),
-                COMPLETE_PROFILE_NOTIFICATION_ID
-            )
+        }else {
+            when (type) {
+                null, NotificationType.ADMIN -> Triple(
+                    NOTIFICATIONS_CHANNEL_ID,
+                    appContext.getString(R.string.the_notifications),
+                    NOTIFICATIONS_NOTIFICATION_ID
+                )
+                NotificationType.ORDER -> Triple(
+                    ORDER_DETAILS_CHANNEL_ID,
+                    appContext.getString(R.string.order_details),
+                    ORDER_DETAILS_NOTIFICATION_ID
+                )
+                NotificationType.WALLET -> Triple(
+                    WALLET_DETAILS_CHANNEL_ID,
+                    appContext.getString(R.string.wallet),
+                    WALLET_DETAILS_NOTIFICATION_ID
+                )
+                NotificationType.CONFIRM_ADDITIONAL_SERVICES -> Triple(
+                    CONFIRM_ADDITIONAL_SERVICES_DETAILS_CHANNEL_ID,
+                    appContext.getString(R.string.addition_of_services),
+                    CONFIRM_ADDITIONAL_SERVICES_DETAILS_NOTIFICATION_ID
+                )
+                NotificationType.MESSAGE -> Triple(
+                    MESSAGE_DETAILS_CHANNEL_ID,
+                    appContext.getString(R.string.chatting),
+                    MESSAGE_DETAILS_NOTIFICATION_ID
+                )
+                NotificationType.COMPLETE_PROFILE -> Triple(
+                    COMPLETE_PROFILE_CHANNEL_ID,
+                    appContext.getString(R.string.complete_sign_in),
+                    COMPLETE_PROFILE_NOTIFICATION_ID
+                )
+            }
         }
 
         showNotificationToLaunchPendingIntent(
@@ -100,7 +131,7 @@ object NotificationsUtils {
             channelId,
             channelName,
             notificationId,
-            sound
+            uri
         )
     }
 
@@ -112,30 +143,8 @@ object NotificationsUtils {
         channelId: String,
         channelName: String,
         notificationId: Int,
-        sound: String?,
-        //type: NotificationType?,
-        //uri: Uri? = null
+        uri: Uri?,
     ) {
-        val uri = if (sound.isNullOrEmpty() || sound == "default") null else {
-            val indexOfDot = sound.indexOf(".")
-
-            val resSound: Int = applicationContext.resources.getIdentifier(
-                if (indexOfDot == -1) sound else sound.substring(0, indexOfDot).apply {
-                    Timber.e("NotificationsService -> string $this")
-                },
-                "raw",
-                applicationContext.packageName
-            )
-
-            Timber.e("NotificationsService -> resSound $resSound")
-
-            if (resSound == 0) null else Uri.Builder()
-                .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
-                .authority(applicationContext.packageName)
-                .appendPath(resSound.toString())
-                .build()
-        }
-
         Timber.e("NotificationsService -> uri $uri")
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
