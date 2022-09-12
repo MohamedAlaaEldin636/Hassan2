@@ -139,6 +139,8 @@ object PusherUtils {
     }
 
     fun loginBeams(isUserNotProvider: Boolean, apiToken: String, id: Int) {
+        Timber.e("BeamsCallback -> Pre login $apiToken $isUserNotProvider $id")
+
         val tokenProvider = BeamsTokenProvider(
             if (isUserNotProvider) BEAMS_TOKEN_URL_FOR_USERS else BEAMS_TOKEN_URL_FOR_PROVIDERS,
             object : AuthDataGetter {
@@ -156,6 +158,8 @@ object PusherUtils {
         )
 
         val beamNamePrefix = if (isUserNotProvider) "users" else "providers"
+        Timber.e("BeamsCallback PRE 1 MORE -> ${beamNamePrefix}-${id}")
+
         PushNotifications.clearAllState()
         PushNotifications.setUserId(
             "${beamNamePrefix}-${id}",
@@ -171,6 +175,8 @@ object PusherUtils {
                 }
             }
         )
+
+        Timber.e("BeamsCallback DONE")
     }
 
     fun getChannelEvent(

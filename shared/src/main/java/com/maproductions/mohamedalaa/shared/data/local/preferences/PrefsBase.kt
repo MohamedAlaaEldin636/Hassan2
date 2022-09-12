@@ -13,6 +13,7 @@ import com.maproductions.mohamedalaa.shared.core.extensions.fromJsonOrNull
 import com.maproductions.mohamedalaa.shared.core.extensions.toJsonOrNull
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import timber.log.Timber
 
 abstract class PrefsBase(
     protected val context: Context,
@@ -20,7 +21,7 @@ abstract class PrefsBase(
     name: String
 ) {
 
-    protected val Context.dataStore by preferencesDataStore(name = name)
+    protected val Context.dataStore by preferencesDataStore(name = "${context.packageName}$name")
 
     protected suspend inline fun <reified T> setValue(key: String, value: T?) {
         context.dataStore.edit { prefs ->
@@ -30,7 +31,13 @@ abstract class PrefsBase(
 
     protected inline fun <reified T> getValue(key: String): Flow<T?> {
         return context.dataStore.data.map { prefs ->
-            prefs[stringPreferencesKey(key)].fromJsonOrNull(gson)
+            if (prefs.contains(stringPreferencesKey(key))) {
+                Timber.e("SplashFragment NOOOO HAS KEY $key")
+                prefs[stringPreferencesKey(key)].fromJsonOrNull(gson)
+            }else {
+                Timber.e("SplashFragment NOOOO NOOOOOOOOOOOOOO KEY $key")
+                null
+            }
         }
     }
 

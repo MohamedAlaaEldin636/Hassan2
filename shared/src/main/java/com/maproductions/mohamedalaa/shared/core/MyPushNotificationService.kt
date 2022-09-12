@@ -48,6 +48,7 @@ abstract class MyPushNotificationService : MessagingService() {
             title,
             body,
             model?.type,
+            model?.sound
         )
     }
 
@@ -63,7 +64,7 @@ abstract class MyPushNotificationService : MessagingService() {
         //val sound = map.getValue("sound")
         val targetId = map["target_id"]?.toInt() ?: return null
 
-        return NotificationModel(title, body, type, targetId)
+        return NotificationModel(title, body, type, targetId, map["sound"])
     }
 
     data class NotificationModel(
@@ -71,7 +72,8 @@ abstract class MyPushNotificationService : MessagingService() {
         var body: String,
         var type: NotificationType,
         //var sound: String,
-        var targetId: Int
+        var targetId: Int,
+        var sound: String?,
     )
 
 }

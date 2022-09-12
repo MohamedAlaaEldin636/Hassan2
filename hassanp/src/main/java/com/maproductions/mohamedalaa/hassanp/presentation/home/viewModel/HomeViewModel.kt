@@ -39,6 +39,8 @@ class HomeViewModel @Inject constructor(
     val repoAuth: RepoAuth,
 ) : AndroidViewModel(application) {
 
+    var onTheWayOrdersIds = emptyList<Int>()
+
     private var timer: CountDownTimer? = null
 
     private val providerData = prefsAccount.getProviderData()

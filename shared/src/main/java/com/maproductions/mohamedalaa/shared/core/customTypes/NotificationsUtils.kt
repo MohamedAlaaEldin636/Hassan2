@@ -4,10 +4,12 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.AudioAttributes
+import android.media.AudioManager.STREAM_NOTIFICATION
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
@@ -15,6 +17,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.getSystemService
 import com.maproductions.mohamedalaa.shared.R
 import com.maproductions.mohamedalaa.shared.domain.notifications.NotificationType
+import timber.log.Timber
 
 object NotificationsUtils {
 
@@ -54,6 +57,7 @@ object NotificationsUtils {
         title: String,
         body: String,
         type: NotificationType?,
+        sound: String?,
     ) {
         val (channelId, channelName, notificationId) = when (type) {
             null, NotificationType.ADMIN -> Triple(
@@ -95,7 +99,8 @@ object NotificationsUtils {
             body,
             channelId,
             channelName,
-            notificationId
+            notificationId,
+            sound
         )
     }
 
@@ -107,9 +112,32 @@ object NotificationsUtils {
         channelId: String,
         channelName: String,
         notificationId: Int,
+        sound: String?,
         //type: NotificationType?,
-        uri: Uri? = null
+        //uri: Uri? = null
     ) {
+        val uri = if (sound.isNullOrEmpty() || sound == "default") null else {
+            val indexOfDot = sound.indexOf(".")
+
+            val resSound: Int = applicationContext.resources.getIdentifier(
+                if (indexOfDot == -1) sound else sound.substring(0, indexOfDot).apply {
+                    Timber.e("NotificationsService -> string $this")
+                },
+                "raw",
+                applicationContext.packageName
+            )
+
+            Timber.e("NotificationsService -> resSound $resSound")
+
+            if (resSound == 0) null else Uri.Builder()
+                .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(applicationContext.packageName)
+                .appendPath(resSound.toString())
+                .build()
+        }
+
+        Timber.e("NotificationsService -> uri $uri")
+
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(applicationContext, channelId)
             .setPriority(NotificationCompat.PRIORITY_MAX)
@@ -121,8 +149,9 @@ object NotificationsUtils {
             .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
             .setAutoCancel(true)
             .setShowWhen(true)
-            .setSound(uri ?: defaultSoundUri)
             .setDefaults(/*Notification.DEFAULT_SOUND or */Notification.DEFAULT_LIGHTS or Notification.DEFAULT_VIBRATE)
+            //, /*AudioManager.*//*STREAM_NOTIFICATION*/
+            .setSound(uri ?: defaultSoundUri, STREAM_NOTIFICATION)
             .setContentIntent(pendingIntent)
 
         val notificationManager = applicationContext.getSystemService<NotificationManager>() ?: return
@@ -135,8 +164,12 @@ object NotificationsUtils {
                 NotificationManager.IMPORTANCE_HIGH
             )
             val audioAttrs = AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                .setUsage(AudioAttributes.USAGE_ALARM)
+                    /*
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION_EVENT)
+                     */
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION_COMMUNICATION_INSTANT)
                 .setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED)
                 .build()
             channel.setSound(uri ?: defaultSoundUri, audioAttrs)

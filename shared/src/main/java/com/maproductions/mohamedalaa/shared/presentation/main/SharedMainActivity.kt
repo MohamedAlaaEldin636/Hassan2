@@ -1,7 +1,9 @@
 package com.maproductions.mohamedalaa.shared.presentation.main
 
+import android.content.ContentResolver
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import androidx.activity.viewModels
 import androidx.annotation.CallSuper
 import androidx.annotation.NavigationRes
@@ -15,6 +17,8 @@ import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
 import com.google.firebase.messaging.FirebaseMessaging
 import com.maproductions.mohamedalaa.shared.BuildConfig
 import com.maproductions.mohamedalaa.shared.NavSharedArgs
@@ -200,6 +204,64 @@ abstract class SharedMainActivity : MABaseActivity<ActivityMainBinding>() {
             }
         }
     }
+
+    /*override fun onStart() {
+        super.onStart()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            initializePlayer()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N || playerAll == null) {
+            initializePlayer()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            releasePlayer()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            releasePlayer()
+        }
+    }
+
+    private var playerAll: ExoPlayer? = null
+
+    private fun initializePlayer() {
+        playerAll = *//*Simple*//*ExoPlayer.Builder(this)
+            .build()
+
+        playerAll?.also { exoPlayer ->
+            val mediaItem = MediaItem.fromUri(
+                Uri.Builder()
+                    .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                    .authority(applicationContext.packageName)
+                    .appendPath(R.raw.ringing.toString())
+                    .build()
+            )
+            exoPlayer.setMediaItem(mediaItem)
+
+            exoPlayer.playWhenReady = false
+            exoPlayer.prepare()
+        }
+    }
+
+    private fun releasePlayer() {
+        playerAll?.release()
+        playerAll = null
+    }*/
 
     override fun onBackPressed() {
         val navController = try {

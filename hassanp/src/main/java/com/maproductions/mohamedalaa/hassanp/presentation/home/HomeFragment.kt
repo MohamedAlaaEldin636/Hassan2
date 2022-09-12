@@ -149,13 +149,14 @@ class HomeFragment : MABaseFragment<FragmentHomeBinding>(), LocationHandler.List
                 viewModel.stopReceivingOrders(0L)
             }
 
-            // Check on the way orders
-            (activity as? MainActivity)?.trackOrders(
-                response.data?.onTheWayOrders?.map { it.id }.orEmpty()
-            )
-
+            val onTheWayOrdersIds = response.data?.onTheWayOrders?.map { it.id }.orEmpty()
             if (shouldUpdateProfileLocationToApi()) {
+                viewModel.onTheWayOrdersIds = onTheWayOrdersIds
+
                 locationHandler.requestCurrentLocation(true)
+            }else {
+                // Check on the way orders
+                (activity as? MainActivity)?.trackOrders(onTheWayOrdersIds)
             }
         }
     }
@@ -180,6 +181,11 @@ class HomeFragment : MABaseFragment<FragmentHomeBinding>(), LocationHandler.List
             afterHidingLoading = {
                 // tam taghyeer 3nwanak b naga7 isa.
                 Timber.e("tam taghyeer 3enwanak b naga7")
+
+                // Check on the way orders
+                (activity as? MainActivity)?.trackOrders(viewModel.onTheWayOrdersIds)
+
+                viewModel.onTheWayOrdersIds = emptyList()
             }
         )
     }
