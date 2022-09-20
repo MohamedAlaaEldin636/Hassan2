@@ -36,6 +36,15 @@ android {
         multiDexEnabled = true
     }
 
+    signingConfigs {
+        create("releaseConfig") {
+            storeFile = file(rootProject.file("GrandKeyUser.jks"))
+            storePassword = "grand2017"
+            keyAlias = "grand"
+            keyPassword = "grand2017"
+        }
+    }
+
     buildTypes {
         debug {
             isMinifyEnabled = false
@@ -46,6 +55,8 @@ android {
             )
         }
         release {
+            signingConfig = signingConfigs.getByName("releaseConfig")
+
             isMinifyEnabled = false
             isShrinkResources = false
 
