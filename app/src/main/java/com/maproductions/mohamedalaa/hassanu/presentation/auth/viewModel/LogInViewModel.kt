@@ -190,14 +190,14 @@ class LogInViewModel @Inject constructor(
 
                                 repoAuth.updateUserProfile(name, email)
                             },
-                            afterHidingLoading = { _ ->
+                            afterHidingLoading = { response2 ->
                                 val navController = fragment.findNavControllerOfProject()
 
                                 if (!it.isVerified) {
                                     navController.navigateDeepLinkWithOptions(
                                         "fragment-dest",
                                         "com.grand.hassan.shared.verify.phone",
-                                        paths = arrayOf(true.toString(), phone.value.orEmpty())
+                                        paths = arrayOf(true.toString(), response2?.phone.orEmpty()/*phone.value.orEmpty()*/)
                                     )
                                 }else {
                                     viewModelScope.launch {
