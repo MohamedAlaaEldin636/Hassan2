@@ -34,8 +34,8 @@ class AddingServicesViewModel @Inject constructor(
     private val gson: Gson,
 ) : AndroidViewModel(application) {
 
-    val currentServices = args.jsonOfServicesInOrderDetails
-        .fromJsonOrNull<List<ServiceInOrderDetails>>(gson).orEmpty()
+    val currentServices = emptyList<ServiceInOrderDetails>()/*args.jsonOfServicesInOrderDetails
+        .fromJsonOrNull<List<ServiceInOrderDetails>>(gson).orEmpty()*/
 
     val retryAbleFlow = RetryAbleFlow {
         repoHome.getServicesOfCategoryAllPages(args.categoryId)
