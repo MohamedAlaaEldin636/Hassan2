@@ -59,7 +59,7 @@ class RepoAuth @Inject constructor(
     suspend fun updateUserProfile(
         image: MultipartBody.Part?,
         name: String,
-        email: String?,
+        email: String,
         phone: String?,
     ) = dataSource.updateUserProfile(image, name, email, phone)
 

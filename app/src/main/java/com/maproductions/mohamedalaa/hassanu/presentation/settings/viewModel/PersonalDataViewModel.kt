@@ -59,7 +59,7 @@ class PersonalDataViewModel @Inject constructor(
                 repoAuth.updateUserProfile(
                     imageUri?.createMultipartBodyPart(myApp, ApiConst.Query.IMAGE),
                     name.value.orEmpty(),
-                    if (userData.value?.email == email.value) null else email.value,
+                    email.value.orEmpty() /* Optional so even if empty save as empty */,
                     if (phone.value.orEmpty() == userData.value?.phone) null else {
                         phone.value.orEmpty()
                     },

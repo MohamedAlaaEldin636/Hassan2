@@ -130,7 +130,7 @@ class DataSourceAuth @Inject constructor(
     suspend fun updateUserProfile(
         image: MultipartBody.Part?,
         name: String,
-        email: String?,
+        email: String,
         phone: String?,
     ) = safeApiCall {
         val map = mutableMapOf(
@@ -138,9 +138,10 @@ class DataSourceAuth @Inject constructor(
             //ApiConst.Query.PHONE to phone.toRequestBody(),
             ApiConst.Query.ACCOUNT_TYPE to ApiConst.Query.USER.toRequestBody(),
         )
-        if (!email.isNullOrEmpty()) {
+        map[ApiConst.Query.EMAIL] = email.toRequestBody()
+        /*if (!email.isNullOrEmpty()) {
             map[ApiConst.Query.EMAIL] = email.toRequestBody()
-        }
+        }*/
         if (!phone.isNullOrEmpty()) {
             map[ApiConst.Query.PHONE] = phone.toRequestBody()
         }
