@@ -73,9 +73,9 @@ class VHItemOrderInHome(parent: ViewGroup, private val repoOrder: RepoOrder, pri
     fun bind(item: ResponseOrder) {
         binding.materialCardView.tag = item.id
 
-        binding.imageImageView.setUrlViaGlideOrPlaceholder(item.user.imageUrl)
+        binding.imageImageView.setUrlViaGlideOrPlaceholder(item.user?.imageUrl)
 
-        binding.nameTextView.text = item.user.name
+        binding.nameTextView.text = item.user?.name
 
         binding.costTextView.text = item.total.roundHalfUpToIntOrFloat(1).toString() +
                 " ${binding.root.context.getString(SR.string.currency_symbolic_text_caps)}"

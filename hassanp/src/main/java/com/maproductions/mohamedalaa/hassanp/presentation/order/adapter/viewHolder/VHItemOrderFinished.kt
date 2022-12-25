@@ -38,8 +38,8 @@ class VHItemOrderFinished(parent: ViewGroup) : RecyclerView.ViewHolder(
         binding.costTextView.text = item.total.roundHalfUpToIntOrFloat(1).toString() +
                 " ${binding.root.context.getString(com.maproductions.mohamedalaa.shared.R.string.currency_symbolic_text_caps)}"
 
-        binding.imageMaterialCardView.setUrlViaGlideOrPlaceholder(item.user.imageUrl)
-        binding.providerNameTextView.text = item.user.name
+        binding.imageMaterialCardView.setUrlViaGlideOrPlaceholder(item.user?.imageUrl)
+        binding.providerNameTextView.text = item.user?.name
 
         // 3 هاشم الأشقر - القاهرة - بجوار برج
         binding.addressTextView.text = item.address?.address.orEmpty()

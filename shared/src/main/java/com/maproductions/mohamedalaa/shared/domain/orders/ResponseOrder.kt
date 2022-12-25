@@ -15,7 +15,7 @@ data class ResponseOrder(
     @SerializedName("ordered_at") var orderedAt: String,
     var address: ResponseAddress?,
     var provider: ProviderInOrder?,
-    var user: UserInOrder,
+    var user: UserInOrder?,
     @SerializedName("cancellation_fees") var cancellationFeesPercent: Float,
     var services: List<ServiceInOrdersList>,
     var total: Float,

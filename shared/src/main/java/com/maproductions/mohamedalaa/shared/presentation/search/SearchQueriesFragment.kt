@@ -64,7 +64,7 @@ class SearchQueriesFragment : MABaseFragment<FragmentSearchQueriesBinding>() {
                     SearchType.PROVIDER_HOME -> viewModel.suggestionsOfProviderHomeOrders.specialCollectLatest {
                         IdAndName(
                             it.id,
-                            "${it.user.name} - ${it.orderNumber}"
+                            "${it.user?.name.orEmpty()} - ${it.orderNumber}"
                         )
                     }
                 }

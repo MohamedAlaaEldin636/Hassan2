@@ -122,7 +122,7 @@ class SearchQueriesViewModel @Inject constructor(
 
                     val navController = view.findNavControllerOfProject()
 
-                    val text = "${order.user.name} - ${order.orderNumber}"
+                    val text = "${order.user?.name.orEmpty()} - ${order.orderNumber}"
 
                     navController.navigateUp()
 

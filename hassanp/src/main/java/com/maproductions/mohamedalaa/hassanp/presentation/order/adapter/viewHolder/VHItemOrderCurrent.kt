@@ -59,13 +59,13 @@ class VHItemOrderCurrent(parent: ViewGroup) : RecyclerView.ViewHolder(
     @SuppressLint("SetTextI18n")
     fun bind(item: ResponseOrder) {
         binding.materialCardView.tag = item.id
-        binding.providerCallMaterialCardView.tag = item.user.phone
-        binding.providerMSGMaterialCardView.tag = item.user.id
-        binding.providerNameTextView.tag = item.user.imageUrl
-        binding.addressTextView.tag = item.user.name
+        binding.providerCallMaterialCardView.tag = item.user?.phone
+        binding.providerMSGMaterialCardView.tag = item.user?.id
+        binding.providerNameTextView.tag = item.user?.imageUrl
+        binding.addressTextView.tag = item.user?.name
 
-        binding.imageMaterialCardView.setUrlViaGlideOrPlaceholder(item.user.imageUrl)
-        binding.providerNameTextView.text = item.user.name
+        binding.imageMaterialCardView.setUrlViaGlideOrPlaceholder(item.user?.imageUrl)
+        binding.providerNameTextView.text = item.user?.name
 
         // 3 هاشم الأشقر - القاهرة - بجوار برج
         binding.addressTextView.text = item.address?.address.orEmpty()
