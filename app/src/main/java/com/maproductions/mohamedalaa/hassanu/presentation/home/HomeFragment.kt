@@ -43,11 +43,13 @@ class HomeFragment : MABaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding?.sliderView?.setSliderAdapter(viewModel.adapterSliders)
         binding?.sliderView?.post {
-            binding?.sliderView?.isAutoCycle = false
+            binding?.sliderView?.isAutoCycle = true
 
             binding?.sliderView?.setIndicatorEnabled(true)
             binding?.sliderView?.indicatorSelectedColor = requireContext().getColor(SR.color.indicator_selected_color)
             binding?.sliderView?.indicatorUnselectedColor = requireContext().getColor(SR.color.indicator_unselected_color)
+
+            binding?.sliderView?.startAutoCycle()
         }
 
         binding?.recyclerView?.layoutManager = GridLayoutManager(
