@@ -29,6 +29,8 @@ abstract class MyPushNotificationService : MessagingService() {
 
         val model = getModelFromMap(remoteMessage.data)
 
+        Timber.e("NotificationsService -> $model")
+
         val title = model?.title ?: getString(R.string.app_name)
         val body = model?.body ?: getString(R.string.app_name)
 

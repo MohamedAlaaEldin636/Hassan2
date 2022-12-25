@@ -7,4 +7,6 @@ enum class NotificationType(val apiValue: String) {
     CONFIRM_ADDITIONAL_SERVICES("confirm-additional-services"),
     MESSAGE("message"),
     COMPLETE_PROFILE("complete-profile"),
+    //DEACTIVATE("deactivate"),
+    //to-do deactivate
 }
