@@ -88,11 +88,16 @@ class AddingServicesViewModel @Inject constructor(
             )
         }.toJson(gson)
 
+        val originalTotalWithoutAdditions = args.jsonOfServicesInOrderDetails
+            .fromJsonOrNull<List<ServiceInOrderDetails>>(gson).orEmpty().map {
+                it.count.toFloat() * it.price
+            }.sum()
+
         view.findNavController().navigateDeepLinkWithoutOptions(
             "dialog-dest",
             "com.grand.hassan.shared.money.received.dialog.with.list.of.services",
             args.orderId.toString(),
-            total.toString(),
+            (originalTotalWithoutAdditions + total).toString(),
             jsonListOfRequestServiceWithCount
         )
     }
