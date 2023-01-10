@@ -44,8 +44,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
 
-                tools:src="@drawable/ic_notification"
-                android:src="@{activityViewModel.menuItemNotificationsVisibility == MenuItemVisibility.SHOW ? @drawable/ic_notification : @drawable/ic_notification_new_data}"
+                android:src="@drawable/ic_notification"
 
                 android:clickable="true"
                 android:focusable="true"
@@ -53,11 +52,38 @@
 
                 android:layout_marginEnd="16dp"
 
-                android:padding="8dp"
+                android:padding="4dp"
+
+                android:visibility="@{activityViewModel.showNotificationsIcon,default=gone}"
 
                 app:layout_constraintTop_toTopOf="@id/logoImageView"
                 app:layout_constraintBottom_toBottomOf="@id/logoImageView"
                 app:layout_constraintEnd_toEndOf="parent"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+
+                android:padding="2dp"
+
+                android:includeFontPadding="false"
+
+                tools:text="9999"
+                android:text="@{activityViewModel.menuItemNotificationsCount}"
+                android:gravity="center"
+                android:textColor="@color/white"
+
+                android:visibility="@{activityViewModel.menuItemNotificationsCount != null}"
+
+                android:maxLines="1"
+                android:ellipsize="end"
+
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="3sp"
+
+                android:background="@drawable/dr_red_circle"
+
+                app:layout_constraintTop_toTopOf="@id/notificationsImageView"
+                app:layout_constraintStart_toStartOf="@id/notificationsImageView"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/searchTextInputLayout"

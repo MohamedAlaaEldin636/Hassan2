@@ -54,20 +54,44 @@
                 android:focusable="true"
                 android:onClick="@{v -> activityViewModel.onNotificationsClick(v)}"
 
-                android:padding="8dp"
+                android:padding="4dp"
 
-                tools:src="@drawable/ic_notification_new_data"
-                android:src="@{activityViewModel.menuItemNotificationsVisibility == MenuItemVisibility.SHOW ? @drawable/ic_notification : @drawable/ic_notification_new_data}"
+                android:src="@drawable/ic_notification"
 
                 android:layout_marginEnd="16dp"
 
                 tools:visibility="visible"
-                android:visibility="@{activityViewModel.menuItemNotificationsVisibility == MenuItemVisibility.SHOW || activityViewModel.menuItemNotificationsVisibility == MenuItemVisibility.SHOW_HAVING_NEW_DATA,default=gone}"
+                android:visibility="@{activityViewModel.showNotificationsIcon,default=gone}"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/placeholderMaterialToolbar"
                 app:layout_constraintBottom_toBottomOf="@id/placeholderMaterialToolbar"
                 tools:ignore="ContentDescription" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+
+                android:padding="2dp"
+
+                android:includeFontPadding="false"
+
+                tools:text="9999"
+                android:text="@{activityViewModel.menuItemNotificationsCount}"
+                android:gravity="center"
+                android:textColor="@color/white"
+
+                android:visibility="@{activityViewModel.menuItemNotificationsCount != null}"
+
+                android:maxLines="1"
+                android:ellipsize="end"
+
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="3sp"
+
+                android:background="@drawable/dr_red_circle"
+
+                app:layout_constraintTop_toTopOf="@id/notificationsImageView"
+                app:layout_constraintStart_toStartOf="@id/notificationsImageView"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/logoImageView"

@@ -60,18 +60,15 @@ class MainViewModel @Inject constructor(
 
     private val notificationsCount = prefsAccount.getNotificationsCount().asLiveData()
     val showNotificationsIcon = MutableLiveData(false)
-    val menuItemNotificationsVisibility = switchMapMultiple2(notificationsCount, showNotificationsIcon) {
-        if (showNotificationsIcon.value == true) {
-            MutableLiveData(
-                if (notificationsCount.value.orZero() > 0) {
-                    MenuItemVisibility.SHOW_HAVING_NEW_DATA
-                }else {
-                    MenuItemVisibility.SHOW
-                }
-            )
+    /** not-null only if > 0 */
+    val menuItemNotificationsCount = switchMapMultiple2(notificationsCount, showNotificationsIcon) {
+        val count = if (showNotificationsIcon.value == true) {
+            notificationsCount.value.orZero()
         }else {
-            MutableLiveData(MenuItemVisibility.HIDE)
+            0
         }
+
+        if (count > 0) count.toString() else null
     }
 
     private val listOfOrdersIdsForTracking = mutableSetOf<Int>()
